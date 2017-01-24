@@ -1,0 +1,31 @@
+<template name="payments">
+  {{> header headerVariable=headerVariable}}
+    <div class="cont">
+      <div class="row">
+          <div class="col l12">
+              <div class="card of-h " style="min-height: 700px;">
+                  <div class="content">
+                      <style>
+                        .content .row{
+                          margin-right: 0;
+                        }
+                        .content table{
+                          width: 100% !important
+                        }
+                      </style>
+                      {{> tabular table=TabularTables.Payments class="table" id="paymentsTable" selector=paymentsSelector style="max-width: 100%;"}}
+                  </div>
+              </div>
+          </div>
+      </div>
+      <div class="fixed-action-btn horizontal"  style="right: 45px; bottom: 45px; position: fixed;">
+        <a title="Download report" class="btn-floating btn-large blue waves-effect waves-light download-payments"  href="">
+          <i class="ion-archive"> </i>
+        </a>
+        <ul>
+          <li><a title="Send by E-mail" id="sendmail" data-target="#modal1" class="send-email btn-floating waves-effect waves-light green" ><i class="material-icons">email</i></a></li>
+        </ul>
+      </div>
+    </div>
+    {{> emailModal subject=headerVariable.title repData=tableData}}
+</template>

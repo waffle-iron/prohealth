@@ -1,0 +1,87 @@
+<template name="marketerSales">
+{{> header headerVariable=headerVariable}}
+      <div class='row page-title-form' style="width:40%">
+        <div class="col l12">
+        <div class="col l3" style="margin-top:-1rem;padding-bottom:1rem">
+          <label for="date">From</label>
+          <input {{b "value: fromDate"}}  type="text" name="date" id="fromDate" style="margin: 0;"/>
+        </div>
+
+        <div class="col l3" style="margin-top:-1rem;padding-bottom:1rem">
+          <label for="date">To</label>
+          <input {{b "value: toDate"}} type="text" name="date" id="toDate" style="margin: 0;"/>
+        </div>
+
+        <div class="input-field col l2" style="margin-top:0.4rem;padding-bottom:0rem">
+          <select id="admitState" {{b "value: admitState"}}>
+            <option value="all">All</option>
+            <option value="Admitted">Admits</option>
+            <option value="NonAdmitted">Non-Admits</option>
+          </select>
+          <label>Admit State</label>
+        </div>
+        <div class="input-field col l2" style="margin-top:0.4rem;padding-bottom:0rem">
+          <select id="insurance" {{b "value: insurance"}}>
+            <option value="all">All</option>
+            <option value="Medicare">Medicare</option>
+            <option value="Private">Private</option>
+          </select>
+          <label>Insurance</label>
+        </div>
+        <div class="input-field col l2" style="margin-top:0.4rem;padding-bottom:0rem">
+          <select id="business" {{b "value: business"}}>
+            <option value="all">All</option>
+            <option value="Hospice">Hospice</option>
+            <option value="Homecare">Homecare</option>
+          </select>
+          <label>Business</label>
+        </div>
+      </div>
+    </div>
+    <div class="row date-error" style="display: none;margin-top:0;margin-bottom:0;padding-top:0;padding-bottom:0">
+      <div class="col l6 offset-l6" style="margin-top:0;margin-bottom:0;padding-top:0;padding-bottom:0">
+        <div class="col s6 " style="margin-top:0;margin-bottom:0;padding-top:0;padding-bottom:0">
+        <span class="" style="position: relative;top: 5rem;">
+          <i class="material-icons red-text">error</i><span style="position: relative;top: -0.5rem;left: 1rem;" class="red-text">To date must be after from date !</span>
+        </span>
+        </div>
+      </div>
+    </div>
+  <div class="cont">
+    <div class="row" style="margin-bottom: 0rem;">
+      <div class="col l6">
+        {{#if isMarketerView}}
+          <div class="col l1" style="text-align: left; padding-top: 0.5rem;padding-bottom: 0;margin-right: 2rem;white-space:nowrap">View As</div>
+          <div class="col l10" style= "padding-bottom: 0;">
+            <a title="View data in table view" href="{{pathFor 'marketerSales' template='marketerReport' marketer=getMarketer}}" id = "table" class="col l3 viewAs btn white blue-text" style="text-align: center;padding:0" data-viewAs="table">Table</a>
+            <a title="View data in chart view" href="{{pathFor 'marketerSales' template='marketerStats' marketer=getMarketer}}" id = "chart" class="col l3 viewAs btn white black-text" style="text-align: center;padding:0" data-viewAs="chart">Chart</a>
+          </div>
+          {{/if}}
+      </div>
+      <div class="col l6">
+          <div class="col l3" style="text-align: right; padding-top: 0.5rem;padding-bottom: 0;">Group By</div>
+          <div class="col l9" style= "padding-bottom: 0;">
+            <button title="Group sales by day" id = "day" class="col l3 groupBy btn white blue-text" style="text-align: center;padding:0" data-groupby="day">Day</button>
+            <button title="Group sales by week" id = "week" class="col l3 groupBy btn white black-text" style="text-align: center;padding:0" data-groupby="week">Week</button>
+            <button title="Group sales by month" id = "month" class="col l3 groupBy btn white black-text" style="text-align: center;padding:0" data-groupby="month">Month</button>
+            <button title="Group sales by year" id = "year" class="col l3 groupBy btn white black-text" style="text-align: center;padding:0" data-groupby="year">Year</button>
+          </div>
+      </div>
+    </div>
+    {{#if invalidDates}}
+    <div class="row">
+        <div class="col l8 offset-l2">
+            <div class="card-panel card-panel alert alert-border-left white red-text">
+                <strong>Note!</strong>
+                <span>
+                    Please Enter a valid date.</span>
+            </div>
+        </div>
+    </div>
+    {{else}}
+    <div id="content">
+      {{> Template.dynamic template=salesView}}
+    </div>
+    {{/if}}
+  </div>
+</template>

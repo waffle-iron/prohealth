@@ -1,0 +1,46 @@
+<template name="agentsAgentCard">
+    <div class="col s12 m6 l4">
+
+        <div class="card">
+            <div class="title">
+
+                <span class=" grey-text text-darken-3">{{name}}</span>
+
+                <a title="View agent's profile" class="right grey-text text-darken-3" style="padding:0; margin-left: 1rem" href="{{pathFor 'profile' _id=this._id}}">
+                    <i class="ion-more"></i>
+                </a>
+
+                {{#if hasRole 'hr-admin'}}
+                  <a title="Edit agent's profile" class="right grey-text text-darken-3" href="{{pathFor route='agentEdit'}}">
+                      <i class="ion-edit"></i>
+                  </a>
+                {{/if}}
+
+            </div>
+            <div class="content agent-card" style="padding:1rem">
+                <div class="col s12 m4 l4" style="padding-bottom: 0;">
+                    <p>
+                        <img class="" src="{{getPicture}}" style="width: 90px;height: 90px;border-radius:1000px">
+                    </p>
+                </div>
+                <div class="col s12 m8 l8" style="padding-bottom: 0;">
+                    <p class="truncate">
+                        <i class="material-icons">email</i>
+                        <span class="">{{#if email}}{{email}}{{else}}&mdash;{{/if}}</span>
+                    </p>
+                    <p class="truncate">
+                        <i class="material-icons">phone</i>
+                        <span class="">{{#if phone}}{{phone}}{{else}}&mdash;{{/if}}</span>
+                    </p>
+                    <div class="truncate">
+                        <i class="material-icons">phone_iphone</i>
+                        <span class="">{{#if mobile}}{{mobile}}{{else}}&mdash;{{/if}}</span>
+                    </div>
+                </div>
+
+                <!-- <div class="col s12 m8 l2">
+            </div> -->
+            </div>
+        </div>
+    </div>
+</template>

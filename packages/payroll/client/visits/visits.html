@@ -1,0 +1,85 @@
+<template name="visits">
+{{> header headerVariable=headerVariable}}
+<div class="fixed-action-btn horizontal"  style="right: 45px; bottom: 45px; position: fixed;">
+  <a title="Download report" class="btn-floating btn-large blue waves-effect waves-light download-visits"  href="">
+    <i class="ion-archive"> </i>
+  </a>
+  <ul>
+    <li><a title="Send by E-mail" id="sendmail" data-target="#modal1" class="send-email btn-floating waves-effect waves-light green download-bills" ><i class="material-icons">email</i></a></li>
+  </ul>
+</div>
+
+  <div class='row page-title-form'>
+    <div class="col l6 offset-l6">
+      <div class="col s3 offset-s3">
+        <input placeholder="From" id="start-date" type="text"
+               {{b "value: startDate, change: query"}}>
+      </div>
+      <div class="col s3">
+        <input placeholder="To" id="end-date" type="text"
+               {{b "value: endDate, change: query"}}>
+      </div>
+      <div class="col s3">
+        <button title="Load visits from server" type="button" id="load" style="width: 100px; padding: 0px;"
+                class="waves-effect waves-ripple btn white black-text"
+                {{updating}}>
+
+          {{#if loadingStatus}}
+            <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
+            <span class="sr-only">Loading</span>
+          {{else}}
+            <i class="left material-icons" style="padding-left: 1rem;margin-right: 0;">refresh</i>
+            <span class="">Load</span>
+          {{/if}}
+        </button>
+      </div>
+    </div>
+    </div>
+    <div class="row date-error" style="display: none;margin-top:0;margin-bottom:0;padding-top:0;padding-bottom:0">
+      <div class="col l6 offset-l6" style="margin-top:0;margin-bottom:0;padding-top:0;padding-bottom:0">
+        <div class="col s6 offset-s3" style="margin-top:0;margin-bottom:0;padding-top:0;padding-bottom:0">
+        <span class="" style="position: relative;top: 5rem;">
+          <i class="material-icons red-text">error</i><span style="position: relative;top: -0.5rem;left: 1rem;" class="red-text">To date must be after from date !</span>
+        </span>
+        </div>
+      </div>
+    </div>
+  {{#if Template.subscriptionsReady}}
+    <div class="cont">
+      <div class='card-panel' style="overfloe-x:scroll">
+        {{#if loadingStatus}}
+          <h5 class="center">Loading visits, please wait...</h5>
+          {{> loading}}
+        {{else}}
+          {{> tabular
+                      table=TabularTables.Visits
+                      selector=query
+                      class="table"
+                      id="visits-table"
+
+          }}
+          <style>
+            /*#visits-table_wrapper{
+              overflow-x: scroll
+            }*/
+          </style>
+        {{/if}}
+      </div>
+    </div>
+  {{else}}
+    {{> loading}}
+  {{/if }}
+
+  {{> emailModal subject=headerVariable.title repData=tableData}}
+</template>
+
+<template name="checkVisit">
+  <button type="button" class="btn waves-effect">Check</button>
+</template>
+
+<template name="myloading">
+  <div style="height: 500px;" class="center">
+    <i class="fa fa-cog fa-spin fa-3x fa-fw"></i>
+    <span class="sr-only">Loading...</span>
+  </div>
+</template>

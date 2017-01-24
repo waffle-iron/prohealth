@@ -1,0 +1,73 @@
+<template name="emergencyList">
+  {{> header headerVariable=headerVariable}}
+  <div class="filters">
+
+    <div class="filter light-blue darken-1">
+        <div class="row" style="margin-right: -1rem">
+            <div class="col s12 m12 l12 right-align filter-content">
+                {{> agentsFilters}}
+            </div>
+        </div>
+    </div>
+    <div class="row">
+      {{#if agents}}
+        <div class="col s12 m12 l12">
+            <div class="card-panel">
+                {{> emergencyListTable}}
+            </div>
+        </div>
+      {{else}}
+        <div class="row">
+            <div class="col l8 offset-l2">
+                <div class="card-panel card-panel alert alert-border-left white blue-text">
+                    <strong>No Results!</strong>
+                    <span>
+                        There are no agents with the selected criteria.</span>
+                </div>
+            </div>
+        </div>
+      {{/if}}
+    </div>
+
+      <div class="fixed-action-btn horizontal" style="bottom: 45px; right: 45px;">
+        <a title="Print" href="javascript:window.print()" class="btn-floating btn-large blue action-submit">
+            <i class="large ion-android-print"></i>
+        </a>
+        <ul>
+          <li><a title="Send by E-mail" id="sendmail" data-target="#modal1" class="send-email btn-floating waves-effect waves-light yellow darken-3 download-bills" ><i class="material-icons">email</i></a></li>
+          <li><a title="Download report" class="btn-floating waves-effect waves-light green download-agents" ><i class="ion-archive"> </i></a></li>
+        </ul>
+      </div>
+    </div>
+    {{> emailModal subject=headerVariable.title repData=tableData}}
+</template>
+
+<template name="emergencyListTable">
+  <table   class= "table table-condensed">
+        <thead>
+          <tr>
+              <th data-field="name">Name</th>
+              <th data-field="job">Job</th>
+              <th data-field="phone">Phone</th>
+              <th data-field="email">Email</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          {{#each agents}}
+            {{> emergencyListItem}}
+          {{/each}}
+        </tbody>
+      </table>
+</template>
+<template name="emergencyListItem">
+    <tr>
+        <td>{{name}}</td>
+        <td>{{job.name}}</td>
+        <td>{{#if phone}}{{phone}}
+            {{#if mobile}}-{{/if}}{{/if}}
+            {{#if mobile}}
+            {{mobile}}{{/if}}</td>
+        <td>{{email}}</td>
+    </tr>
+</template>

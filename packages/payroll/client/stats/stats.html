@@ -1,0 +1,10 @@
+<template name="visitsStats">
+  {{> header headerVariable=headerVariable}}
+  {{#if visitsData}}
+    <div class="cont">
+      {{> highchartsHelper chartId="test" chartWidth="100%" charHeight="100%" chartObject=chartOpts}}
+    </div>
+  {{else}}
+    {{>loading}}
+  {{/if}}
+</template>

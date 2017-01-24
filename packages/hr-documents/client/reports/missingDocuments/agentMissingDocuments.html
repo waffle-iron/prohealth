@@ -1,0 +1,7 @@
+<template name="agentMissingDocuments">
+    {{#if missing_documents}}
+        {{#each missing_documents}}
+            <a href="{{pathFor 'agentEdit' _id=agent._id}}" class="collection-item">{{name}}</a>
+        {{/each}}
+    {{/if}}
+</template>

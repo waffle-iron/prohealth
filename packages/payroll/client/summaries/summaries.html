@@ -1,0 +1,66 @@
+<template name="visitsSummaries">
+
+  <div class="page-title">
+      <div class="row" style="margin-right: -1rem">
+          <div class="col s12 m3 l2">
+              <h1>Visits Summary</h1>
+              <ul>
+                  <li>
+                      <a href="#">
+                          <i class="fa fa-home"></i>Summary of visits within a date range</a>
+                  </li>
+              </ul>
+          </div>
+          <div class="col s12 m9 l10 right-align">
+
+            <div id="update-date" class="text-center">
+              <div class="input-field col s4">
+                <input id="start-date" value={{startDate}}>
+                <label>Start Date</label>
+              </div>
+              <div class="input-field col s4">
+                <input id="end-date" value={{endDate}}>
+                <label>End Date</label>
+              </div>
+              <div class="input-field col s4">
+                <select id="change-field" class="browser-default">
+                  <option value="$patient">Group By Patient</option>
+                  <option value="$agency">Group By Agency</option>
+                  <option value="$insurance">Group By Insurance</option>
+                  <option value="$user">Group By User</option>
+                </select>
+              </div>
+            </div>
+          </div>
+      </div>
+  </div>
+  {{#if Template.subscriptionsReady}}
+  <div class="cont">
+  <div class="card-panel">
+        <table class="table">
+          <thead>
+            <th>Name</th>
+            <th>Total</th>
+          </thead>
+          <tbody>
+            {{#each summaries}}
+            {{> visitsSummary doc=this sd=startDate ed=endDate fd=field }}
+            {{/each}}
+          </tbody>
+          <tfoot>
+            <th>Total</th>
+            <th>{{totalCount}}</th>
+          </tfoot>
+        </table>
+      </div>
+    </div>
+
+  {{else}} {{> loading}} {{/if }}
+</template>
+
+<template name="visitsSummary">
+  <tr>
+    <td>{{doc._id}}</td>
+    <td><a href="/visits?start-date={{sd}}&end-date={{ed}}{{#if fd}}&{{fd}}={{doc._id}}{{/if}}">{{doc.total}}</a></td>
+  </tr>
+</template>

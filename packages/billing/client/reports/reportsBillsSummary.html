@@ -1,0 +1,123 @@
+<template name="reportsBillsSummary">
+  {{> header headerVariable=headerVariable}}
+  <div class='row page-title-form'>
+    <div class="col l6 offset-l6">
+      <div class="col s3 offset-s3">
+        <div class='input-field'>
+          <input {{b "value: fromDate"}} type="text" name="from" id="from" class=""/>
+          <label for="from">From</label>
+        </div>
+      </div>
+      <div class="col s3">
+        <div class='input-field'>
+          <input {{b "value: toDate"}} type="text" name="to" id="to" class=""/>
+          <label for="to">To</label>
+        </div>
+      </div>
+      <div class="col s3">
+        <div class='input-field'>
+          <select {{b "value: filterType"}} name="filter_type" id="filter_type" class="">
+            <option  value="claim">Claim</option>
+            <option value="payor">Insurance</option>
+          </select>
+          <label for="filter_type">Filter type</label>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row date-error" style="display: none;margin-top:0;margin-bottom:0;padding-top:0;padding-bottom:0">
+    <div class="col l6 offset-l6" style="margin-top:0;margin-bottom:0;padding-top:0;padding-bottom:0">
+      <div class="col s6 offset-s3" style="margin-top:0;margin-bottom:0;padding-top:0;padding-bottom:0">
+      <span class="" style="position: relative;top: 5rem;">
+        <i class="material-icons red-text">error</i><span style="position: relative;top: -0.5rem;left: 1rem;" class="red-text">To date must be after from date !</span>
+      </span>
+      </div>
+    </div>
+  </div>
+  <div class="cont">
+    {{#if invalidDates}}
+      <div class="row">
+          <div class="col l8 offset-l2">
+              <div class="card-panel card-panel alert alert-border-left white red-text">
+                  <strong>Note!</strong>
+                  <span>
+                      Please enter a valid date.</span>
+              </div>
+          </div>
+      </div>
+    {{else}}
+    {{#if isLoading}}
+        {{>loading}}
+    {{else}}
+      {{> tablesControl parentTemplate="reportsBillsSummary" start="fromDate" end="toDate"}}
+      <div class="row">
+        <div class="col l12">
+        <ul class='collection z-index-1'  style="margin-top: 0rem;">
+            <li class="collection-item">
+              <b>Total</b>
+              <span class='right'>
+                <label>Total:</label>
+                <span class='count' {{b "text: count"}}></span>
+                <span style='margin-left: 2rem;' {{b "text: total"}}></span>
+              </span>
+            </li>
+          </ul>
+          <ul class="collapsible popout  col s12" data-collapsible="accordion">
+            {{#each datumFirstLevel}}
+              {{#let that = this}}
+                <li title="Click to expand">
+                  <div class="collapsible-header">
+                    {{> dataFirstLevelBill}}
+                  </div>
+                  <div class="collapsible-body">
+                    <ul class="collection">
+                      {{#each datumSecondLevel name}}
+                        <a title="Click to view" class="collection-item hoverable" href='{{pathFor "bills"}}?{{that.type}}={{that.name}}&{{this.type}}={{this.name}}{{datesParams}}' target= "_blank">
+                          {{> dataSecondLevelBill}}
+                        </a>
+                      {{/each}}
+                    </ul>
+                  </div>
+                 </li>
+               {{/let}}
+             {{/each}}
+           </ul>
+
+           <div class="fixed-action-btn horizontal"  style="right: 45px; bottom: 45px; position: fixed;">
+             <a title="Download report" class="btn-floating btn-large blue" {{b "click: downloadCSV"}}>
+               <i class="ion-archive"> </i>
+             </a>
+             <ul>
+               <li><a title="Send by E-mail" id="sendmail" data-target="#modal1" class="send-email btn-floating waves-effect waves-light green download-bills" ><i class="material-icons">email</i></a></li>
+             </ul>
+           </div>
+         </div>
+       </div>
+       {{/if}}
+    {{/if}}
+  </div>
+  {{> emailModal subject=headerVariable.title repData=convertArrayOfObjectsToCSV}}
+</template>
+
+
+<template name = "dataFirstLevelBill">
+ <span><b {{b "text: name"}} ></b></span>
+
+<span class="right">
+  <span style="font-size: 1rem;color: #9e9e9e;">Total:</span>
+  <span class='count' {{b "text: count"}}></span>
+  <span style='margin-left: 2rem;' {{b "text: total"}}></span>
+</span>
+
+</template>
+
+
+<template name = "dataSecondLevelBill">
+ <span><b {{b "text: name"}} ></b></span>
+
+ <span class='right'>
+   <label>Total:</label>
+   <span class='count' {{b "text: count"}}></span>
+   <span style='margin-left: 2rem;' {{b "text: total"}}></span>
+ </span>
+</template>

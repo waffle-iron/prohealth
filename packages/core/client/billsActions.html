@@ -1,0 +1,11 @@
+<template name="billsActions">
+  <div>
+      <!-- {{#quickRemoveButton collection="Bills" _id=this._id class="waves-effect btn-flat btn-small" beforeRemove=beforeRemoveHelper style="z-index:0"}}<i class="icon ion-android-delete"></i>{{/quickRemoveButton}} -->
+      <!-- <a title="Delete bill" href="{{pathFor 'billDelete' _id=this._id}}" class="waves-effect btn-flat btn-small" style="z-index:0"> <i class="icon ion-android-delete"></i></a> -->
+      <a title="Add Paymnet" id="addPayment" href="" class="col l6 btn-flat btn-small" style="z-index:0"><i class="material-icons">attach_money</i></a>
+      <a title="Edit bill" href="{{pathFor 'billEdit' _id=this._id}}" class="col l6  btn-flat btn-small" style="z-index:0"> <i class="icon ion-edit"></i></a>
+  </div>
+</template>
+<template name="visitCheck">
+  <a class="btn-flat" href="/visits/{{_id}}"> View</a>
+</template>

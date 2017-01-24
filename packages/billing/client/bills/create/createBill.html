@@ -1,0 +1,75 @@
+<template name="createBill">
+            <div class="card" style="overflow:visible;margin-bottom: 2rem;">
+                <div class="content" style="overflow:visible">
+
+                    {{#autoForm collection="Bills" id="createBill" type="insert"}}
+                        <div class="edit-bill">
+                            <div class="row">
+                              <div class="col l3 patient-name">
+                                  <!-- {{> afQuickField name='patient_name'}} -->
+                                  {{> afFieldInput type='autocomplete' field="mrn"}}
+                              </div>
+                              <div class="col l3 patient-name">
+                                  {{> afFieldInput type='autocomplete' name='patient_name' field="name"}}
+                              </div>
+                              <div class="col l3">
+                                  {{> afQuickField name='date' type='text' id='billDate'}}
+                              </div>
+                              <div class="col l3">
+                                  {{> afQuickField name='amount'}}
+                              </div>
+                              <div class="col l3 payor">
+                                  {{> afQuickField name='payor_id' options=payors id="payor-select" }}
+                              </div>
+                              <div class="col l3">
+                                  {{> afQuickField name='claim_id' id='claim_id'}}
+                              </div>
+                              <div class="col l3">
+                                  {{> afQuickField name='claim_start_date' type='text' id='claimStartDate'}}
+                                </div>
+                              <div class="col l3">
+                                {{> afQuickField name='claim_end_date' type='text' id='claimEndDate'}}
+                              </div>
+                              <div class="col l12">
+
+                                <button title="Save bill" type="submit" name="commit" class="btn right">
+                                  <i class="icon ion-checkmark-round"></i>
+                                </button>
+
+                              </div>
+                            </div>
+
+
+
+                            <span class="date-error" style="display: none">
+                              <i class="material-icons red-text">error</i><span style="position: relative;top: -0.5rem;left: 1rem;" class="red-text">Claim end date must be after claim start date !</span>
+                            </span>
+
+
+                        </div>
+
+
+
+                    {{/autoForm}}
+                </div>
+            </div>
+
+
+    <style>
+
+    .patient-name{
+      height: 50px;
+    }
+      .edit-bill .row .col {
+        padding-bottom: 0;
+      }
+      .edit-bill .row {
+        margin: -1rem -1rem 1rem 0;
+      }
+      .edit-bill .row .row:first-child {
+        margin: 1rem -1rem 1rem 1rem;
+        padding: 0;
+      }
+
+    </style>
+</template>

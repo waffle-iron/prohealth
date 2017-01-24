@@ -1,0 +1,17 @@
+import "./index/index.js";
+import "./create/index.js";
+import "./edit/index.js";
+import "./view/index.js";
+import "./reports/index.js";
+import "./accounts/index.js";
+import "./jobscrud/jobs.html";
+import "./jobscrud/jobs.js";
+import "./jobscrud/editjob.html";
+import "./jobscrud/editjob.js";
+import "./jobscrud/createjob.html";
+import "./jobscrud/createjob.js";
+import "./jobscrud/_form.html";
+import "./jobscrud/_form.js";
+import "./filters/agentsFilters.html";
+import "./filters/agentsFilters.js";
+AutoForm.setDefaultTemplate('materialize');

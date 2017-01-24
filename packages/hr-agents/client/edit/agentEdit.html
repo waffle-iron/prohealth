@@ -1,0 +1,85 @@
+<template name="agentEdit">
+  {{> header headerVariable=headerVariable backRoute="agents"}}
+    <div class="profile">
+
+  <div class="filter light-blue darken-1" style="padding:0">
+      <div class="row" style="margin-right: -1rem;margin-top:4rem">
+        <div class="col s12 m12 l12 right-align profile-tabs">
+          <a id="agentEditGeneral" data-template="agentEditGeneral" href="" class="col l4 center btn-flat tab-button">General</a>
+          <a id="agentEditRates" data-template="agentEditRates" href="" class="col l4 center btn-flat tab-button">Rates</a>
+          <a id="agentEditDocuments" data-template="agentEditDocuments" href="" class="col l4 center btn-flat tab-button">Documents</a>
+          <!-- <a id="personal" data-template="personal" href="" class="btn-flat tab-button">Personal</a> -->
+        </div>
+      </div>
+  </div>
+    {{#if Template.subscriptionsReady}}
+    <div class="cont">
+    <div class="row">
+        <div class="col l10 offset-l1">
+            {{#with agent}}
+                 <div class="card">
+                   <div class="title">
+                     <h5>{{tabTitle}}</h5>
+                     {{#if isRatesTab}}
+                     <!-- <div class="input-field col l3 right rate-j" style="margin:0;padding:0;margin-top: -8px;">
+                         <select id = "rateJump" style="margin:0;padding:0;">
+                           <option value="" disabled selected>Search for rate type</option>
+                           {{#each rateTypes}}
+                             <option value={{this._id}}>{{this.name}}</option>
+                           {{/each}}
+                         </select>
+                       </div> -->
+                       <div class="col l4 right" style="margin:0;padding:0;margin-top: -8px;">
+                         {{> inputAutocomplete settings=autocompleteSettings id = "rateJump"  placeholder="Search for rate type" style="margin:0;padding:0;"}}
+                       </div>
+                       <div class="col l1 right blue-text" style="margin:0;padding:0;padding-right:0.5rem;margin-top: 0px;text-align:right">
+                         <i class="material-icons">search</i>
+                       </div>
+                     {{/if}}
+                   </div>
+                   <div class="content">
+                     {{> Template.dynamic template=tab}}
+                   </div>
+                 </div>
+            {{/with}}
+        </div>
+      </div>
+    </div>
+    {{else}}
+        {{> loading}}
+    {{/if}}
+
+
+    <style>
+      .collection-item .row .col{
+        padding-bottom: 0;
+      }
+      .collection-item .row{
+        margin: -1rem -1rem 1rem 0rem;
+      }
+
+      .collection-item .row:first-child{
+        margin: 1rem -1rem 1rem 0rem;
+      }
+      .-autocomplete-container{
+        top:3rem !important
+      }
+    </style>
+  </div>
+</template>
+
+<template name="personal">
+  {{#if Template.subscriptionsReady}}
+      {{#autoForm collection="Agents" doc=this id="editAgentPersonalForm" type="update" }}
+
+        {{> afQuickField name='picture' id='picture' title='Profile Picture' cropRatio="1"}}
+        <button class="btn blue action-submit" type="submit" name="commit">
+            Save Changes <i class="right ion-checkmark"></i>
+        </button>
+      {{/autoForm}}
+    {{/if}}
+</template>
+
+<template name="autocompleteTemplate">
+  <span class="label">{{name}}</span>
+</template>

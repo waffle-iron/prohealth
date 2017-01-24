@@ -1,0 +1,68 @@
+<template name="expiringDocumentsFilter">
+    <div class="row">
+        <div class="col l6" style="padding-right:0rem; padding-bottom:0">
+            <div class="input-field col s4">
+                <input placeholder="At least 3 letters" id="nameField" {{b "value: name_query, change: nameChange"}} type="text" style="text-align:left">
+                <label>Search by name</label>
+            </div>
+
+            <div class="input-field col s4">
+                <select {{b "value: job, change: filterChange"}} class="">
+                    <option value="">Select</option>
+                    {{#each jobs_options}}
+                        <option value="{{id}}">{{name}}</option>
+                    {{/each}}
+                </select>
+                <label>Job</label>
+            </div>
+            <div class="input-field col s4">
+                <select {{b "value: agency, change: filterChange"}} class="">
+                    <option value="">Select</option>
+                    {{#each agencies_options}}
+                        <option value="{{name}}">{{name}}</option>
+                    {{/each}}
+                </select>
+                <label>Agency</label>
+            </div>
+        </div>
+        <div class="col l5" style="padding-right:0rem; padding-bottom:0">
+            <div class="input-field col s4">
+                <select {{b "value: area, change: filterChange"}} class="">
+                    <option value="">Select</option>
+                    {{#each areas_options}}
+                        <option value="{{name}}">{{name}}</option>
+                    {{/each}}
+                </select>
+                <label>Area</label>
+            </div>
+            <!-- <div class="input-field col s2">
+          <select {{b "value: availability, change: filterChange"}} class=""  >
+            <option value="">Select</option>
+            {{#each availabilities_options}}
+              <option value="{{id}}">{{name}}</option>
+            {{/each}}
+          </select>
+          <label>Availability</label>
+        </div> -->
+            <div class="input-field col s4">
+                <select {{b "value: active, change: filterChange"}} class="active-only">
+                    <option value="true">Active Only</option>
+                    <option value="false">All Agents</option>
+                </select>
+
+                <label>State</label>
+            </div>
+            <div class="input-field col s4 expiry">
+                <select id="expiryRange" {{b "value: expiresIn, change: filterChange"}}>
+                    <option value="" disabled selected>Expiring in</option>
+                    <option value="0" selected>Expired</option>
+                    <option value="30">30 days</option>
+                    <option value="60">60 days</option>
+                </select>
+            </div>
+        </div>
+        <div class="input-field col l1">
+          <a class="btn white blue-text" id="clear-filters" style="padding-right:1rem;padding-left:1rem">clear</a>
+        </div>
+    </div>
+</template>

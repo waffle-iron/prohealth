@@ -1,0 +1,21 @@
+<template name="header">
+  <div class="page-title z-depth-1">
+    <div class="row" style="margin-right: -1rem">
+      <div class="col s12 m12 l12" style="padding-top: 0.6rem;">
+        <div class="col s12 m9 l7" style="margin:0;padding:0">
+          <h1>
+            {{#if hasBack}}
+            <a title="Back" class="back" style="z-index:20">
+              <i class="left ion-chevron-left"></i>
+            </a>
+            {{/if}}
+            {{title}} <small class="head-desc">- {{subtitle}}</small>
+          </h1>
+        </div>
+      </div>
+    </div>
+  </div>
+  <style>
+    a:hover { cursor:pointer; }
+  </style>
+</template>

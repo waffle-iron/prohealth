@@ -1,0 +1,50 @@
+<template name="billLogs">
+  {{> header headerVariable=headerVariable}}
+  {{#if audits}}
+    <div class="cont">
+      {{#if Template.subscriptionsReady}}
+
+      <div class="row">
+        <div class="col l12">
+          <div class="card">
+              <div class="content">
+                   <ul class="collection" style="border: 0; margin:0">
+                     {{#each audits}}
+                       <li class="collection-item">
+                         <div class="row">
+                           <div class="col s12 {{#if isDelete this}}red-text text-accent-4{{/if}}">
+                             <strong>{{auditUser this}}</strong>
+                             {{auditTitle this}}
+                             <small class="right">{{parseDate this.date}}</small>
+                             <blockquote class="{{blockQuoteColor this}}" style="margin-bottom: 0;">
+                               <p>
+                                 {{#each description}}
+                                   {{this}}
+                                   <br>
+                                 {{/each}}
+                               </p>
+                             </blockquote>
+                           </div>
+                         </div>
+                       </li>
+                     {{/each}}
+                   </ul>
+               </div>
+          </div>
+      </div>
+    </div>
+    {{else}}
+      {{> loading}}
+    {{/if}}
+  </div>
+  {{else}}
+    <div class="row">
+        <div class="col l8 offset-l2">
+            <div class="card-panel card-panel alert alert-border-left white blue-text">
+                <span>
+                    No deleted bills yet !</span>
+            </div>
+        </div>
+    </div>
+  {{/if}}
+</template>

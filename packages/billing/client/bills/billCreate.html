@@ -1,0 +1,84 @@
+<template name="billCreate">
+  {{> header headerVariable=headerVariable}}
+    <div class="cont">
+    <div class="row" style="margin-top: 0">
+        <div class="col l8 offset-l2">
+            <div class="card" style="overflow:visible;margin-bottom: 2rem;">
+                <div class="content" style="overflow:visible">
+
+                    {{#autoForm collection="Bills" id="createBillForm" type="insert"}}
+                        <div class="edit-bill">
+                            <div class="row">
+                              <div class="col l6 patient-name">
+                                  <!-- {{> afQuickField name='patient_name'}} -->
+                                  {{> afFieldInput type='autocomplete' field="mrn"}}
+                              </div>
+                              <div class="col l6 patient-name">
+                                  {{> afFieldInput type='autocomplete' name='patient_name' field="name"}}
+                              </div>
+                                <!-- <div class="col l6" style="margin-top:2rem">
+                                  <div class="input-field col s12">
+                                  {{> afFieldInput firstOption="Select an agency..." type="select" options=agencies name='agency_id' id="agency_id" value=agency._id}}
+                                    <label>Agency</label>
+                                  </div>
+                                </div> -->
+                            </div>
+                            <br>
+                            <br>
+                            <div class="row">
+                                <div class="col l6">
+                                    {{> afQuickField name='date' type='text' id='billDate' value=today}}
+                                </div>
+                                <div class="col l6">
+                                    {{> afQuickField name='amount'}}
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col l6 payor">
+                                    {{> afQuickField name='payor_id' options=payors id="payor-select" value=getMedicareID}}
+                                </div>
+                                <div class="col l6">
+                                    {{> afQuickField name='claim_id' id='claim_id'}}
+                                </div>
+                            </div>
+                            <div class="row claim-dates">
+                                <div class="col l6">
+                                    {{> afQuickField name='claim_start_date' type='text' id='claimStartDate'}}                                </div>
+                                <div class="col l6">
+                                  {{> afQuickField name='claim_end_date' type='text' id='claimEndDate'}}
+                                </div>
+                            </div>
+                            <span class="date-error" style="display: none">
+                              <i class="material-icons red-text">error</i><span style="position: relative;top: -0.5rem;left: 1rem;" class="red-text">Claim end date must be after claim start date !</span>
+                            </span>
+                        </div>
+                        <div class="fixed-action-btn" style="bottom: 45px; right: 45px;">
+                        <button title="Save bill" type="submit" name="commit" class="btn-large btn-floating right">
+                          <i class="icon ion-checkmark-round"></i>
+                        </button>
+                      </div>
+                    {{/autoForm}}
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
+
+    <style>
+
+    .patient-name{
+      height: 50px;
+    }
+      .edit-bill .row .col {
+        padding-bottom: 0;
+      }
+      .edit-bill .row {
+        margin: -1rem -1rem 1rem 0;
+      }
+      .edit-bill .row .row:first-child {
+        margin: 1rem -1rem 1rem 1rem;
+        padding: 0;
+      }
+
+    </style>
+</template>

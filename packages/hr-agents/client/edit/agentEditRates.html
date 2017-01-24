@@ -1,0 +1,51 @@
+<template name="agentEditRatesCollectionItem">
+  <div class="col s12 m6 l6 rates" style="margin-bottom: 0; padding-bottom: 0">
+
+
+      {{#if hasRate}}
+          {{#autoForm collection="CompensationRates" doc=hasRate id=this._id type="update" }}
+              {{> afFieldInput name='agent' value=thisAgent type="hidden"}}
+              {{> afQuickField name='compensation_type' value=_id type="hidden"}}
+              {{> afQuickField name='amount' label=this.name class=amountId}}
+          {{/autoForm}}
+
+      {{else}}
+
+          {{#autoForm collection="CompensationRates" id=this._id type="insert" }}
+              {{> afFieldInput name='agent' value=thisAgent type="hidden"}}
+              {{> afQuickField name='compensation_type' value=_id type="hidden"}}
+              {{> afQuickField name='amount' label=this.name class=amountId}}
+          {{/autoForm}}
+      {{/if}}
+
+  </div>
+</template>
+
+<template name="agentEditRates">
+        {{#if Template.subscriptionsReady}}
+
+            <div class="row">
+                <div class="col s12 m12 l12">
+
+                    {{#each rateTypes}}
+                        {{> agentEditRatesCollectionItem}}
+                    {{/each}}
+                    <div class="col s12 m12 l12">
+                        <button title="Save" class="btn btn-commit btn-floating btn-large right grey-text">
+                            <i class="material-icons">save</i>
+                        </button>
+                        <style>
+                            .btn-commit {
+                                position: fixed !important;
+                                bottom: 45px;
+                                right: 45px;
+                            }
+
+                        </style>
+                    </div>
+                </div>
+            </div>
+        {{else}}
+            {{> loading}}
+        {{/if}}
+</template>

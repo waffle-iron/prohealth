@@ -1,0 +1,61 @@
+<template name="documentEdit">
+  {{> header headerVariable=headerVariable}}
+    <div class="profile">
+        {{#if Template.subscriptionsReady}}
+        <div class="cont">
+            {{#if documents}}
+                {{#each documents}}
+                    <div class="card">
+                        <div class="title">
+                            <span style="font-weight: bold">{{title}}</span>
+                            ({{name}})
+                            <!-- <a href="{{url}}" target="_blank" class=" blue-text right action" download>
+                                <i class="mdi-file-file-download"></i>
+                            </a> -->
+                        </div>
+                        <div class="content">
+                            <div class="row" style="margin-top: 0;">
+                                {{#autoForm collection="Documents" doc=this id=this._id type="update"}}
+                                    {{addHooks this._id}}
+                                    <div class="col s12 m6 l4">
+                                        {{> afQuickField name='document_type_id' options = documentTypeOptions value=docType}}
+                                    </div>
+                                    {{#if categorized}}
+                                        <div class="col s12 m6 l4">
+                                            {{> afQuickField name='page' }}
+                                        </div>
+                                    {{/if}}
+                                    {{#if firstDoc documents this}}
+                                        <div class="col s12 m6 l4">
+                                            {{> afQuickField name='expires' id="expiresField"}}
+                                        </div>
+                                    {{/if}}
+
+                                    <button class="btn-floating btn blue action-submit" type="submit" name="commit" style="position:absolute; top: 1.5rem; right: 2rem;" id="submit">
+                                        <i class="large ion-checkmark-round"></i>
+                                    </button>
+                                    <a href="{{pathFor 'documentDelete' _id=this._id}}" class="btn-floating red action-delete " style="position:absolute; top: 1.5rem; right: 6rem;">
+                                        <i class="ion-trash-b"></i>
+                                    </a>
+                                {{/autoForm}}
+                            </div>
+                            <img src={{url}} alt="" style="width:100%;height:auto;margin:0"/>
+                            <!-- <canvas id="pdfcanvas{{this._id}}" style="width:100%;height:auto;margin:auto"></canvas> -->
+                            <!-- {{render this}} -->
+                        </div>
+                    </div>
+                {{/each}}
+            {{else}}
+
+                <div class="card-panel">
+                    <h4>
+                        There are no documents of this type, please go back.
+                    </h4>
+                </div>
+            {{/if}}
+          </div>
+        {{else}}
+            {{> loading}}
+        {{/if}}
+    </div>
+</template>

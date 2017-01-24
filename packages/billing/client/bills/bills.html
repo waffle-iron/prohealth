@@ -1,0 +1,103 @@
+<template name="bills">
+  {{> header headerVariable=headerVariable}}
+
+
+    <div class="cont">
+
+      <div class="row" id="upload-form">
+        <div class="col l12">
+          {{#with infoLabel}}
+          <div class="card">
+            <div class="title">
+              <h5>Upload Bill - {{infoLabel}}</h5>
+               <a class="close" href="#"> <i class="material-icons">close</i> </a>
+            </div>
+            <div class="content">
+
+              <div class="col l3" style="padding-bottom:0">
+                <button class="upload waves-effect waves-light btn" style="width:100%">Start Upload</button>
+              </div>
+               <div class="col l9" style="padding-bottom:0">
+                 <div class="progress">
+                   {{#with file}}
+                   <!-- <div class="progress"> <div class="white-text" style="width: {{percent_uploaded}}%">{{file.original_name}} - {{percent_uploaded}}%</div> </div> -->
+                     <div class="white-text" id = "upProg" style="width: {{percent_uploaded}}%">{{this.file.original_name}} - {{percent_uploaded}}%</div>
+                   {{/with}}
+                 </div>
+               </div>
+               <p class="red-text file-error" style="margin:0;padding:0;margin-top:-1rem;display:none">Please select a PDF file</p>
+            </div>
+          </div>
+          {{/with}}
+        </div>
+      </div>
+      {{> createBill}}
+    <!-- <div class="row" style = "margin:0; margin-bottom:-2rem">
+                <div class="col l10" style = "padding-right:1rem">
+                <div class="file-field input-field" style = "margin-top:0">
+                  <div class="btn">
+                    <span>File</span>
+                    <input type="file" class="file_bag" multiple>
+                  </div>
+                  <div class="file-path-wrapper">
+                    <input class="file-path validate" type="text">
+                  </div>
+                </div>
+              </div>
+                <div class="col l2" style = "padding-right:0">
+                  <button class="upload btn" style = "height:39px;width:100%">Upload</button>
+                </div>
+              </div>
+      {{#each files}}
+      <div class="progress"> <div class="white-text" style="width: {{percent_uploaded}}%">{{file.original_name}} - {{percent_uploaded}}%</div> </div>
+
+      {{/each}} -->
+
+  <div class="row">
+    <div class="col l12">
+        <div class="card">
+            <div class="content">
+                <style>
+                  .content .row{
+                    margin-right: 0;
+                  }
+                  .content table{
+                    width: 100% !important
+                  }
+                </style>
+                <!-- {{> reactiveTable collection=Bills}} -->
+                {{> tabular table=TabularTables.Bills id="billsTable" class="table bordered highlight centered" selector=billsSelector}}
+            </div>
+
+
+
+            <div class="fixed-action-btn horizontal"  style="right: 45px; bottom: 45px; position: fixed;">
+              <a title="Create bill" class="btn-floating btn-large blue waves-effect waves-light"  href="{{pathFor 'billCreate'}}">
+                <i class="large material-icons">add</i>
+              </a>
+              <ul>
+                <li><a title="Send by E-mail" id="sendmail" data-target="#modal1" class="send-email yellow darken-3 btn-floating waves-effect waves-light" ><i class="material-icons">email</i></a></li>
+                <li><a title="Download report" class="btn-floating waves-effect waves-light red download-bills" ><i class="ion-archive"> </i></a></li>
+                <li style="margin-top:0">
+
+                  <div class="file-field input-field" style="margin-top:0">
+                    <div title="Upload bill" class="btn-floating waves-effect waves-light green" style="width: 3rem; height:3rem;">
+                      <span>
+                        <i class="material-icons" style="line-height: inherit;margin-right: .7rem;">publish</i>
+                      </span>
+                      <input type="file" class="file_bag" accept=".pdf">
+                    </div>
+                  </div>
+                </li>
+              </ul>
+            </div>
+
+        </div>
+    </div>
+  </div>
+
+</div>
+{{> emailModal subject=headerVariable.title repData=tableData}}
+
+{{> addPaymentModal}}
+</template>

@@ -1,0 +1,21 @@
+[Bill.last].map{|b| {date: b.date, amount: b.amount, patient_name: b.patient.display_name}}
+
+[Bill.last].map{|b| {date: b.date, amount: b.amount, patient_name: b.patient.display_name, claim_name: b.claim_type.name, payor_name: b.insurance_company.name}}
+
+File.open("bills_data.json", "w") { |f| f.write Bill.all.map{|b| {date: (b.date || DateTime.parse("1970-01-01")).strftime("%Y-%m-%d"), amount: b.amount, patient_name: b.patient.display_name, claim_name: b.claim_type.name, payor_name: b.insurance_company.name, claim_start_date: (b.claim_start_date || DateTime.parse("1970-01-01")).strftime("%Y-%m-%d"), claim_end_date: (b.claim_end_date || DateTime.parse("1970-01-01")).strftime("%Y-%m-%d"), r_id: b.id}}.to_json }
+
+
+File.open("payments_data.json", "w") { |f| f.write Payment.all.map{|b| {date: (b.date || DateTime.parse("1970-01-01")).strftime("%Y-%m-%d"), amount: b.amount, notes: b.notes, payment_type: (b.payment_type.try(:name) || "N/A"),  bill_id: b.bill_id}}.to_json }
+
+
+scp deploy@remotehost.edu:foobar.txt /local/dir
+
+
+scp -i config/deploy/prohealth.pem deploy@52.33.207.41:prohealth/current/bills_data.json
+
+
+"date": "2015-02-04",
+"amount": 1831.77,
+"notes": null,
+"payment_type": "nulls",
+"bill_id": 48833

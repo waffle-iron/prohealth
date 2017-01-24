@@ -1,0 +1,122 @@
+<template name="marketerSalesSheet">
+  <div id="sales-table" class= "card-panel" >
+    <p style="font-size:1.1rem;margin-bottom: 0;text-align:center;padding:0.5rem 0;background-color:#f5f5f5;border-bottom:solid 1px #ddd">
+      <strong>Medicare insurance /Private insurance <small class="grey-text">per {{groupBy}}</small></strong>
+    </p>
+    {{#if Template.subscriptionsReady}}
+    <div style = "overflow-x: scroll">
+      {{#if marketerSales}}
+      <table class="table striped sales centered">
+        <thead>
+          <tr>
+            <th rowspan="2" style="vertical-align: middle">Marketer</th>
+            <th rowspan="2" style="background-color:#e1f5fe;color:#263238; vertical-align: middle;padding-left: 1rem;padding-right: 1rem;">Total</th>
+            {{#each dates}}
+            <th style="padding-left: 1rem;padding-right: 1rem;">
+              {{dt}}{{#if yr}}<small class="grey-text" style="padding-left:.1rem">/{{yr}}</small>{{/if}}
+            </th>
+            {{/each}}
+          </tr>
+          {{#if groupByWeek}}
+            <tr>
+              {{#each dates}}
+                <th style="padding-top:0; padding-bottom:0">{{start}}-{{end}}</th>
+              {{/each}}
+            </tr>
+          {{/if}}
+        </thead>
+          <tbody>
+              {{#each marketer in marketerSales}}
+              <tr>
+                <td><a title="Open marketer sales" class = "changeTemplate" id={{marketer._id}} href="{{pathFor 'marketerSales' template='marketerReport' marketer=marketer._id}}">{{marketer._id}}</a></td>
+                <td style="background-color:#e1f5fe;color:#263238">
+                  {{#if showMedicare}}<a title="View Medicare sales" target="_blank" href="{{getTotalLink 'Medicare' marketer._id}}" class="go-patients"><strong>{{marketer.totalMedicare}}</strong></a>{{/if}}{{#if showAll}}/{{/if}}{{#if showPrivate}}<a title="View Private sales" target="_blank" href="{{getTotalLink 'Private' marketer._id}}" class="go-patients">{{marketer.totalNonMedicare}}</a>{{/if}}
+
+                </td>
+                {{#each admit in updateAdmits marketer.admits}}
+                  <td>
+                    {{#if showMedicare}}
+                      {{#if admit.medicare}}
+                        <strong>
+                          <a title="View Medicare sales" target="_blank" href="{{getLink admit 'Medicare' marketer._id}}" class="go-patients">
+                            {{admit.medicare}}
+                          </a>
+                        </strong>
+                      {{else}}
+                        {{admit.medicare}}
+                      {{/if}}
+                    {{/if}}
+                    {{#if showAll}}
+                      /
+                    {{/if}}
+                    {{#if showPrivate}}
+                      {{#if admit.nonMedicare}}
+                        <strong>
+                          <a title="View Private sales" target="_blank" href="{{getLink admit 'Private' marketer._id}}" class="go-patients">
+                            {{admit.nonMedicare}}
+                          </a>
+                        </strong>
+                      {{else}}
+                        {{admit.nonMedicare}}
+                      {{/if}}
+                      {{/if}}
+                  </td>
+                {{/each}}
+              </tr>
+              {{/each}}
+              <tr>
+                <td><strong>Total</strong></td>
+                <td>{{#if showMedicare}}<a title="View Medicare sales" target="_blank" href="{{getUTotalLink 'Medicare'}}" class="go-patients"><strong>{{ultimateTotal.medicare}}</strong></a>{{/if}}{{#if showAll}}/{{/if}}{{#if showPrivate}}<a title="View Private sales" target="_blank" href="{{getUTotalLink 'Private'}}" class="go-patients">{{ultimateTotal.nonMedicare}}</a>{{/if}}</td>
+                {{#each admit in updateAdmits totals}}
+                  <td>
+                    {{#if showMedicare}}
+                      {{#if admit.medicare}}
+                        <strong>
+                          <a title="View Medicare sales" target="_blank" href="{{getTotalsLink admit 'Medicare'}}" class="go-patients">
+                            {{admit.medicare}}
+                          </a>
+                        </strong>
+                      {{else}}
+                        {{admit.medicare}}
+                      {{/if}}
+                    {{/if}}
+                    {{#if showAll}}
+                      /
+                    {{/if}}
+                    {{#if showPrivate}}
+                      {{#if admit.nonMedicare}}
+                        <strong>
+                          <a title="View Private sales" target="_blank" href="{{getTotalsLink admit 'Private'}}" class="go-patients">
+                            {{admit.nonMedicare}}
+                          </a>
+                        </strong>
+                      {{else}}
+                        {{admit.nonMedicare}}
+                      {{/if}}
+                    {{/if}}
+                  </td>
+                {{/each}}
+              </tr>
+          </tbody>
+
+      </table>
+      {{else}}
+      <!-- <tr style="text-align:center"> -->
+      <p style="text-align:center">No Sales in selected period</p>
+      <!-- </tr> -->
+      {{/if}}
+    </div>
+      {{else}}
+      {{> loading}}
+      {{/if }}
+    </div>
+    <div class="fixed-action-btn horizontal"  style="right: 45px; bottom: 45px; position: fixed;">
+      <a title="Download report" class="btn-floating btn-large blue waves-effect waves-light download-payments"  href=""  {{b "click: downloadCSV"}}>
+        <i class="ion-archive"></i>
+      </a>
+      <ul>
+        <li><a title="Send by E-mail" id="sendmail" data-target="#modal1" class="send-email btn-floating waves-effect waves-light green download-bills" ><i class="material-icons">email</i></a></li>
+      </ul>
+    </div>
+    {{> emailModal subject=header repData=tableData}}
+</template>

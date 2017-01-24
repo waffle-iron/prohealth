@@ -1,0 +1,164 @@
+<template name="marketerReport">
+  <div class="">
+    {{#if Template.subscriptionsReady}}
+      {{#if getData}}
+        <div class="card-panel">
+              <div class="" style="overflow-x: scroll !important; margin-bottom: 100px;">
+                <table class="table table-striped sales centered">
+                  <thead>
+                    <tr>
+                      <th rowspan="2" style="white-space: nowrap">Insurance Type</th>
+                      <th rowspan="2" style="white-space: nowrap">Insurance Name</th>
+                      <th rowspan="2" style="background-color:#e1f5fe;color:#263238;border-radius:0">Total</th>
+                      {{#each date in getDateRange}}
+                        <th>
+                          {{#if isGroupByYear}}
+                            {{date}}
+                          {{else}}
+                            {{getDate date}}
+                          {{/if}}
+                        </th>
+                      {{/each}}
+                    </tr>
+                    {{#if isGroupByWeek}}
+                      <tr>
+                        {{#each date in getDateRange}}
+                          <th style="padding-top:0; padding-bottom:0">{{date.start}}-{{date.end}}</th>
+                        {{/each}}
+                      </tr>
+                    {{/if}}
+                  </thead>
+                  <tbody>
+                    <!-- Medicare -->
+                    {{#if showMedicare}}
+                    <tr>
+                      <td style="background-color:#e1f5fe;color:#263238;border-radius:0">Medicare</td>
+                      <td style="background-color:#e1f5fe;color:#263238;border-radius:0"></td>
+                      <td style="background-color:#b3e5fc;color:#263238;border-radius:0">
+                        <a title="View sales" target="_blank" href="{{getTotalLink 'Medicare'}}"  style="z-index: 0;">
+                          {{getMedicareData.totalAdmits}}
+                        </a>
+                      </td>
+                      {{#each date in getDateRange}}
+                        {{#with getTotal date getMedicareData.medicare}}
+                          <td style="background-color:#e1f5fe;color:#263238;border-radius:0">
+                            <a title="View sales" target="_blank" href="{{getLink date 'Medicare'}}"  style="z-index: 0;">
+                              {{this.totalMedicare}}
+                            </a>
+                          </td>
+                        {{else}}
+                          <td style="background-color:#e1f5fe;color:#263238;border-radius:0">0</td>
+                        {{/with}}
+                      {{/each}}
+                    </tr>
+                    {{#each insurance in getMedicareData.medicare}}
+                      <tr>
+                        <td></td>
+                        <td>{{insurance._id}}</td>
+                        <td style="background-color:#e1f5fe;color:#263238;border-radius:0"><a target="_blank" href="{{getTotalLink insurance._id}}" style="z-index: 0;">{{insurance.totalAdmitted}}</a></td>
+                        {{#each date in getDateRange}}
+                          {{#with checkDates date insurance.admits}}
+                            <td>
+                              <a title="View sales" target="_blank" href="{{getLink date insurance._id}}" style="z-index: 0;">
+                                {{this.total}}
+                              </a>
+                            </td>
+                          {{else}}
+                            <td>0</td>
+                          {{/with}}
+                        {{/each}}
+                      </tr>
+                    {{/each}}
+                    {{/if}}
+                    <!-- /medicare -->
+                    {{#if showPrivate}}
+                    <tr>
+                      <td style="background-color:#e1f5fe;color:#263238;border-radius:0">Private</td>
+                      <td style="background-color:#e1f5fe;color:#263238;border-radius:0"></td>
+                      <td style="background-color:#b3e5fc;color:#263238;border-radius:0">
+                        <a title="View sales" target="_blank" href="{{getTotalLink 'Private'}}" style="z-index: 0;">
+                          {{getPrivateData.totalAdmits}}
+                        </a>
+                      </td>
+                      {{#each date in getDateRange}}
+                        {{#with getTotal date getPrivateData.private}}
+                          <td style="background-color:#e1f5fe;color:#263238;border-radius:0">
+                            <a title="View sales" target="_blank" href="{{getLink date 'Private'}}" style="z-index: 0;">
+                              {{this.totalPrivate}}
+                            </a>
+                          </td>
+                        {{else}}
+                          <td style="background-color:#e1f5fe;color:#263238;border-radius:0">0</td>
+                        {{/with}}
+                      {{/each}}
+                    </tr>
+                    {{#each insurance in getPrivateData.private}}
+                      <tr>
+                        <td></td>
+                        <td> <span class="center">{{insurance._id}}</span></td>
+                        <td style="background-color:#e1f5fe;color:#263238;border-radius:0"><a target="_blank" href="{{getTotalLink insurance._id}}" style="z-index: 0;">{{insurance.totalAdmitted}}</a></td>
+                        {{#each date in getDateRange}}
+                          {{#with checkDates date insurance.admits}}
+                            <td>
+                              <a title="View sales" target="_blank" href="{{getLink date insurance._id}}"  style="z-index: 0;">
+                                {{this.total}}
+                              </a>
+                            </td>
+                          {{else}}
+                            <td>0</td>
+                          {{/with}}
+                        {{/each}}
+                      </tr>
+                    {{/each}}
+                    {{/if}}
+                    {{#if showAll}}
+                    <tr>
+                      <td style="background-color:#e1f5fe;color:#263238;border-radius:0">Total</td>
+                      <td style="background-color:#e1f5fe;color:#263238;border-radius:0"></td>
+                      <td style="background-color:#b3e5fc;color:#263238;border-radius:0">
+                        <a title="View sales" target="_blank" href="{{getMarketerTotalLink}}"  style="z-index: 0;">
+                          {{totalOf getMedicareData.totalAdmits getPrivateData.totalAdmits}}
+                        </a>
+                      </td>
+                      {{#each date in getDateRange}}
+                      {{#with getAllTotal date getPrivateData.private getMedicareData.medicare}}
+                      <td style="background-color:#e1f5fe;color:#263238;border-radius:0">
+                        <a title="View sales" target="_blank" href="{{getLink date '0'}}"  style="z-index: 0;">
+                          {{this}}
+                        </a>
+                      </td>
+                      {{else}}
+                      <td style="background-color:#e1f5fe;color:#263238;border-radius:0">0</td>
+                      {{/with}}
+                      {{/each}}
+                    </tr>
+                    {{/if}}
+                  </tbody>
+                </table>
+              </div>
+        </div>
+        {{else}}
+          <div class="row">
+            <div class="col l8 offset-l2">
+              <div class="card-panel card-panel alert alert-border-left white blue-text">
+                <strong>No Results!</strong>
+                <span>
+                  Marketer has no sales in the selected period.</span>
+              </div>
+            </div>
+          </div>
+        {{/if}}
+      {{else}}
+        {{> loading}}
+      {{/if}}
+  </div>
+  <div class="fixed-action-btn horizontal"  style="right: 45px; bottom: 45px; position: fixed;">
+    <a title="Download report" class="btn-floating btn-large blue waves-effect waves-light download-payments"  href=""  {{b "click: downloadCSV"}}>
+      <i class="ion-archive"></i>
+    </a>
+    <ul>
+      <li><a title="Send by E-mail" id="sendmail" data-target="#modal1" class="send-email btn-floating waves-effect waves-light green download-bills" ><i class="material-icons">email</i></a></li>
+    </ul>
+  </div>
+  {{> emailModal subject=header repData=tableData}}
+</template>

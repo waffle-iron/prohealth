@@ -1,0 +1,50 @@
+<template name="rateEdit">
+    <!-- Breadcrumb -->
+    <div class="page-title">
+        <div class="row">
+            <div class="col s12 m9 l10">
+                <h1>{{agent.name}}</h1>
+                <ul>
+                    <li>
+                        Editing {{agent.name}} Profile
+                    </li>
+                </ul>
+            </div>
+            <div class="col s12 m3 l2 right-align">
+                <a href="" class="btn grey lighten-3 grey-text z-depth-0 chat-toggle back">
+                    <i class="left ion-chevron-left"></i> Back
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="card">
+            <div class="title">
+                {{rate.name}}
+            </div>
+            <div class="content" style="overflow: visible;">
+              {{#autoForm collection="CompensationRates" doc=rate id="RateUpdateForm" type="update" }}
+
+              <!-- {{> afFieldInput name='agent' value=agent type="hidden"}} -->
+
+                <div class="col s12 m12 l6">
+                  {{> afQuickField name='compensation_type' value=rate.compensation_type}}
+                </div>
+                <div class="col s12 m12 l6">
+                  {{> afQuickField name='amount' value=rate.amount}}
+                </div>
+
+                <div class="fixed-action-btn" style="bottom: 45px; right: 45px;">
+                    <button class="btn-floating btn-large blue action-submit" type="submit" name="commit">
+                        <i class="large ion-checkmark-round"></i>
+                    </button>
+                    <ul>
+                        <li><a class="btn-floating red delete action-delete"><i class="ion-trash-b"></i></a></li>
+                    </ul>
+                </div>
+
+              {{/autoForm}}
+            </div>
+        </div>
+    </div>
+</template>

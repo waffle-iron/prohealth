@@ -1,0 +1,52 @@
+<template name="followups">
+  {{> header headerVariable=headerVariable}}
+    {{#if Template.subscriptionsReady}}
+    <div class="cont">
+      {{#if followup}}
+      <div class="col l12">
+        <div class="card">
+            <div class="content">
+              <table class="bordered highlight">
+                     <thead>
+                       <tr>
+                           <th data-field="date">Date</th>
+                           <th data-field="note">Note</th>
+                           <th data-field="done">Check</th>
+                           <th data-field="bill"></th>
+                       </tr>
+                     </thead>
+
+                     <tbody>
+                       {{#each followup}}
+                         <tr>
+                           <td>{{parseDate date}}</td>
+                           <td>{{note}}</td>
+                           <td>
+                              <input title="Check follow up" type="checkbox" class="followUpDone" id="followUp{{_id}}" {{isDone this.done}} data-idfollowup={{this._id}} data-done={{this.done}} />
+														    <label for="followUp{{_id}}"></label>
+                           </td>
+                           <td>
+                             <a href="{{pathFor 'billEdit' _id=this.entityId}}">Show Bill</a>
+                           </td>
+                         </tr>
+                       {{/each}}
+                     </tbody>
+                   </table>
+            </div>
+        </div>
+    </div>
+    {{else}}
+      <div class="row">
+          <div class="col l8 offset-l2">
+              <div class="card-panel card-panel alert alert-border-left white blue-text">
+                  <span>
+                      No follow ups yet !</span>
+              </div>
+          </div>
+      </div>
+    {{/if}}
+  </div>
+  {{else}}
+    {{> loading}}
+  {{/if}}
+</template>

@@ -1,0 +1,16 @@
+<template name="documentEditSortable">
+  {{> docsHeader}}
+    <div class="container-docs-sortable">
+
+        {{> typebar}}
+        {{#if Template.subscriptionsReady}}
+            {{> sortableDocs}}
+        {{else}}
+            {{> loading}}
+        {{/if}}
+    </div>
+    <footer style="left: calc(240px + 10rem); width: calc(100% - 240px - 10rem);">
+        © 2016 Powered by
+        <a href="http://dout.io">duot.io</a>
+    </footer>
+</template>

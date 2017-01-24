@@ -1,0 +1,66 @@
+<template name="types">
+    {{#with docType}}
+        {{reloadSortable}}
+        {{#if documents _id}}
+        {{else}}
+          <div class="row">
+              <div class="col l8 offset-l2">
+                  <div class="card-panel card-panel alert alert-border-left white blue-text">
+                      <span>
+                          No documents with this type !</span>
+                  </div>
+              </div>
+          </div>
+        {{/if}}
+            <div class="content" style="overflow-y: visible;">
+                <div class="row" style="margin-top:8rem">
+                    <div id={{_id}} class="grey lighten-1" style="z-index:1;min-height:10rem;height:calc(100% - 80px);position: fixed;left: 240px;top: 80px;overflow-x: hidden;overflow-y:scroll;">
+                        <!-- <table class="sortable-table" id={{_id}} style="height:100%"> -->
+                                <ul id={{_id}} class="documents" data-name={{name}} style="min-width:10rem;height:100%">
+                                    {{#each documents _id}}
+                                        <li id={{_id}} data-moved="false" class="doc-item" style="padding: 5px 5px">
+                                            <div id={{_id}} class="docCard card-panel grey lighten-3" style="font-weight:bold;position:relative;width:9rem;padding:0.2rem;height:12rem;text-align: center;overflow:hidden">
+                                                <span class="grey lighten-3 grey-text text-darken-1 page" style="position: absolute;bottom: 0;left: 2px;padding-right:0.25rem;padding-left:0.25rem;z-index:10">{{page}}</span>
+                                                <img id={{_id}} class="rotate" src={{chckURL url}} alt="" style="width:{{adjWidth _id}};max-width:100%;height:auto;margin:0;max-height:11.6rem;transform: rotate({{rotation}}deg);"/>
+                                                <div class="my-handle white-text"><i class="material-icons">drag_handle</i></div>
+                                            </div>
+                                        </li>
+                                    {{/each}}
+                                </ul>
+                        <!-- </table> -->
+                    </div>
+                </div>
+            </div>
+
+        <div class="col l10 offset-l2" style="text-align: center;">
+            {{#with document docId}}
+                <div class="card" style="z-index:0;margin-bottom:8rem">
+                    <div class="title" style="text-align:left">
+                        {{name}}
+                        <a href="{{pathFor 'documentDelete' _id=_id}}" id="deleteDoc" class="grey-text text-darken-2 right" style="line-height: 1rem;">
+                            <i class="material-icons">delete</i>
+                        </a>
+                        <a id="rotateDocRight" data-docId={{_id}} style="margin-right: 1rem;line-height: 1rem;" href="" class="grey-text text-darken-2 right rotateDoc">
+                            <i data-docId={{_id}} class="material-icons">rotate_right</i>
+                        </a>
+                    </div>
+                    <div class="content">
+                        <div class="row" style="margin:0; padding:0;">
+                          <div class="col l1" style="margin:0; padding:0;margin-top:1.5rem">
+                            <i class="material-icons">zoom_in</i>
+                          </div>
+                          <div class="col l10" style="margin:0; padding:0;">
+                            <p class="range-field">
+                              <input type="range" id="zoomSlider" step="10" min={{minValue}} max={{maxValue}} {{b "value: zoomValue, change:zoomF"}}/>
+                            </p>
+                          </div>
+                        </div>
+                        <div id="imgContainer" style="overflow-x:scroll">
+                          <img class="" id="docImage" src={{chckURL url}} alt="" style="width:auto;height:auto;margin:0;transform: rotate({{rotation}}deg);"/>
+                        </div>
+                    </div>
+                </div>
+            {{/with}}
+        </div>
+    {{/with}}
+</template>

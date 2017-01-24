@@ -1,0 +1,88 @@
+.typebar {
+  position: fixed;
+  overflow: hidden;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 240px;
+  padding-bottom: 5px;
+  background: #35384C;
+  font-size: 1rem;
+  z-index: 1000;
+  -webkit-transform: translate3d(0, 0, 0);
+          transform: translate3d(0, 0, 0);
+}
+.typebar .input-field input {
+  color: #FFF;
+  padding-left: 1rem
+}
+.typebar li a:hover {
+  background-color: #2d2f40 !important;
+}
+/*.sortable-ghost form, .sortable-ghost a,  .sortable-ghost .my-handle,
+.sortable-chosen form, .sortable-chosen a{
+  display: none;
+}*/
+
+.sortable-chosen img,.sortable-chosen .my-handle{
+  display: none;
+  /*opacity: 0.75;*/
+}
+.sortable-chosen li, .sortable-chosen,{
+  min-height:0;
+  background-color: rgba(0,0,0,0);
+  height: 3rem !important
+}
+.sortable-ghost li, .sortable-ghost{
+  min-height:0;
+  background-color: rgba(0,0,0,0);
+  height: 12rem !important
+}
+.sortable-ghost .page, .sortable-chosen .page{
+  /*display: block;*/
+  background-color: rgba(255,0,0,0) !important;
+}
+.sortable-ghost .docCard{
+  background-color: rgba(255,0,0,0) !important;
+  color: #bdbdbd !important;
+  border: dashed #FFF 2px;
+  opacity: 0.5 !important;
+  min-height:0;
+  height:6rem
+  /*display: block !important*/
+}
+.sortable-chosen .docCard{
+  opacity: 0.4 !important;
+  /*min-height:0;*/
+  /*display: block !important;*/
+  height: 3rem !important
+}
+.my-handle{
+  z-index: 1;
+  width:100%;
+  position: absolute;
+  top: 0rem;
+  left: 0rem;
+  font-size: 2rem;
+  font-size: 1.5rem;
+  background-color: #35384C;
+  opacity:0.5;
+  padding: 0rem 1.5rem;
+  text-align: center;
+  border-radius: 0.05rem;
+  height: 2rem;
+
+}
+/*.my-handle:hover{
+  cursor:pointer;
+}*/
+.my-handle:active, .my-handle:hover{
+  cursor:move;
+}*/
+/*.docCard{
+  min-height:465px
+}
+/*.sortable-table tr td:last-child{
+    width:0%;
+    white-space:nowrap;
+}*/

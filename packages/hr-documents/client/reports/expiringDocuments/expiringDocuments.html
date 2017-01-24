@@ -1,0 +1,66 @@
+<template name="expiringDocuments">
+  {{> header headerVariable=headerVariable}}
+  <div class="filters">
+    <div class='row page-title-form'>
+      <div class="col l6 offset-l6">
+        <!-- <div class="row" style="margin-right: -1rem"> -->
+          <div class="input-field col s4 expiry right" style="margin-top: -1rem;">
+              <select id="expiryRange" {{b "value: expiresIn"}}>
+                  <option value="" disabled selected>Expiring in</option>
+                  <option value="0" selected>Expired</option>
+                  <option value="30">30 days</option>
+                  <option value="60">60 days</option>
+              </select>
+          </div>
+          <span class="blue-text col s6 right" style="position: relative; top:.5rem; font-size:1rem">Change select expiry range here <i class="material-icons">announcement</i></span>
+          <!-- </div> -->
+        </div>
+        </div>
+
+    <div class="filter light-blue darken-1">
+        <div class="row" style="margin-right: -1rem">
+            <div class="col s12 m12 l12 right-align filter-content">
+                {{> agentsFilters}}
+            </div>
+        </div>
+    </div>
+    {{#if Template.subscriptionsReady}}
+        {{#if agents}}
+            {{#if expiringDocumentsAggr}}
+                <div class="row">
+                    <div class="col s12 m12 l12">
+                        {{> expiringDocumentsList}}
+                    </div>
+                </div>
+            {{else}}
+                <div class="row">
+                    <div class="col l8 offset-l2">
+                        <div class="card-panel card-panel alert alert-border-left white blue-text">
+                            <span>
+                                No expiring documents in selected range !</span>
+                        </div>
+                    </div>
+                </div>
+            {{/if}}
+        {{else}}
+            <div class="row">
+                <div class="col l8 offset-l2">
+                    <div class="card-panel card-panel alert alert-border-left white blue-text">
+                        <span>
+                            No expiring documents in selected range and/or current filter !</span>
+                    </div>
+                </div>
+            </div>
+        {{/if}}
+    {{else}}
+        {{> loading}}
+    {{/if }}
+  </div>
+</template>
+
+<template name="expiringDocumentsList">
+  {{#each agents}}
+    {{> expiringDocumentItem}}
+  {{/each}}
+    <!-- {{> pages}} -->
+</template>

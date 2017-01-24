@@ -1,0 +1,197 @@
+<template name="timesheetEntry">
+    <div class="collection-item grey-text" style="position: relative">
+        <div class="row" style="margin-top: 0; margin-bottom: 0;">
+          {{#if billingStateIs "logged"}}
+          <div class="col l5" style="padding-right:0">
+            <div class="col l3" style="">{{#if patient}}{{patient}}{{else}}&mdash;{{/if}} {{formStatus}}</div>
+            <div class="col l3" style="">{{form}}</div>
+            <div class="col l3" style="">By {{user}}</div>
+            <div class="col l3" style="">
+              <p style="padding: 0px; margin: 0px;">{{date formDate}}</p>
+              <p style="padding: 0px; margin: 0px;">In: {{#if timeIn}}{{timeIn}}{{else}}&mdash;{{/if}} Out: {{#if timeOut}}{{timeOut}}{{else}}&mdash;{{/if}}</p>
+            </div>
+          </div>
+            <div class="col l4" style="padding-right:0">
+              <div class="col l4 chk-box">
+                <p>
+                  <input class="complexCheckbox" type="checkbox" id={{_id}} {{isChecked _id}} />
+                  <label for="{{_id}}">Complex</label>
+                </p>
+              </div>
+              {{#autoForm collection="Visits" type=formType doc=doc id=formId autosaveOnKeyup=true}}
+                  <div class="col l5 outofarea chk-box" style="padding-right:0">
+                      {{> afQuickField name='out_of_area'}}
+                  </div>
+                  <div class="col l3" style="padding-right:0">
+                      {{> afQuickField name='mileage'}}
+                  </div>
+                  <style>
+                    .outofarea .col label {
+                      margin-right: 0;
+                    }
+                    .chk-box label{
+                      padding-left: 2rem;
+                    }
+                  </style>
+              {{/autoForm}}
+            </div>
+            {{else}}
+            <div class="col l5" style="padding-right:0">
+              <div class="col l3" style="">{{#if patient}}{{patient}}{{else}}&mdash;{{/if}}<br/>{{formStatus}}</div>
+              <div class="col l3" style="">{{form}}</div>
+              <div class="col l3" style="">By {{user}}</div>
+              <div class="col l3" style="">
+                <p style="padding: 0px; margin: 0px;">{{date formDate}}</p>
+                <p style="padding: 0px; margin: 0px;">In: {{#if timeIn}}{{timeIn}}{{else}}&mdash;{{/if}}<br/>Out: {{#if timeOut}}{{timeOut}}{{else}}&mdash;{{/if}}</p>
+              </div>
+            </div>
+            <div class="col l4" style="padding-right:0">
+              {{#with visit this._id}}
+                <div class="col l4 chk-box">
+                  <div class="input-field">
+                    {{#if complex}}
+                    <input type="checkbox" id="cmplx" checked disabled/>
+                    {{else}}
+                    <input type="checkbox" id="cmplx" disabled/>
+                    {{/if}}
+                    <label for="cmplx">complex</label>
+                  </div>
+                </div>
+                <div class="col l5 outofarea chk-box" style="padding-right:0">
+                  <div class="input-field">
+                    {{#if out_of_area}}
+                    <input type="checkbox" id="ooa" checked disabled/>
+                    {{else}}
+                    <input type="checkbox" id="ooa" disabled/>
+                    {{/if}}
+                    <label for="ooa">Out of area</label>
+                  </div>
+                </div>
+                <div class="col l3" style="padding-right:0">
+                  <!-- <div class="input-field"> -->
+                    <label for="mileage">Mileage</label>
+                    <input id="mileage" placeholder="mileage" type="text" class="validate" disabled value={{mileage}}>
+                  <!-- </div> -->
+                </div>
+            {{/with}}
+          </div>
+
+            {{/if}}
+      <div class="col l3" style="padding-right: 0px;">
+        {{#if commentsLength}}
+          <div class="col l12" style="padding-right: 1rem;">
+            <a title="View/add comments" id="btnComment"  class="grey-text btn-small btn-flat right right-align" style="width:100%; overflow-x: hidden; white-space: nowrap;text-overflow: ellipsis;">
+              <i class="material-icons right blue-text">comment</i>
+              {{lastComment}}
+            </a>
+          </div>
+        {{else}}
+        <div class="col l12" style="padding-right: 1rem;">
+          <a title="Add a comment" id="btnComment" class="grey-text btn-small btn-flat right right-align" style="width:100%; overflow-x: hidden; white-space: nowrap;text-overflow: ellipsis;">
+            <i class="material-icons right blue-text">comment</i>
+            Leave a comment...
+          </a>
+        </div>
+        {{/if}}
+        <div class="col l9 offset-l3" style="padding-right: 1rem;">
+
+        {{#if billingStateIs "pending"}}
+            {{#if isAdmin}}
+              <a title="Approve visit" class="btn blue btn-small white-text right-align btn-approve " data-id="{{_id}}"  style="width:100%;">
+                {{price}} -
+                Approve
+                <!-- <i class="material-icons right white-text">launch</i> -->
+              </a>
+              <a title="Reject visit" class="btn red darken-2 white-text btn-small white-text  right-align btn-reject " data-id="{{_id}}" style="width:100%;">
+                Reject
+                <!-- <i class='ion-android-close right'></i> -->
+              </a>
+            {{else}}
+              <a class="btn-flat btn-small right-align disabled" style="width:100%;">
+                <!-- <i class='ion-android-done right'></i> -->
+                {{price}}
+              </a>
+            {{/if}}
+        {{else}}
+          {{#if billingStateIs "logged"}}
+            <a title="Request visit" class="btn blue white-text btn-small btn-request right right-align" data-id="{{_id}}" style="width:100%;" >
+               <!-- <i class='ion-android-checkbox-outline blue-text right'></i> -->
+               Request {{price}}
+            </a>
+          {{else}}
+            <a class="btn-flat btn-small right-align disabled" style="width:100%;">
+              <i class='{{#if billingStateIs "rejected"}}ion-android-close{{else}}ion-android-done{{/if}} right'></i>
+              {{price}}
+            </a>
+          {{/if}}
+        {{/if}}
+            <!-- {{#if billingStateIs "approved"}}
+
+                <a class="btn-flat btn-small right disabled green-text " data-id="{{_id}}" style="padding:0">
+                    <i class='ion-android-done right'></i>
+                    Approved
+                </a>
+            {{/if}} -->
+
+            <!-- {{#if billingStateIs "rejected"}}
+
+                <a class="btn-flat btn-small right disabled red-text " data-id="{{_id}}" style="padding:0">
+                    <i class='ion-android-close right'></i>
+                    Rejected
+                </a>
+            {{/if}} -->
+
+          <!-- </p> -->
+        </div>
+        </div>
+      </div>
+      <div style="padding-right: 0;">
+        <a title="View visit details" href="{{pathFor 'visitDetails'}}" class="btn-flat btn-small blue-text btn-more">
+            <i class="material-icons">more_vert</i>
+        </a>
+        <style>
+          .btn-more{
+            position: absolute;
+            right: 0;
+            top: -2%;
+            height: 105%;
+            width: 1rem;
+            padding: 2rem 1.4rem 2rem .3rem;
+            line-height: 1.8rem;
+          }
+        </style>
+      </div>
+    </div>
+    <style>
+        .lbgrey {
+            border-left: 4px solid #888;
+        }
+        .lbgreen {
+            border-left: 4px solid green;
+        }
+        .lborange {
+            border-left: 4px solid orange;
+        }
+        .lbred {
+            border-left: 4px solid red;
+        }
+        form p {
+            padding: 0 !important;
+            margin-left: 0 !important;
+            ​;
+        }
+        form .row {
+            margin: 0 !important;
+        }
+        form .input-field {
+            padding: 0 !important;
+        }
+        .input-field input {
+            margin-bottom: 0 !important;
+        }
+        .hideBlock {
+            display: none;
+        }
+
+    </style>
+</template>

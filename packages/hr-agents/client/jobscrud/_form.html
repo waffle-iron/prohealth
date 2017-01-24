@@ -1,0 +1,52 @@
+<template name="jobsform">
+  <div class="cont">
+  <div class="row" style="margin: 50px;">
+    <div class="col s12 m12 l12">
+      {{#autoForm collection="Jobs" doc=doc id="updateJobForm" type=type }}
+        <ul class="collection with-header">
+          <li class="collection-header">
+            <h5>
+              <i class="mdi-action-perm-identity"></i>
+              Job Details
+            </h5>
+          </li>
+          <li class="collection-item">
+            {{> afQuickField name='name' }}
+          </li>
+          <li class="collection-item">
+            {{> afQuickField name='description'}}
+          </li>
+          <li class="collection-item col s12 m12 l12">
+            <div class="col s12 m6 l6">
+              {{> afQuickField name='document_types_ids' }}
+            </div>
+            <div class="col s12 m6 l6">
+              {{> afQuickField name='activity_types_ids' }}
+            </div>
+          </li>
+        </ul>
+        <button type="submit" name="commit" class="action-submit btn btn-commit btn-floating btn-large right grey-text">
+          <i class="material-icons">save</i>
+        </button>
+
+      {{/autoForm}}
+    </div>
+  </div>
+  </div>
+  <style>
+    .collection {
+        border: none;
+        overflow: visible !important;
+      }
+    .btn-commit {
+      position: fixed !important;
+      bottom: 45px;
+      right: 45px;
+    }
+    .btn-cancel {
+      position: fixed !important;
+      bottom: 45px;
+      right: 110px;
+    }
+  </style>
+</template>

@@ -1,0 +1,181 @@
+<template name="visitDetails">
+  {{> header headerVariable=headerVariable}}
+  <div class="cont">
+    <div class="row">
+        <div class="col l3" style="margin-top:3.5rem; padding-right:0.1rem">
+
+            <div class="main-data" style="padding-right:5%">
+                <table class="profile-info">
+                    {{#with visit}}
+                        <tbody>
+                            <tr>
+                                <td class="right">
+                                    <h3 style="margin-top: 10%; line-height:0.5">Visit Details</h3>
+                                </td>
+                            </tr>
+                            <tr style="margin-top: 0">
+                                <td class="right" style="text-align:right">
+                                  {{#if isTimeInOUt}}
+                                    <span class="grey-text">{{timeIn}}
+                                        -
+                                        {{timeOut}}</span>
+                                    <br/>
+                                    {{/if}}
+                                    <span class="grey-text detail">By</span>
+                                    <span class="light grey-text text-darken-1">{{user}}</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="right" style="text-align:right">
+                                    <br/>
+                                    <span class="light grey-text">Patient Info</span>
+                                    <br/>
+                                    <span class="light grey-text">Name</span>
+                                    <span class="grey-text text-darken-2 detail">{{#if patient}}{{patient}}{{else}}&mdash;{{/if}}</span>
+                                    <br/>
+                                    <span class="light grey-text">Agency</span>
+                                    <span class="grey-text text-darken-2 detail">{{#if agency}}{{agency}}{{else}}&mdash;{{/if}}</span>
+                                    <br/>
+                                    <span class="light grey-text">Insurance</span>
+                                    <span class="grey-text text-darken-2 detail">{{#if insurance}}{{insurance}}{{else}}&mdash;{{/if}}</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="right" style="text-align:right">
+                                    <br/>
+                                    <span class="light grey-text">Form Details</span>
+                                    <br/>
+                                    <span class="light grey-text">Name</span>
+                                    <span class="grey-text text-darken-2 detail">{{#if form}}{{form}}{{else}}&mdash;{{/if}}</span>
+                                    <br/>
+                                    <span class="light grey-text">Status</span>
+                                    <span class="grey-text text-darken-2 detail">{{#if formStatus}}{{formStatus}}{{else}}&mdash;{{/if}}</span>
+                                    <br/>
+                                    <span class="light grey-text">Date</span>
+                                    <span class="grey-text text-darken-2 detail">{{parseDateVD formDate}}</span>
+                                    <br/>
+
+                                </td>
+                                <!-- Name -->
+
+                                <!-- <td class="right" style="text-align:right">
+                                  <span>{{user}}</span>
+                                  <br/>
+                                  <span>{{patient}}</span>
+                                  <br/>
+                                  <span>{{agency}}</span>
+
+                                  <br/>
+                                  <span>{{insurance}}</span>
+                                  <br/>
+                                  <span>{{form}}</span>
+                                  <br/>
+                                  <span>{{formStatus}}</span>
+                                  <br/>
+                                  <span>{{parseDateVD formDate}}</span>
+                                  <br/>
+                                  <span>{{timeIn}}</span>
+                                  <br/>
+                                  <span>{{timeOut}}</span>
+                              </td> -->
+                            </tr>
+                        </tbody>
+                    {{/with}}
+                </table>
+            </div>
+            <!-- ////////////////////////////////////////////////////////////////////////////// -->
+
+        </div>
+        <div class="col l6">
+            <!--  -->
+            <div class="card" style="margin-top:0rem;">
+                <div class="title">
+                    <h5>Validation</h5>
+                </div>
+                <div class="content">
+                    <table>
+                      <tbody>
+                      {{#each validationKeys}}
+
+                      <tr>
+                          <th>{{fixKey this}}</th>
+
+                          <td class="">
+                            {{#if validSection this}}
+                              <i class="right material-icons green-text">done</i>
+                            {{else}}
+                              <i class="right material-icons red-text">close</i>
+                            {{/if}}
+                          </td>
+                      </tr>
+
+                      {{/each}}
+                      </tbody>
+                    </table>
+
+
+                </div>
+            </div>
+
+
+
+            <div class="card" style=" min-height:26rem">
+                <div class="title">
+                    <h5>Comments</h5>
+                </div>
+                <div class="content">
+                    <!-- Add Comment  -->
+                    <div class="row" style="margin-right: -1rem; margin-top: -1rem">
+                        <form class="col s12">
+                            <div class="input-field">
+                                <textarea id="commentText" class="materialize-textarea"></textarea>
+                                <label for="textarea1">Leave a comment..</label>
+                            </div>
+                        </form>
+                    </div>
+                    <span class="btn btn-floating right" id="btnRead" style="position: absolute;right: 2rem;top: 2rem;">
+                        <i class="large material-icons">speaker_notes</i>
+                    </span>
+                    <!-- Show Comments  -->
+                    <div class="row" style="margin-top:0rem">
+                        <div class="col l12">
+                            <ul class="collection" style="border: 0; margin:0">
+                                {{#each comments}}
+                                    <li class="collection-item">
+                                        <div class="row">
+                                            <div class="col s12">
+                                                <strong>{{commentUser this}}</strong>
+                                                {{commentTitle this}}
+                                                <small class="right">{{parseDate this.date}}</small>
+                                                <blockquote class="blue-text text-darken-1" style="margin-bottom: 0;">
+                                                    <p>
+                                                        {{content}}
+                                                    </p>
+                                                </blockquote>
+                                            </div>
+                                        </div>
+                                    </li>
+                                {{/each}}
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+
+        </div>
+
+    </div>
+  </div>
+    <style>
+        .profile-info .contacts span {
+            color: #aaa;
+            line-height: 22px;
+        }
+        .detail {
+            font-weight: 500;
+        }
+
+    </style>
+</template>

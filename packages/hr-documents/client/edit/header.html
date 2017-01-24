@@ -1,0 +1,33 @@
+<template name="docsHeader">
+  <div class="page-title z-depth-1">
+    <div class="row" style="margin-right: -1rem">
+      <div class="col s12 m12 l12" style="padding-top: 0.6rem;">
+        <div class="col s12 m9 l7" style="margin:0;padding:0">
+          <h1>
+            <a href="{{pathFor 'agentEdit' _id=agent_id}}" style="z-index:20">
+              <i class="left ion-chevron-left"></i>
+            </a>
+            {{headerVariable.title}} <small class="head-desc">- {{headerVariable.subtitle}}</small>
+          </h1>
+        </div>
+        <div class="col s12 m3 l5">
+          <!-- {{#if Template.subscriptionsReady}} -->
+
+                <form id="formDoc" style="position: fixed; z-index: 10; top: 0; right: 0; display:{{hasExpiry}}">
+                  <div class="col l9" style="margin-top:0">
+                    <label>Expires</label>
+                    <input id="expiresType" placeholder="Expiry Date" class="expiresFields" name="expires" type="text" style="margin-top:0" value={{#with docType}} {{#if documents _id}}{{expiry _id}}{{/if}}{{/with}}>
+                  </div>
+                  <!-- {{pikaDayLoad}} -->
+                  <div class="col l3">
+                    <button class="btn btn-small blue lighten-1" type="submit" id="submitExpDate" style="position:relative; top:2rem; width:100%;text-align: center;padding: 0 0.5rem;">
+                      <i class="material-icons">save</i>
+                    </button>
+                  </div>
+                </form>
+            <!-- {{/if}} -->
+        </div>
+      </div>
+    </div>
+  </div>
+</template>

@@ -1,0 +1,76 @@
+<template name="visitsSpreadsheet">
+  {{> header headerVariable=headerVariable}}
+  <div class='row page-title-form'>
+    <div class="col l6 offset-l6">
+      <div class="col s3">
+        <div class='input-field'>
+          <input {{b "value: fromDate"}} type="text" name="from" id="from" value="" class=""/>
+          <label class="active" for="from">From</label>
+        </div>
+      </div>
+      <div class="col s3">
+        <div class='input-field'>
+          <input {{b "value: toDate"}} type="text" name="to" id="to" value="" class=""/>
+          <label class="active" for="to">To</label>
+        </div>
+      </div>
+    </div>
+    </div>
+  <div class="cont">
+      <div class="card-panel">
+        {{#if Template.subscriptionsReady}}
+      <table class="table">
+        <thead>
+          <tr>
+            <th>
+              <select {{b "value: field1"}} id="change-field1" class="browser-default">
+                {{#each selector1}}
+                <option value={{value}} selected={{selected}}>{{innerHTML}}</option>
+                {{/each}}
+              </select>
+            </th>
+            <th>
+              <select {{b "value: field2"}} id="change-field2" class="browser-default">
+                {{#each selector2}}
+                <option value={{value}} selected={{selected}}>{{innerHTML}}</option>
+                {{/each}}
+              </select>
+            </th>
+            <th>Month</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#each visitsSpreadsheet}}
+          <tr>
+            <td>{{_id}}</td>
+            <td></td>
+          <td><a target="_blank" href="/visits?start-date={{fromDate}}&end-date={{toDate}}&{{field1}}={{_id}}">{{months}}</a> </td>
+          </tr>
+          {{#each field2Aggregates}}
+            <tr>
+              <td></td>
+              <td>{{_id}}</td>
+          <td><a target="_blank" href="/visits?start-date={{fromDate}}&end-date={{toDate}}&{{field1}}={{../_id}}&{{field2}}={{_id}}">{{months}}</a> </td>
+            </tr>
+          {{/each}}
+          {{/each}}
+        </tbody>
+        <tfoot>
+          <th>Total</th>
+          <th></th>
+        <th><a target="_blank" href="/visits?start-date={{fromDate}}&end-date={{toDate}}">{{TotalCount 'months'}}</a> </th>
+        </tfoot>
+      </table>
+      {{else}} {{> loading}} {{/if }}
+  </div>
+  <div class="fixed-action-btn horizontal"  style="right: 45px; bottom: 45px; position: fixed;">
+    <a title="Download report" class="btn-floating btn-large blue waves-effect waves-light download-visits"  href=""  {{b "click: downloadCSV"}}>
+      <i class="ion-archive"></i>
+    </a>
+    <ul>
+      <li><a title="Send by E-mail" id="sendmail" data-target="#modal1" class="send-email btn-floating waves-effect waves-light green download-bills" ><i class="material-icons">email</i></a></li>
+    </ul>
+  </div>
+  {{> emailModal subject=headerVariable.title repData=tableData}}
+</div>
+</template>

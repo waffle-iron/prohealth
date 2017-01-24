@@ -1,0 +1,235 @@
+<template name="patientsSpreadsheetGrouped">
+  {{> header headerVariable=headerVariable}}
+  <div class='row page-title-form'>
+    <div class="col l5 offset-l7">
+      <div id="update-date">
+        <div class="col m4 offset-m5" style="padding-bottom:0">
+          <div class='input-field'>
+            <input value="{{date}}" type="text" name="date" id="date" class=""/>
+            <label for="date">Date</label>
+          </div>
+        </div>
+        <div class="col m3" style="padding-bottom:0;padding-right:0;">
+          <div class="input-field">
+            <button title="Load patients from server" type="button" style="padding-right:1rem;padding-left:1rem;width: 100%" class="btn waves-effect waves-ripple white black-text refresh-data right" >
+              <i class="left material-icons" style="margin-right: 0;">refresh</i>Reload
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+  <div class="cont">
+  <div id="content" class= "card-panel">
+    {{#if getStatus}}
+      <table class="table">
+        <thead>
+          <tr>
+            <th>First Group</th>
+            <th>Second Group</th>
+            <th colspan="2" style="margin-right: 4rem">Date</th>
+            <th colspan="2" style="margin-right: 4rem">Date Week</th>
+            <th colspan="4">Date Month</th>
+          </tr>
+          <tr style="height: 65px;">
+            <th>
+              <!-- <select id="change-field1" {{b "value: field1"}} class="browser-default">
+                {{#each selector1}}
+                  <option value={{value}} selected={{selected}}>{{innerHTML}}</option>
+                {{/each}}
+              </select> -->
+              Primary primaryInsurance
+            </th>
+            <th>
+              <select id="change-field2" {{b "value: field2"}} class="browser-default">
+                {{#each selector2}}
+                <option value={{value}} selected={{selected}}>{{innerHTML}}</option>
+                {{/each}}
+              </select>
+            </th>
+
+            <th class="rotate">Leads</th>
+            <th class="rotate">Referrals</th>
+            <th class="rotate">Leads</th>
+            <th class="rotate">Referrals</th>
+            <th class="rotate">Leads</th>
+            <th class="rotate">Referrals</th>
+            <th class="rotate">Non-Admit</th>
+            <th class="rotate">Admit</th>
+            <!-- <th class="rotate">Pre-Admit W/O Con</th>
+            <th class="rotate">Pre-Admit</th>
+            <th class="rotate">Pre-Recert</th>
+            <th class="rotate">Recert</th>
+            <th class="rotate">Transferred</th>
+            <th class="rotate">Resumption</th>
+            <th class="rotate">Discharge W/O CON</th>
+            <th class="rotate">D/C W/O PPW</th>
+            <th class="rotate">Discharge</th> -->
+
+
+
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th>
+              Medicare
+            </th>
+          </tr>
+          {{#each patientsSpreadsheetMedicare}}
+            <tr>
+
+              <td></td>
+              <td>{{_id}}</td>
+              <td><a target="_blank" title="View sales" href="/patients?type={{type}}&start-date={{today}}&end-date={{today}}&primaryInsurance=Medicare&{{field2s}}={{_id}}&chartStatus=Lead">{{dayLeads}}</a></td>
+              <td><a target="_blank" title="View sales" href="/patients?type={{type}}&start-date={{today}}&end-date={{today}}&primaryInsurance=Medicare&{{field2s}}={{_id}}">{{dayReferrals}}</a></td>
+              <td><a target="_blank" title="View sales" href="/patients?type={{type}}&start-date={{weekStart}}&end-date={{weekEnd}}&primaryInsurance=Medicare&{{field2s}}={{_id}}&chartStatus=Lead">{{weekLeads}}</a></td>
+              <td><a target="_blank" title="View sales" href="/patients?type={{type}}&start-date={{weekStart}}&end-date={{weekEnd}}&primaryInsurance=Medicare&{{field2s}}={{_id}}">{{weekReferrals}}</a></td>
+              <td><a target="_blank" title="View sales" href="/patients?type={{type}}&start-date={{monthStart}}&end-date={{monthEnd}}&primaryInsurance=Medicare&{{field2s}}={{_id}}&chartStatus=Lead">{{monthLeads}}</a></td>
+              <td><a target="_blank" title="View sales" href="/patients?type={{type}}&start-date={{monthStart}}&end-date={{monthEnd}}&primaryInsurance=Medicare&{{field2s}}={{_id}}">{{monthReferrals}}</a></td>
+              <td><a target="_blank" title="View sales" href="/patients?type={{type}}&start-date={{monthStart}}&end-date={{monthEnd}}&primaryInsurance=Medicare&{{field2s}}={{_id}}&chartStatus=Non-Admit">{{monthNonAdmit}}</a></td>
+              <td><a target="_blank" title="View sales" href="/patients?type={{type}}&start-date={{monthStart}}&end-date={{monthEnd}}&primaryInsurance=Medicare&{{field2s}}={{_id}}&chartStatus=Admitted">{{monthAdmitted}}</a></td>
+              <!-- <td><a target="_blank" href="/patients?type={{type}}&start-date={{monthStart}}&end-date={{monthEnd}}&{{field1s}}={{_id}}&chartStatus=Pre-Admit W/O Con">{{monthPreAdmitWOCon}}</a></td>
+              <td><a target="_blank" href="/patients?type={{type}}&start-date={{monthStart}}&end-date={{monthEnd}}&{{field1s}}={{_id}}&chartStatus=Pre-Admit">{{monthPreAdmit}}</a></td>
+              <td><a target="_blank" href="/patients?type={{type}}&start-date={{monthStart}}&end-date={{monthEnd}}&{{field1s}}={{_id}}&chartStatus=Pre-Recert">{{monthPreRecert}}</a></td>
+              <td><a target="_blank" href="/patients?type={{type}}&start-date={{monthStart}}&end-date={{monthEnd}}&{{field1s}}={{_id}}&chartStatus=Recert">{{monthRecert}}</a></td>
+              <td><a target="_blank" href="/patients?type={{type}}&start-date={{monthStart}}&end-date={{monthEnd}}&{{field1s}}={{_id}}&chartStatus=Transferred">{{monthTransferred}}</a></td>
+              <td><a target="_blank" href="/patients?type={{type}}&start-date={{monthStart}}&end-date={{monthEnd}}&{{field1s}}={{_id}}&chartStatus=Resumption">{{monthResumption}}</a></td>
+              <td><a target="_blank" href="/patients?type={{type}}&start-date={{monthStart}}&end-date={{monthEnd}}&{{field1s}}={{_id}}&chartStatus=Discharge W/O CON">{{monthDischargeWON}}</a></td>
+              <td><a target="_blank" href="/patients?type={{type}}&start-date={{monthStart}}&end-date={{monthEnd}}&{{field1s}}={{_id}}&chartStatus=D/C W/O PPW">{{monthDCWOPPW}}</a></td>
+              <td><a target="_blank" href="/patients?type={{type}}&start-date={{monthStart}}&end-date={{monthEnd}}&{{field1s}}={{_id}}&chartStatus=Discharge">{{monthDischarge}}</a></td> -->
+            </tr>
+          {{/each}}
+          {{#if patientsSpreadsheetMedicare}}
+            <tr class="grey lighten-2">
+            <th>Total</th>
+            <th>
+            </th>
+            <th><a target="_blank" title="View sales" href="/patients?type={{type}}&start-date={{today}}&end-date={{today}}&primaryInsurance=Medicare&chartStatus=Lead">{{TotalCountMedicare 'dayLeads'}}</a></th>
+            <th><a target="_blank" title="View sales" href="/patients?type={{type}}&start-date={{today}}&end-date={{today}}&primaryInsurance=Medicare">{{TotalCountMedicare 'dayReferrals'}}</a></th>
+            <th><a target="_blank" title="View sales" href="/patients?type={{type}}&start-date={{weekStart}}&end-date={{weekEnd}}&primaryInsurance=Medicare&chartStatus=Lead">{{TotalCountMedicare 'weekLeads'}}</a></th>
+            <th><a target="_blank" title="View sales" href="/patients?type={{type}}&start-date={{weekStart}}&end-date={{weekEnd}}&primaryInsurance=Medicare">{{TotalCountMedicare 'weekReferrals'}}</a></th>
+            <th><a target="_blank" title="View sales" href="/patients?type={{type}}&start-date={{monthStart}}&end-date={{monthEnd}}&primaryInsurance=Medicare&chartStatus=Lead">{{TotalCountMedicare 'monthLeads'}}</a></th>
+            <th><a target="_blank" title="View sales" href="/patients?type={{type}}&start-date={{monthStart}}&end-date={{monthEnd}}&primaryInsurance=Medicare">{{TotalCountMedicare 'monthReferrals'}}</a></th>
+            <th><a target="_blank" title="View sales" href="/patients?type={{type}}&start-date={{monthStart}}&end-date={{monthEnd}}&primaryInsurance=Medicare&chartStatus=Non-Admit">{{TotalCountMedicare 'monthNonAdmit'}}</a></th>
+            <th><a target="_blank" title="View sales" href="/patients?type={{type}}&start-date={{monthStart}}&end-date={{monthEnd}}&primaryInsurance=Medicare&chartStatus=Admitted">{{TotalCountMedicare 'monthAdmitted'}}</a></th>
+            <!-- <th><a target="_blank" href="/patients?type={{type}}&start-date={{monthStart}}&end-date={{monthEnd}}&chartStatus=Pre-Admit W/O Con">{{TotalCount 'monthPreAdmitWOCon'}}</a></th>
+            <th><a target="_blank" href="/patients?type={{type}}&start-date={{monthStart}}&end-date={{monthEnd}}&chartStatus=Pre-Admit">{{TotalCount 'monthPreAdmit'}}</a></th>
+            <th><a target="_blank" href="/patients?type={{type}}&start-date={{monthStart}}&end-date={{monthEnd}}&chartStatus=Pre-Recert">{{TotalCount 'monthPreRecert'}}</a></th>
+            <th><a target="_blank" href="/patients?type={{type}}&start-date={{monthStart}}&end-date={{monthEnd}}&chartStatus=Recert">{{TotalCount 'monthRecert'}}</a></th>
+            <th><a target="_blank" href="/patients?type={{type}}&start-date={{monthStart}}&end-date={{monthEnd}}&chartStatus=Transferred">{{TotalCount 'monthTransferred'}}</a></th>
+            <th><a target="_blank" href="/patients?type={{type}}&start-date={{monthStart}}&end-date={{monthEnd}}&chartStatus=Resumption">{{TotalCount 'monthResumption'}}</a></th>
+            <th><a target="_blank" href="/patients?type={{type}}&start-date={{monthStart}}&end-date={{monthEnd}}&chartStatus=Discharge W/O CON">{{TotalCount 'monthDischargeWON'}}</a></th>
+            <th><a target="_blank" href="/patients?type={{type}}&start-date={{monthStart}}&end-date={{monthEnd}}&chartStatus=D/C W/O PPW">{{TotalCount 'monthDCWOPPW'}}</a></th>
+            <th><a target="_blank" href="/patients?type={{type}}&start-date={{monthStart}}&end-date={{monthEnd}}&chartStatus=Discharge">{{TotalCount 'monthDischarge'}}</a></th> -->
+          </tr>
+
+          {{/if}}
+          {{#if patientsSpreadsheet}}
+          <tr>
+            <th>Private</th>
+          </tr>
+          {{/if}}
+          {{#each patientsSpreadsheet}}
+            <tr>
+              <td></td>
+              <td>{{_id}}</td>
+              <td><a target="_blank" title="View sales" href="/patients?type={{type}}&start-date={{today}}&end-date={{today}}&primaryInsurance=Private&{{field2s}}={{_id}}&chartStatus=Lead">{{dayLeads}}</a></td>
+              <td><a target="_blank" title="View sales" href="/patients?type={{type}}&start-date={{today}}&end-date={{today}}&primaryInsurance=Private&{{field2s}}={{_id}}">{{dayReferrals}}</a></td>
+              <td><a target="_blank" title="View sales" href="/patients?type={{type}}&start-date={{weekStart}}&end-date={{weekEnd}}&primaryInsurance=Private&{{field2s}}={{_id}}&chartStatus=Lead">{{weekLeads}}</a></td>
+              <td><a target="_blank" title="View sales" href="/patients?type={{type}}&start-date={{weekStart}}&end-date={{weekEnd}}&primaryInsurance=Private&{{field2s}}={{_id}}">{{weekReferrals}}</a></td>
+              <td><a target="_blank" title="View sales" href="/patients?type={{type}}&start-date={{monthStart}}&end-date={{monthEnd}}&primaryInsurance=Private&{{field2s}}={{_id}}&chartStatus=Lead">{{monthLeads}}</a></td>
+              <td><a target="_blank" title="View sales" href="/patients?type={{type}}&start-date={{monthStart}}&end-date={{monthEnd}}&primaryInsurance=Private&{{field2s}}={{_id}}">{{monthReferrals}}</a></td>
+              <td><a target="_blank" title="View sales" href="/patients?type={{type}}&start-date={{monthStart}}&end-date={{monthEnd}}&primaryInsurance=Private&{{field2s}}={{_id}}&chartStatus=Non-Admit">{{monthNonAdmit}}</a></td>
+              <td><a target="_blank" title="View sales" href="/patients?type={{type}}&start-date={{monthStart}}&end-date={{monthEnd}}&primaryInsurance=Private&{{field2s}}={{_id}}&chartStatus=Admitted">{{monthAdmitted}}</a></td>
+              <!-- <td><a target="_blank" href="/patients?type={{type}}&start-date={{monthStart}}&end-date={{monthEnd}}&{{field1s}}={{_id}}&chartStatus=Pre-Admit W/O Con">{{monthPreAdmitWOCon}}</a></td>
+              <td><a target="_blank" href="/patients?type={{type}}&start-date={{monthStart}}&end-date={{monthEnd}}&{{field1s}}={{_id}}&chartStatus=Pre-Admit">{{monthPreAdmit}}</a></td>
+              <td><a target="_blank" href="/patients?type={{type}}&start-date={{monthStart}}&end-date={{monthEnd}}&{{field1s}}={{_id}}&chartStatus=Pre-Recert">{{monthPreRecert}}</a></td>
+              <td><a target="_blank" href="/patients?type={{type}}&start-date={{monthStart}}&end-date={{monthEnd}}&{{field1s}}={{_id}}&chartStatus=Recert">{{monthRecert}}</a></td>
+              <td><a target="_blank" href="/patients?type={{type}}&start-date={{monthStart}}&end-date={{monthEnd}}&{{field1s}}={{_id}}&chartStatus=Transferred">{{monthTransferred}}</a></td>
+              <td><a target="_blank" href="/patients?type={{type}}&start-date={{monthStart}}&end-date={{monthEnd}}&{{field1s}}={{_id}}&chartStatus=Resumption">{{monthResumption}}</a></td>
+              <td><a target="_blank" href="/patients?type={{type}}&start-date={{monthStart}}&end-date={{monthEnd}}&{{field1s}}={{_id}}&chartStatus=Discharge W/O CON">{{monthDischargeWON}}</a></td>
+              <td><a target="_blank" href="/patients?type={{type}}&start-date={{monthStart}}&end-date={{monthEnd}}&{{field1s}}={{_id}}&chartStatus=D/C W/O PPW">{{monthDCWOPPW}}</a></td>
+              <td><a target="_blank" href="/patients?type={{type}}&start-date={{monthStart}}&end-date={{monthEnd}}&{{field1s}}={{_id}}&chartStatus=Discharge">{{monthDischarge}}</a></td> -->
+            </tr>
+          {{/each}}
+        </tbody>
+        <tfoot>
+          {{#if patientsSpreadsheet}}
+          <tr class="grey lighten-2">
+            <th>Total</th>
+            <th></th>
+            <th><a target="_blank" title="View sales" href="/patients?type={{type}}&start-date={{today}}&end-date={{today}}&primaryInsurance=Private&chartStatus=Lead">{{TotalCount 'dayLeads'}}</a></th>
+            <th><a target="_blank" title="View sales" href="/patients?type={{type}}&start-date={{today}}&end-date={{today}}&primaryInsurance=Private">{{TotalCount 'dayReferrals'}}</a></th>
+            <th><a target="_blank" title="View sales" href="/patients?type={{type}}&start-date={{weekStart}}&end-date={{weekEnd}}&primaryInsurance=Private&chartStatus=Lead">{{TotalCount 'weekLeads'}}</a></th>
+            <th><a target="_blank" title="View sales" href="/patients?type={{type}}&start-date={{weekStart}}&end-date={{weekEnd}}&primaryInsurance=Private">{{TotalCount 'weekReferrals'}}</a></th>
+            <th><a target="_blank" title="View sales" href="/patients?type={{type}}&start-date={{monthStart}}&end-date={{monthEnd}}&primaryInsurance=Private&chartStatus=Lead">{{TotalCount 'monthLeads'}}</a></th>
+            <th><a target="_blank" title="View sales" href="/patients?type={{type}}&start-date={{monthStart}}&end-date={{monthEnd}}&primaryInsurance=Private">{{TotalCount 'monthReferrals'}}</a></th>
+            <th><a target="_blank" title="View sales" href="/patients?type={{type}}&start-date={{monthStart}}&end-date={{monthEnd}}&primaryInsurance=Private&chartStatus=Non-Admit">{{TotalCount 'monthNonAdmit'}}</a></th>
+            <th><a target="_blank" title="View sales" href="/patients?type={{type}}&start-date={{monthStart}}&end-date={{monthEnd}}&primaryInsurance=Private&chartStatus=Admitted">{{TotalCount 'monthAdmitted'}}</a></th>
+            <!-- <th><a target="_blank" href="/patients?type={{type}}&start-date={{monthStart}}&end-date={{monthEnd}}&chartStatus=Pre-Admit W/O Con">{{TotalCount 'monthPreAdmitWOCon'}}</a></th>
+            <th><a target="_blank" href="/patients?type={{type}}&start-date={{monthStart}}&end-date={{monthEnd}}&chartStatus=Pre-Admit">{{TotalCount 'monthPreAdmit'}}</a></th>
+            <th><a target="_blank" href="/patients?type={{type}}&start-date={{monthStart}}&end-date={{monthEnd}}&chartStatus=Pre-Recert">{{TotalCount 'monthPreRecert'}}</a></th>
+            <th><a target="_blank" href="/patients?type={{type}}&start-date={{monthStart}}&end-date={{monthEnd}}&chartStatus=Recert">{{TotalCount 'monthRecert'}}</a></th>
+            <th><a target="_blank" href="/patients?type={{type}}&start-date={{monthStart}}&end-date={{monthEnd}}&chartStatus=Transferred">{{TotalCount 'monthTransferred'}}</a></th>
+            <th><a target="_blank" href="/patients?type={{type}}&start-date={{monthStart}}&end-date={{monthEnd}}&chartStatus=Resumption">{{TotalCount 'monthResumption'}}</a></th>
+            <th><a target="_blank" href="/patients?type={{type}}&start-date={{monthStart}}&end-date={{monthEnd}}&chartStatus=Discharge W/O CON">{{TotalCount 'monthDischargeWON'}}</a></th>
+            <th><a target="_blank" href="/patients?type={{type}}&start-date={{monthStart}}&end-date={{monthEnd}}&chartStatus=D/C W/O PPW">{{TotalCount 'monthDCWOPPW'}}</a></th>
+            <th><a target="_blank" href="/patients?type={{type}}&start-date={{monthStart}}&end-date={{monthEnd}}&chartStatus=Discharge">{{TotalCount 'monthDischarge'}}</a></th> -->
+          </tr>
+
+          {{/if}}
+
+          {{#if patientsSpreadsheet}}
+          <tr class="yellow lighten-4">
+            <th>Total(All)</th>
+            <th></th>
+            <th><a target="_blank" title="View sales" href="/patients?type={{type}}&start-date={{today}}&end-date={{today}}&chartStatus=Lead">{{findTotal 'dayLeads'}}</a></th>
+            <th><a target="_blank" title="View sales" href="/patients?type={{type}}&start-date={{today}}&end-date={{today}}">{{findTotal 'dayReferrals'}}</a></th>
+            <th><a target="_blank" title="View sales" href="/patients?type={{type}}&start-date={{weekStart}}&end-date={{weekEnd}}&chartStatus=Lead">{{findTotal 'weekLeads'}}</a></th>
+            <th><a target="_blank" title="View sales" href="/patients?type={{type}}&start-date={{weekStart}}&end-date={{weekEnd}}">{{findTotal 'weekReferrals'}}</a></th>
+            <th><a target="_blank" title="View sales" href="/patients?type={{type}}&start-date={{monthStart}}&end-date={{monthEnd}}&chartStatus=Lead">{{findTotal 'monthLeads'}}</a></th>
+            <th><a target="_blank" title="View sales" href="/patients?type={{type}}&start-date={{monthStart}}&end-date={{monthEnd}}">{{findTotal 'monthReferrals'}}</a></th>
+            <th><a target="_blank" title="View sales" href="/patients?type={{type}}&start-date={{monthStart}}&end-date={{monthEnd}}&chartStatus=Non-Admit">{{findTotal 'monthNonAdmit'}}</a></th>
+            <th><a target="_blank" title="View sales" href="/patients?type={{type}}&start-date={{monthStart}}&end-date={{monthEnd}}&chartStatus=Admitted">{{findTotal 'monthAdmitted'}}</a></th>
+            <!-- <th><a target="_blank" href="/patients?type={{type}}&start-date={{monthStart}}&end-date={{monthEnd}}&chartStatus=Pre-Admit W/O Con">{{TotalCount 'monthPreAdmitWOCon'}}</a></th>
+            <th><a target="_blank" href="/patients?type={{type}}&start-date={{monthStart}}&end-date={{monthEnd}}&chartStatus=Pre-Admit">{{TotalCount 'monthPreAdmit'}}</a></th>
+            <th><a target="_blank" href="/patients?type={{type}}&start-date={{monthStart}}&end-date={{monthEnd}}&chartStatus=Pre-Recert">{{TotalCount 'monthPreRecert'}}</a></th>
+            <th><a target="_blank" href="/patients?type={{type}}&start-date={{monthStart}}&end-date={{monthEnd}}&chartStatus=Recert">{{TotalCount 'monthRecert'}}</a></th>
+            <th><a target="_blank" href="/patients?type={{type}}&start-date={{monthStart}}&end-date={{monthEnd}}&chartStatus=Transferred">{{TotalCount 'monthTransferred'}}</a></th>
+            <th><a target="_blank" href="/patients?type={{type}}&start-date={{monthStart}}&end-date={{monthEnd}}&chartStatus=Resumption">{{TotalCount 'monthResumption'}}</a></th>
+            <th><a target="_blank" href="/patients?type={{type}}&start-date={{monthStart}}&end-date={{monthEnd}}&chartStatus=Discharge W/O CON">{{TotalCount 'monthDischargeWON'}}</a></th>
+            <th><a target="_blank" href="/patients?type={{type}}&start-date={{monthStart}}&end-date={{monthEnd}}&chartStatus=D/C W/O PPW">{{TotalCount 'monthDCWOPPW'}}</a></th>
+            <th><a target="_blank" href="/patients?type={{type}}&start-date={{monthStart}}&end-date={{monthEnd}}&chartStatus=Discharge">{{TotalCount 'monthDischarge'}}</a></th> -->
+          </tr>
+
+          {{/if}}
+        </tfoot>
+      </table>
+      <div class="fixed-action-btn horizontal"  style="right: 45px; bottom: 45px; position: fixed;">
+        <a title="Download report" class="btn-floating btn-large blue waves-effect waves-light download-payments"  href=""  {{b "click: downloadCSV"}}>
+          <i class="ion-archive"></i>
+        </a>
+        <ul>
+          <li><a title="Send by E-mail" id="sendmail" data-target="#modal1" class="send-email btn-floating waves-effect waves-light green download-bills" ><i class="material-icons">email</i></a></li>
+        </ul>
+      </div>
+    {{else}}
+      {{> loading}}
+    {{/if}}
+  </div>
+</div>
+<!-- Modal Structure -->
+{{> emailModal subject=headerVariable.title repData=tableData}}
+</template>
+
+
+<!-- <template name="myloading">
+  <div style="height: 500px;" class="center">
+    <i class="fa fa-cog fa-spin fa-3x fa-fw"></i>
+    <span class="sr-only">Loading...</span>
+  </div>
+</template> -->

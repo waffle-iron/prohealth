@@ -1,0 +1,100 @@
+<template name="agentEditGeneral">
+    {{#autoForm collection="Agents" doc=this id="editAgentForm" type="update" }}
+
+        <!-- <div class="row"> -->
+            <!-- <div class="col l12"> -->
+                <ul class="collection with-header">
+                    <li class="collection-header">
+                        <h5>
+                            <i class="mdi-action-perm-identity"></i>
+                            Basic info</h5>
+                    </li>
+                    <li class="collection-item">
+                        <div class="row">
+                            <div class="col s12 m12 l12">
+                                {{> afQuickField name='name' }}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col s12 m12 l12">
+                                {{> afQuickField name='job_id'}}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col s12 m12 l12">
+                                {{> afQuickField name='supervisor' }}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col s12 m12 l12">
+                                {{> afQuickField name='active'}}
+                            </div>
+                        </div>
+                    </li>
+                    <li class="collection-header">
+                        <h5>
+                            <i class="mdi-action-perm-contact-cal"></i>
+                            Contact info</h5>
+                    </li>
+                    <li class="collection-item">
+                        <div class="row">
+                            <div class="col s12 m12 l12">
+                                {{> afQuickField name='email' }}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col s12 m12 l12">
+                                {{> afQuickField name='phone' class="numberText"}}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col s12 m12 l12">
+                                {{> afQuickField name='mobile' class="numberText"}}
+                            </div>
+                        </div>
+                    </li>
+                    <li class="collection-header">
+                        <h5>
+                            <i class="mdi-action-assignment"></i>
+                            Business info</h5>
+                    </li>
+                    <li class="collection-item">
+                        <div class="row formcoll" style="margin-top:0">
+                            <div class="col s12 m12 l4">
+                                {{> afQuickField name='agencies'}}
+                            </div>
+                            <div class="col s12 m12 l4">
+                                {{> afQuickField name='areas'}}
+                            </div>
+                            <div class="col s12 m12 l4">
+                                  {{> afQuickField name='availabilities'}}
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+                <div class="col s12 m12 l12">
+                    <button title="Save" type="submit" name="commit" class="action-submit btn btn-commit btn-floating btn-large right grey-text">
+                        <i class="material-icons">save</i>
+                    </button>
+                    <style>
+                        .btn-commit {
+                            position: fixed !important;
+                            bottom: 45px;
+                            right: 45px;
+                        }
+                        .formcoll .af-checkbox-group.collection{
+
+                              border: none;
+                              /* border-radius: 2px; */
+                              overflow: visible !important;
+                          }
+                    </style>
+                </div>
+                <!-- <button class="btn blue action-submit" type="submit" name="commit">
+                            Save Changes <i class="right ion-checkmark"></i>
+                        </button> -->
+            <!-- </div> -->
+        <!-- </div> -->
+
+    {{/autoForm}}
+</template>

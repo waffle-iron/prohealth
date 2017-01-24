@@ -1,0 +1,24 @@
+<template name="afAutocomplete">
+  <label>{{label}}</label>
+  {{> inputAutocomplete settings=settings id=fieldId data-schema-key=schKey name=name class="input-xlarge" placeholder=placeholder autocomplete="off"}}
+  {{#if isNameField}}<span class="pat-help-block red-text">{{afFieldMessage name="patient_id"}}</span>{{#if isNotValid}}<i class='mdi-alert-warning red-text left'></i> {{/if}}{{/if}}
+<style>
+  .-autocomplete-container{
+    width:calc(100% - 4rem);
+    margin-top: 2rem;
+    margin-left: -1rem;
+  }
+</style>
+</template>
+<template name="patientName">
+  <span class="autocomplete-option">{{patient}}</span>
+</template>
+<template name="patientMrn">
+  <span class="autocomplete-option">{{patient}}</span>
+  <span class="autocomplete-sub" style="margin-left:2rem">{{#if mrn}}(mrn: {{mrn}}){{/if}}</span>
+  <style>
+    .autocomplete-sub {
+      color: #e0e0e0;
+    }
+  </style>
+</template>

@@ -1,0 +1,93 @@
+<template name="agentEditDocuments">
+    {{#if Template.subscriptionsReady}}
+        <div class="row" style="margin:0; margin-bottom:-2rem">
+            <div class="col l10" style="padding-right:1rem">
+                <div class="file-field input-field" style="margin-top:0">
+                    <div class="btn">
+                        <span>File</span>
+                        <input type="file" class="file_bag" accept="application/pdf">
+                    </div>
+                    <div class="file-path-wrapper">
+                        <input class="file-path validate isPDF" type="text">
+                        <p class="red-text file-error" style="margin:0;padding:0;margin-top:-1rem;display:none">Please select a PDF file</p>
+                    </div>
+                </div>
+            </div>
+            <!-- <input type="file" class="file_bag"> -->
+            <div class="col l2" style="padding-right:0">
+                <button class="upload btn" style="height:39px;width:100%" disabled>Upload</button>
+            </div>
+        </div>
+        {{#each files}}
+            <div class="progress docProg">
+                <div class="white-text" style="width: {{percent_uploaded}}%">{{file.original_name}}
+                    -
+                    {{percent_uploaded}}%</div>
+            </div>
+
+            <!-- <p>{{percent_uploaded}}</p> -->
+        {{/each}}
+
+        <br/>
+        <ul class="collection with-header">
+            <li class="collection-header">
+                <h5>Missing Documents</h5>
+            </li>
+            {{#each missing_documents }}
+                {{> agentEditDocumentsMissingDocumentCollectionItem}}
+            {{/each}}
+        </ul>
+        <!-- {{documentsWithUniqTypes}} -->
+        <ul class="collection with-header">
+            <li class="collection-header">
+                <h5>Available Documents</h5>
+            </li>
+            {{#if documentsExist}}
+                <a title="View all documents and tag them" href="{{pathFor route='documentEditSortable' agent_id=agent_id type_id='nodoctype'}}" class="collection-item blue">
+                    <div>
+                        <span class="white-text ">
+                            Draggable view - Edit all documents
+                        </span>
+                        <a href="{{pathFor route='documentEditSortable' agent_id=agent_id }}" target="_blank" class="black-text right action white-text" download>
+                            <i class="ion-edit white-text"></i>
+                        </a>
+                        <span class="new badge white blue-text" data-badge-caption="" style="margin-right:2rem">{{nDocs this.agent}}</span>
+                    </div>
+                </a>
+            {{/if}}
+            {{#each documentsWithUniqTypes}}
+                {{> agentEditDocumentsCollectionItem}}
+            {{/each}}
+
+        </ul>
+    {{else}}{{> loading}}
+    {{/if}}
+</template>
+<template name="agentEditDocumentsMissingDocumentCollectionItem">
+<li class="collection-item">
+    <div class="grey-text text-darken-2">{{name}}
+    </div>
+</li>
+</template>
+<template name="agentEditDocumentsCollectionItem">
+  <!-- <a href="{{pathFor route='documentEdit' data=getURLData }}" class="collection-item"> -->
+  <li class="collection-item">
+    <div>
+        <span class="grey-text text-darken-2">
+            {{#if this.document_type}}
+                {{this.document_type.name}}
+            {{else}}
+                Untitled, click
+                <i class="ion-edit"></i>
+                to tag document.
+            {{/if}}
+        </span>
+        <!-- <p class="secondary-content"> -->
+        <!-- <a href="{{url}}" target="_blank" class="black-text right action grey-text" download>
+            <i class="ion-edit grey-text text-darken-2"></i>
+        </a> -->
+        <!-- </p> -->
+        <span class="new badge grey darken-1" data-badge-caption="" style="margin-right:2rem">{{numberOfDocsPerType this.document_type_id this.agent}}</span>
+    </div>
+</li>
+</template>

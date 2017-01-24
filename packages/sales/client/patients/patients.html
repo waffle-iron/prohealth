@@ -1,0 +1,53 @@
+<template name="patients">
+  {{> header headerVariable=headerVariable}}
+    <div class='row page-title-form'>
+      <div class="col l6 offset-l6">
+        <div id="update-date" class="text-center">
+          <!-- <div class="input-field col s4">
+            <input id="start-date" value={{startDate}}>
+            <label>Start Date</label>
+          </div>
+          <div class="input-field col s4">
+            <input id="end-date" value={{endDate}}>
+            <label>End Date</label>
+          </div> -->
+          <!-- <div class="input-field col s6 offset-s6">
+            <button title="Load patients from server" type="button" class="btn waves-effect waves-ripple white black-text refresh-data right" >
+              <i class="left material-icons" style="margin-right: 0.5rem;">refresh</i>
+              Refresh
+            </button>
+          </div> -->
+        </div>
+      </div>
+    </div>
+  {{#if Template.subscriptionsReady}}
+  <div class="cont">
+    <div class="card-panel">
+      <!-- {{#if patientsTable}} -->
+      <!-- {{> React component=ReactDataGrid columns=columns rowGetter=rowGetter rowsCount=rowCount minHeight=500 }} -->
+      {{> tabular table=TabularTables.Patients  class="table" id="patients-table" selector=selector }}
+        <!-- {{> reactiveTable collection=patientsCollection}} -->
+
+        <!-- {{> reactiveDataTable
+        collection=patientsCollection
+        tableClass="table table-bordered table-striped table-hover dataTable"
+        tableId="germanPlayersTable"
+        fields=fields
+}} -->
+      <!-- {{else}}
+      {{> loading}}
+      {{/if}} -->
+    </div>
+  </div>
+  <div class="fixed-action-btn horizontal"  style="right: 45px; bottom: 45px; position: fixed;">
+    <a title="Download report" class="btn-floating btn-large blue waves-effect waves-light download-patients"  href="">
+      <i class="ion-archive"> </i>
+    </a>
+    <ul>
+      <li><a title="Send by E-mail" id="sendmail" data-target="#modal1" class="send-email btn-floating waves-effect waves-light green download-bills" ><i class="material-icons">email</i></a></li>
+    </ul>
+  </div>
+  {{else}} {{> loading}} {{/if }}
+  {{> emailModal subject=headerVariable.title repData=tableData}}
+
+</template>

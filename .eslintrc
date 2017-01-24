@@ -1,0 +1,11 @@
+{
+    "extends": "airbnb",
+    "plugins": [
+        "react"
+    ],
+
+    // Stop Airbnb's linting from throwing unresolved module errors
+    "rules": {
+      'import/no-unresolved': 0
+    }
+}

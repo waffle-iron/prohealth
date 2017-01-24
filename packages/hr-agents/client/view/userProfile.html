@@ -1,0 +1,214 @@
+<template name="profile">
+  {{> header headerVariable=headerVariable}}
+    <div class="profile">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="row">
+                    <div class="col s12 l4">
+                        <div class="main-data" style="padding-right:5%">
+                            <table class="profile-info">
+                                <tbody>
+                                    <tr>
+                                        <td class="photo right">
+                                            <img src="{{agentPictureURL}}" alt="{{agent.name}}" class="circle">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="right" style="text-align:right">
+                                            <!-- Name -->
+                                            <h3 style="margin-top: 10%;">{{agent.name}}</h3>
+                                            <!-- /Name -->
+
+                                            <!-- Job -->
+                                            <span>{{agent.job_name}}</span>
+                                            <!-- /Job -->
+
+                                            <!-- Contacts -->
+                                            <div class="contacts">
+                                              <span>
+                                                <i class="material-icons profile-icon">email</i>
+                                              </span>
+                                                <span>{{agent.email}}</span>
+                                                {{#if agent.phone}}
+                                                    <br/>
+                                                    <span>
+                                                      <i class="material-icons profile-icon">phone</i>
+                                                    </span>
+                                                    <span>{{agent.phone}}</span>
+                                                {{/if}}
+                                                {{#if agent.mobile}}
+                                                    <br/>
+                                                    <span>
+                                                      <i class="material-icons profile-icon">smartphone</i>
+                                                    </span>
+                                                    <span>{{agent.mobile}}</span>
+                                                {{/if}}
+                                            </div>
+                                            {{#if isOwner}}
+                                                <a href="{{pathFor 'changePassword'}}">Change password</a>
+                                            {{/if}}
+                                            <!-- /Contact Buttons -->
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+                    <div class="col s12 l6">
+                        <!-- About -->
+                        <div class="card">
+                            <div class="title">
+                                <h5>
+                                    <i class="material-icons" style="position: relative;top: 0.3rem;">business</i>
+                                    Agencies</h5>
+                            </div>
+                            <div class="content">
+                                {{#if agent.agencies}}
+                                    {{#each agent.agencies}}
+                                        {{this}}
+                                    {{/each}}
+                                {{else}}
+                                    No agencies assigned
+                                {{/if}}
+                            </div>
+                        </div>
+                        <!-- /About -->
+                        <div class="row">
+
+                            <div class="col s12 l6">
+                                <!-- Skills -->
+                                <div class="card profile-skills">
+                                    <div class="title">
+                                        <h5>
+                                            <i class="material-icons" style="position: relative;top: 0.4rem;">pin_drop</i>
+                                            Areas</h5>
+                                    </div>
+                                    <div class="content">
+                                        {{#if agent.areas}}
+                                            {{#each agent.areas}}
+                                                {{this}}
+                                            {{/each}}
+                                        {{else}}
+                                            No areas assigned
+                                        {{/if}}
+                                    </div>
+                                </div>
+                                <!-- /Skills -->
+                            </div>
+                            <div class="col s12 l6">
+                                <!-- Statistics -->
+                                <div class="card profile-skills">
+                                    <div class="title">
+                                        <h5>
+                                            <i class="material-icons" style="position: relative;top: 0.4rem;">av_timer</i>
+                                            Availabilities</h5>
+                                    </div>
+                                    <div class="content">
+                                        {{#if agent.availabilities}}
+                                            {{#each agent.availabilities}}
+                                                {{this}}
+                                            {{/each}}
+                                        {{else}}
+                                            No availabilities assigned
+                                        {{/if}}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {{#if isHrOrOwner}}
+                            <div class="row">
+                                <div class="col s12 l12">
+                                    <!-- Skills -->
+                                    <div class="card profile-skills">
+                                        <div class="title">
+                                            <h5>
+                                                <i class="material-icons" style="position: relative;top: 0.4rem;">attach_money</i>
+                                                Rates</h5>
+                                        </div>
+                                        <div class="content">
+                                            {{#if rates}}
+                                                <div class="collection" style="overflow: visible;">
+                                                    {{#each rates}}
+                                                        <div class="collection-item">
+                                                            <div>
+                                                                <span class="grey-text text-darken-2">{{name}}</span>
+                                                                <span class="secondary-content">
+                                                                    {{rate amount}}
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                    {{/each}}
+                                                </div>
+                                            {{else}}
+                                                No rates assigned
+                                            {{/if}}
+                                        </div>
+                                    </div>
+                                    <!-- /Skills -->
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col s12 l12">
+                                    <!-- Skills -->
+                                    <div class="card">
+                                        <div class="title">
+                                            <h5>
+                                                <i class="material-icons" style="position: relative;top: 0.4rem;">description</i>
+                                                Documents</h5>
+                                        </div>
+                                        <div class="content">
+                                            {{#if documents}}
+                                                <div class="collection" style="overflow: visible;">
+                                                    {{#each documents}}
+                                                        <div class="collection-item">
+                                                            <div>
+                                                                <span class="grey-text text-darken-2">
+                                                                    {{#if document_type}}
+                                                                        {{document_type.name}}
+                                                                    {{else}}
+                                                                        {{name}} <small>(untagged)</small>
+                                                                    {{/if}}
+                                                                </span>
+                                                                <span class="secondary-content">
+                                                                  {{#if document_type}}
+                                                                    <span>{{display_date expires}}</span>
+                                                                  {{/if}}
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                    {{/each}}
+                                                </div>
+                                            {{else}}
+                                                No documents assigned
+                                            {{/if}}
+                                        </div>
+                                    </div>
+                                    <!-- /Skills -->
+                                </div>
+                            </div>
+                        {{/if}}
+                    </div>
+                </div>
+            </div>
+        </div>
+        {{#if hasRole "hr-admin"}}
+            <div class="fixed-action-btn" style="bottom: 45px; right: 45px;">
+                <a href="{{pathFor 'agentEdit' _id=agent._id}}" class="btn-floating btn-large blue action-submit">
+                    <i class="large ion-edit"></i>
+                </a>
+            </div>
+        {{/if}}
+        <style>
+            .profile-info .contacts span {
+                color: #aaa;
+                line-height: 22px;
+            }
+            .profile-icon{
+              font-size: 1rem;
+              top: 0.1rem;
+              position: relative;
+            }
+        </style>
+    </div>
+</template>

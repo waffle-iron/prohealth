@@ -1,0 +1,247 @@
+[
+   {
+      "id":1,
+      "title":"Physical Therapy Evaluation",
+      "price":"0.0",
+      "created_at":"2016-02-01T06:48:13.616Z",
+      "updated_at":"2016-02-01T06:48:13.616Z"
+   },
+   {
+      "id":2,
+      "title":"Hospice Initial/Comprehensive Nursing Assessment (HIS)",
+      "price":"0.0",
+      "created_at":"2016-02-01T06:48:13.708Z",
+      "updated_at":"2016-02-01T06:48:13.708Z"
+   },
+   {
+      "id":3,
+      "title":"Hospice Nursing Clinical Note",
+      "price":"0.0",
+      "created_at":"2016-02-01T06:48:13.732Z",
+      "updated_at":"2016-02-01T06:48:13.732Z"
+   },
+   {
+      "id":4,
+      "title":"OASIS-C1 Physical Therapy Start of Care",
+      "price":"0.0",
+      "created_at":"2016-02-01T06:48:13.765Z",
+      "updated_at":"2016-02-01T06:48:13.765Z"
+   },
+   {
+      "id":5,
+      "title":"Physical Therapy Initial Eval/Assessment",
+      "price":"0.0",
+      "created_at":"2016-02-01T06:48:13.799Z",
+      "updated_at":"2016-02-01T06:48:13.799Z"
+   },
+   {
+      "id":6,
+      "title":"Skilled Nursing Visit Record",
+      "price":"0.0",
+      "created_at":"2016-02-01T06:48:13.834Z",
+      "updated_at":"2016-02-01T06:48:13.834Z"
+   },
+   {
+      "id":7,
+      "title":"OASIS-C1 Nurse Start of Care",
+      "price":"0.0",
+      "created_at":"2016-02-01T06:48:13.884Z",
+      "updated_at":"2016-02-01T06:48:13.884Z"
+   },
+   {
+      "id":8,
+      "title":"Physical Therapy Visit Record",
+      "price":"0.0",
+      "created_at":"2016-02-01T06:48:13.931Z",
+      "updated_at":"2016-02-01T06:48:13.931Z"
+   },
+   {
+      "id":9,
+      "title":"Hospice Social Worker Clinical Note",
+      "price":"0.0",
+      "created_at":"2016-02-01T06:48:14.084Z",
+      "updated_at":"2016-02-01T06:48:14.084Z"
+   },
+   {
+      "id":10,
+      "title":"Aide Progress Note",
+      "price":"0.0",
+      "created_at":"2016-02-01T06:48:14.244Z",
+      "updated_at":"2016-02-01T06:48:14.244Z"
+   },
+   {
+      "id":11,
+      "title":"OASIS-C1 Nurse Resumption of Care",
+      "price":"0.0",
+      "created_at":"2016-02-01T06:48:14.269Z",
+      "updated_at":"2016-02-01T06:48:14.269Z"
+   },
+   {
+      "id":12,
+      "title":"Discharge / Transfer Summary",
+      "price":"0.0",
+      "created_at":"2016-02-01T06:48:14.346Z",
+      "updated_at":"2016-02-01T06:48:14.346Z"
+   },
+   {
+      "id":13,
+      "title":"Bereavement Initial Assessment / Care Plan",
+      "price":"0.0",
+      "created_at":"2016-02-01T06:48:14.394Z",
+      "updated_at":"2016-02-01T06:48:14.394Z"
+   },
+   {
+      "id":14,
+      "title":"Hospice Social Worker Assessment",
+      "price":"0.0",
+      "created_at":"2016-02-01T06:48:14.416Z",
+      "updated_at":"2016-02-01T06:48:14.416Z"
+   },
+   {
+      "id":15,
+      "title":"Physical Therapy Functional Reassessment",
+      "price":"0.0",
+      "created_at":"2016-02-01T06:48:14.803Z",
+      "updated_at":"2016-02-01T06:48:14.803Z"
+   },
+   {
+      "id":16,
+      "title":"Occupational Therapy Evaluation/Functional Reassessment",
+      "price":"0.0",
+      "created_at":"2016-02-01T06:48:15.471Z",
+      "updated_at":"2016-02-01T06:48:15.471Z"
+   },
+   {
+      "id":17,
+      "title":"Occupational Therapy Visit Record",
+      "price":"0.0",
+      "created_at":"2016-02-01T06:48:15.723Z",
+      "updated_at":"2016-02-01T06:48:15.723Z"
+   },
+   {
+      "id":18,
+      "title":"OASIS-C1 Discharge",
+      "price":"0.0",
+      "created_at":"2016-02-01T06:48:15.802Z",
+      "updated_at":"2016-02-01T06:48:15.802Z"
+   },
+   {
+      "id":19,
+      "title":"Spiritual Care Assessment/Care Plan",
+      "price":"0.0",
+      "created_at":"2016-02-01T06:48:16.072Z",
+      "updated_at":"2016-02-01T06:48:16.072Z"
+   },
+   {
+      "id":20,
+      "title":"Medical Social Services Evaluation",
+      "price":"0.0",
+      "created_at":"2016-02-01T06:48:16.657Z",
+      "updated_at":"2016-02-01T06:48:16.657Z"
+   },
+   {
+      "id":21,
+      "title":"Bereavement Clinical Counseling Note",
+      "price":"0.0",
+      "created_at":"2016-02-01T06:48:16.856Z",
+      "updated_at":"2016-02-01T06:48:16.856Z"
+   },
+   {
+      "id":22,
+      "title":"OASIS-C1 Physical Therapy Discharge",
+      "price":"0.0",
+      "created_at":"2016-02-01T06:48:18.631Z",
+      "updated_at":"2016-02-01T06:48:18.631Z"
+   },
+   {
+      "id":23,
+      "title":"Skilled Nursing Evaluation Only",
+      "price":"0.0",
+      "created_at":"2016-02-01T06:48:19.280Z",
+      "updated_at":"2016-02-01T06:48:19.280Z"
+   },
+   {
+      "id":24,
+      "title":"Nutritional Assessment and Service Plan",
+      "price":"0.0",
+      "created_at":"2016-02-01T06:48:19.605Z",
+      "updated_at":"2016-02-01T06:48:19.605Z"
+   },
+   {
+      "id":25,
+      "title":"Skilled Nursing Initial Evaluation/Assessment",
+      "price":"0.0",
+      "created_at":"2016-02-01T06:48:30.827Z",
+      "updated_at":"2016-02-01T06:48:30.827Z"
+   },
+   {
+      "id":26,
+      "title":"Speech Therapy Visit Record",
+      "price":"0.0",
+      "created_at":"2016-02-01T06:48:33.365Z",
+      "updated_at":"2016-02-01T06:48:33.365Z"
+   },
+   {
+      "id":27,
+      "title":"OASIS-C1 Physical Therapy Recert",
+      "price":"0.0",
+      "created_at":"2016-02-01T06:48:33.781Z",
+      "updated_at":"2016-02-01T06:48:33.781Z"
+   },
+   {
+      "id":28,
+      "title":"Re-certification",
+      "price":"0.0",
+      "created_at":"2016-04-14T22:34:26.918Z",
+      "updated_at":"2016-04-14T22:34:26.918Z"
+   },
+   {
+      "id":29,
+      "title":"Non-Visit DC Oasis. ",
+      "price":"0.0",
+      "created_at":"2016-04-14T22:35:15.728Z",
+      "updated_at":"2016-04-14T22:35:15.728Z"
+   },
+   {
+      "id":30,
+      "title":"Non-Billable DC",
+      "price":"0.0",
+      "created_at":"2016-04-14T22:35:27.505Z",
+      "updated_at":"2016-04-14T22:35:27.505Z"
+   },
+   {
+      "id":31,
+      "title":"Hospice SOC Facility",
+      "price":"0.0",
+      "created_at":"2016-04-26T23:45:18.960Z",
+      "updated_at":"2016-04-26T23:45:18.960Z"
+   },
+   {
+      "id":32,
+      "title":"Hospice SOC Home",
+      "price":"0.0",
+      "created_at":"2016-04-26T23:45:42.009Z",
+      "updated_at":"2016-04-26T23:45:42.009Z"
+   },
+   {
+      "id":33,
+      "title":"Weekend On Call",
+      "price":"0.0",
+      "created_at":"2016-04-26T23:46:05.701Z",
+      "updated_at":"2016-04-26T23:46:05.701Z"
+   },
+   {
+      "id":34,
+      "title":"Weekday On Call",
+      "price":"0.0",
+      "created_at":"2016-04-26T23:46:23.178Z",
+      "updated_at":"2016-04-26T23:46:23.178Z"
+   },
+   {
+      "id":35,
+      "title":"Death Visit",
+      "price":"0.0",
+      "created_at":"2016-04-26T23:46:39.628Z",
+      "updated_at":"2016-04-26T23:46:39.628Z"
+   }
+]

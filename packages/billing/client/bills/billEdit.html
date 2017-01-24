@@ -1,0 +1,218 @@
+<template name="billEdit">
+	{{> header headerVariable=headerVariable}}
+	<div class="cont">
+		<div  id="checkdiv" style="display:none"></div>
+			<div class="row">
+		<div class="col l6">
+			{{#autoForm collection="Bills" doc=bill id="editBillForm" type="update" }}
+				<div class="card" style="margin-top:0rem;overflow: visible;">
+					<div class="title">
+						<h5>Bill Details</h5>
+					</div>
+					<div class="content" style="overflow: visible;">
+						<div class="edit-bill">
+							<div class="row">
+								<div class="col l6">
+									{{> afQuickField name='patient_name' disabled="true"}}
+								</div>
+								<div class="col l6">
+									{{> afQuickField name='agency_id' style="z-index:0"}}
+								</div>
+							</div>
+							<div class="row">
+								<div class="col l6">
+									{{> afQuickField name='date' type='text' value=billDate id='billDate'}}
+								</div>
+								<div class="col l6">
+									{{> afQuickField name='amount'}}
+								</div>
+							</div>
+							<div class="row">
+								<div class="col l6">
+									{{> afQuickField name='payor_id' style="z-index:0"}}
+								</div>
+								<div class="col l6">
+									{{> afQuickField name='claim_id' style="z-index:0"}}
+								</div>
+							</div>
+							<div class="row">
+								<div class="col l6">
+									{{> afQuickField name='claim_start_date' type='text' value=claimStart id='claimStartDate'}}
+								</div>
+								<div class="col l6">
+									{{> afQuickField name='claim_end_date' type='text' value=claimEnd id='claimEndDate'}}
+								</div>
+							</div>
+							<span class="date-error" style="display: none">
+								<i class="material-icons red-text">error</i><span style="position: relative;top: -0.5rem;left: 1rem;" class="red-text">Claim end date must be after claim start date !</span>
+							</span>
+							<button title="Save bill" id="submitbtn" type="submit" class="btn btn-floating right" style="position: absolute;right: 2rem;top: 2rem; z-index:0">
+								<i class="material-icons">save</i>
+							</button>
+						</div>
+					</div>
+				</div>
+			{{/autoForm}}
+
+
+			<div class="card" style = "margin-top:1rem;">
+				{{#autoForm collection="FollowUps" id="addFollowUpForm" type="insert" }}
+				<div class="title">
+					<h5>Follow Ups</h5>
+				</div>
+				<div class="content" style="overflow: visible;">
+					<div class="edit-bill">
+						<div class="row" style="margin-bottom: 0;">
+							{{> afQuickField name='entityId' value=bill._id type="hidden"}}
+							{{> afQuickField name='user' value=userId type="hidden"}}
+							{{> afQuickField name='collection' value="Bills" type="hidden"}}
+
+							<div class="col l5">
+								{{> afQuickField name='date' id="followUpDate" type="text" value=today}}
+							</div>
+							<div class="col l7">
+								{{> afQuickField name='note'}}
+							</div>
+						</div>
+
+						<button title="Save follow up" type="submit" class="btn btn-floating right" style="position: absolute;right: 2rem;top: 2rem; z-index:0">
+							<i class="material-icons">save</i>
+						</button>
+					</div>
+				</div>
+				{{/autoForm}}
+				{{#if followUps}}
+				<div class="content">
+					<div class="row" style="margin-top:0rem">
+						<div class="col l12">
+							<ul class="collection" style="border: 0; margin:0">
+								{{#each followUps}}
+									<li class="collection-item">
+										{{#if edit this._id}}
+											<!-- <a href="" id="done" data-idfollowup={{this._id}}>	editing :D</a> -->
+											{{#autoForm collection="FollowUps" doc=this id="updateFollowUpForm" type="update"}}
+													<div class="edit-follow-up">
+															{{> afQuickField name='date' id="editFollowUpDate" type="text" value=followupDate}}
+															{{initializeDate}}
+															{{> afQuickField name='note'}}
+															<div class="row">
+																<div class="col l3 offset-l9">
+																	<button  title="Save" type="submit" class="btn" style="z-index:0;">
+																		save
+																	</button>
+																</div>
+														</div>
+													</div>
+
+											{{/autoForm}}
+											<style>
+											 .edit-follow-up .row{
+												margin-top: 0 !important
+											 }
+											</style>
+
+										{{else}}
+										<div class="row">
+											<div class="col l9">
+												<strong>{{userName this.user}}</strong>
+												added a follow up on
+												<strong>{{parseDate this.date}}</strong>
+												{{#if this.note}}
+												<small>Created at {{parseDateTime this.createdAt}}</small>
+												<blockquote class="blue-text text-darken-2" style="margin-bottom: 0;">
+													<p>
+														{{this.note}}
+													</p>
+												</blockquote>
+												{{/if}}
+											</div>
+											<div class="col l3">
+												<div>
+													<input type="checkbox" class="followUpDone" id="followUpDone{{this._id}}" {{isDone this.done}} data-idfollowup={{this._id}} data-done={{this.done}} />
+													<label title="Check follow up" for="followUpDone{{this._id}}" class="right" style="padding:0.85rem"></label>
+												</div>
+												{{# quickRemoveButton collection="FollowUps" _id=this._id class="waves-effect btn-flat btn-small right" title="Delete follow up" beforeRemove=beforeRemoveHelperFollowup style="z-index:0"}}
+													<i class="icon ion-android-delete"></i>
+												{{/quickRemoveButton}}
+												<a title="Edit follow up" class="waves-effect btn-flat btn-small right modal-trigger" data-target="modalFollowup" data-idfollowup={{this._id}} href="" id="editFollowUp">
+													<i class="icon ion-edit" data-idfollowup={{this._id}}></i>
+												</a>
+											</div>
+										</div>
+										{{/if}}
+									</li>
+								{{/each}}
+							</ul>
+						</div>
+					</div>
+				</div>
+				{{/if}}
+			</div>
+
+		</div>
+		<div class="col l6">
+			{{>billPayments}}
+
+			<div class="card" style="margin-top:1rem">
+				<div class="title">
+					<h5>Log</h5>
+				</div>
+				<div class="content">
+					{{> auditTrails}}
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+</template>
+
+<template name="auditTrails">
+	{{>addComment}}
+	<div class="row" style="margin-top:0rem">
+		<div class="col l12">
+			<ul class="collection" style="border: 0; margin:0">
+				{{#each audits}}
+					<li class="collection-item">
+						<div class="row">
+							<div class="col s12 {{#if isDelete this}}red-text text-accent-4{{/if}}">
+								<strong>{{auditUser this}}</strong>
+								{{auditTitle this}}
+								<small class="right">{{parseDate this.date}}</small>
+								<blockquote class="{{blockQuoteColor this}}" style="margin-bottom: 0;">
+									<p>
+										{{#each description}}
+											{{this}}
+											<br>
+										{{/each}}
+									</p>
+								</blockquote>
+							</div>
+						</div>
+					</li>
+				{{/each}}
+			</ul>
+		</div>
+	</div>
+</template>
+
+<template name="addComment">
+	<div class="row" style="margin: 0rem;">
+		{{#autoForm collection="Comments" id="addCommentForm" type="insert" }}
+			{{> afQuickField name='entityId' value=billId type="hidden"}}
+			{{> afQuickField name='user' value=userId type="hidden"}}
+			{{> afQuickField name='collection' value="Bills" type="hidden"}}
+		  {{> afQuickField name='content' placeholder="Comment text here" rows=3}}
+			<button title="Add comment" type="submit" class="btn btn-floating right" style="position: absolute;right: 2rem;top: 2rem; z-index:0">
+				<i class="material-icons">save</i>
+			</button>
+		{{/autoForm}}
+		<!-- <form class="col s12">
+			<div class="input-field">
+				<textarea id="commentText" class="materialize-textarea"></textarea>
+				<label for="textarea1">Leave a comment..</label>
+			</div>
+		</form> -->
+
+	</div>
+</template>

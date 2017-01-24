@@ -1,0 +1,11 @@
+<template name="agentExpiringDocuments">
+    {{#if expiring_documents}}
+        {{#each expiring_documents}}
+            <a href="{{pathFor 'agentEdit' _id=agent._id}}" class="collection-item">
+                {{document_type document_type_id}}
+                <span class="right">{{display_date this.expires}}</span>
+            </a>
+
+        {{/each}}
+    {{/if}}
+</template>

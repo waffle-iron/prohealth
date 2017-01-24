@@ -1,0 +1,132 @@
+<template name="recievablesSpreadsheet">
+  {{> header headerVariable=headerVariable}}
+  <div class='row page-title-form'>
+    <div class="col l6 offset-l6">
+      <div class="col s3">
+        <div class='input-field'>
+          <input {{b "value: fromDate"}} type="text" name="from-date" id="from-date" value="" class=""/>
+          <label class="active" for="from-date">From</label>
+        </div>
+      </div>
+      <div class="col s3">
+        <div class='input-field'>
+          <input {{b "value: toDate"}} type="text" name="to-date" id="to-date" value="" class=""/>
+          <label class="active" for="to-date">To</label>
+        </div>
+      </div>
+      <div class="col s3">
+        <div class='input-field'>
+          <select {{b "value: payment"}} name="payment" id="payment" class="">
+            <option value='$eq'>No Payment</option>
+            <option value='$gt'>Partial Payment</option>
+          </select>
+          <label for="payment">Payment state</label>
+        </div>
+      </div>
+
+      <div class="col s3">
+        <div class='input-field'>
+          <select {{b "value: filter"}} name="filter-type" id="filter-type" class="">
+            <option value="$claim_name|$payor_name">Claim, Payor</option>
+            <option value="$payor_name|$claim_name">Payor, Claim</option>
+          </select>
+          <label for="filter-type">Filter type</label>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row date-error" style="display: none;margin-top:0;margin-bottom:0;padding-top:0;padding-bottom:0">
+    <div class="col l6 offset-l6" style="margin-top:0;margin-bottom:0;padding-top:0;padding-bottom:0">
+      <div class="col s6 " style="margin-top:0;margin-bottom:0;padding-top:0;padding-bottom:0">
+      <span class="" style="position: relative;top: 5rem;">
+        <i class="material-icons red-text">error</i><span style="position: relative;top: -0.5rem;left: 1rem;" class="red-text">To date must be after from date !</span>
+      </span>
+      </div>
+    </div>
+  </div>
+  <div class="cont">
+    {{#if invalidDates}}
+      <div class="row">
+          <div class="col l8 offset-l2">
+              <div class="card-panel card-panel alert alert-border-left white red-text">
+                  <strong>Note!</strong>
+                  <span>
+                      Please enter a valid date.</span>
+              </div>
+          </div>
+      </div>
+    {{else}}
+      {{#if stillLoading}}
+      {{>loading}}
+      {{else}}
+      {{> tablesControl parentTemplate="recievablesSpreadsheet" start="fromDate" end="toDate"}}
+      <div class="row">
+        <div class="col l12">
+          <div class='card' style="">
+            <table class='table table-hover table-striped table-bordered'>
+              <thead>
+                <th {{b "text: filter1"}} class="capitalize"></th>
+                <th {{b "text: filter2"}} class="capitalize"></th>
+                <th class='center-align'>Total</th>
+                <th class='center-align'>0-10 days</th>
+                <th class='center-align'>11-20 days</th>
+                <th class='center-align'>21-30 days</th>
+                <th class='center-align'>31-60 days</th>
+                <th class='center-align'>61+ days</th>
+              </thead>
+              {{#with recievablesSpreadsheet}}
+              <tbody>
+              {{#each totalAggregates}}
+                <tr>
+                  <td>{{_id}}</td>
+                  <td></td>
+                  <td><a title="View bills" href={{generatelink _id null null}}>{{totalc}}</a> <span class="right">{{formatCurrency totala}}</span></td>
+                  <td><a title="View bills" href={{generatelink _id null '_00'}}>{{_00c}}</a> <span class="right">{{formatCurrency _00a}}</span></td>
+                  <td><a title="View bills" href={{generatelink _id null '_11'}}>{{_11c}}</a> <span class="right">{{formatCurrency _11a}}</span></td>
+                  <td><a title="View bills" href={{generatelink _id null '_21'}}>{{_21c}}</a> <span class="right">{{formatCurrency _21a}}</span></td>
+                  <td><a title="View bills" href={{generatelink _id null '_31'}}>{{_31c}}</a> <span class="right">{{formatCurrency _31a}}</span></td>
+                  <td><a title="View bills" href={{generatelink _id null '_61'}}>{{_61c}}</a> <span class="right">{{formatCurrency _61a}}</span></td>
+                </tr>
+                {{#each field2Aggregates}}
+                  <tr>
+                    <td></td>
+                    <td>{{_id}}</td>
+                    <td><a title="View bills" href={{generatelink ../_id _id null}}>{{totalc}}</a> <span class="right">{{formatCurrency totala}}</span></td>
+                    <td><a title="View bills" href={{generatelink ../_id _id '_00'}}>{{_00c}}</a> <span class="right">{{formatCurrency _00a}}</span></td>
+                    <td><a title="View bills" href={{generatelink ../_id _id '_11'}}>{{_11c}}</a> <span class="right">{{formatCurrency _11a}}</span></td>
+                    <td><a title="View bills" href={{generatelink ../_id _id '_21'}}>{{_21c}}</a> <span class="right">{{formatCurrency _21a}}</span></td>
+                    <td><a title="View bills" href={{generatelink ../_id _id '_31'}}>{{_31c}}</a> <span class="right">{{formatCurrency _31a}}</span></td>
+                    <td><a title="View bills" href={{generatelink ../_id _id '_61'}}>{{_61c}}</a> <span class="right">{{formatCurrency _61a}}</span></td>
+                  </tr>
+                {{/each}}
+              {{/each}}
+              </tbody>
+              <tfoot>
+                <th>Total</th>
+                <th></th>
+                <th><a title="View bills" href={{generatelink null null null}}>{{totalc}}</a> <span class="right">{{formatCurrency totala}}</span></th>
+                <th><a title="View bills" href={{generatelink null null '_00'}}>{{_00c}}</a> <span class="right">{{formatCurrency _00a}}</span></th>
+                <th><a title="View bills" href={{generatelink null null '_11'}}>{{_11c}}</a> <span class="right">{{formatCurrency _11a}}</span></th>
+                <th><a title="View bills" href={{generatelink null null '_21'}}>{{_21c}}</a> <span class="right">{{formatCurrency _21a}}</span></th>
+                <th><a title="View bills" href={{generatelink null null '_31'}}>{{_31c}}</a> <span class="right">{{formatCurrency _31a}}</span></th>
+                <th><a title="View bills" href={{generatelink null null '_61'}}>{{_61c}}</a> <span class="right">{{formatCurrency _61a}}</span></th>
+              </tfoot>
+              {{/with}}
+            </table>
+          </div>
+          <div class="fixed-action-btn horizontal"  style="right: 45px; bottom: 45px; position: fixed;">
+            <a title="Download report" class="btn-floating btn-large blue" {{b "click: downloadCSV"}}>
+              <i class="ion-archive"> </i>
+            </a>
+            <ul>
+              <li><a title="Send by E-mail" id="sendmail" data-target="#modal1" class="send-email btn-floating waves-effect waves-light green download-bills" ><i class="material-icons">email</i></a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      {{/if}}
+  {{/if}}
+</div>
+{{> emailModal subject=headerVariable.title repData=tableData}}
+
+</template>

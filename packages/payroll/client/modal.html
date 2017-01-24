@@ -1,0 +1,68 @@
+
+<template name="modal">
+    <!-- Modal Structure -->
+    <p id="#sendID" style="display: none">
+
+    </p>
+    <div id="modal1" class="modal modal-fixed-footer" style="overflow-x: hidden; width:50% !important">
+        <div class="modal-header z-depth-1">
+            <div class="row" style="margin-left: 0 !important; margin-top: 1.2rem;">
+                <div class="col l10">
+                    <h4>Comments</h4>
+                </div>
+                <div class="col l2">
+                    <a id="btnClose" href="" class=" modal-action modal-close right grey-text">
+                        <i class="material-icons">close</i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="modal-content" style="background-color: #fff; position: absolute; margin-top: 4rem; max-height: 100%; width: 100%; overflow-y: auto; overflow-x: hidden;">
+          {{#if notRejected}}
+          <p class="red-text" id="complexError" style="display:none">You must explain why this visit was complex</p>
+          <p class="red-text" id="rejectError" style="display:none">You must explain why this visit was rejected</p>
+          <div class="row" style="margin-right: -1rem; margin-top: -1rem">
+              <form class="col s12">
+                  <div class="input-field">
+                      <textarea id="commentText" class="materialize-textarea"></textarea>
+                      <label for="textarea1">Leave a comment..</label>
+                  </div>
+              </form>
+          </div>
+          <span class="btn btn-floating right" id="btnRead" style="position: absolute;right: 2rem;top: 2rem;">
+              <i class="large material-icons">speaker_notes</i>
+          </span>
+          {{/if}}
+            <div class="row" style="margin-top: -1rem;">
+                <div class="col l12">
+                    <ul class="collection" style="border: 0; margin:0;">
+                        {{#each comments}}
+                            <li class="collection-item">
+                                <div class="row">
+                                    <div class="col s12">
+                                        <strong class="blue-text text-darken-1">{{commentUser this}}</strong>
+                                        <span>{{content}}</span>
+                                        <small class="right">{{parseDate this.date}}</small>
+
+                                    </div>
+                                </div>
+                            </li>
+                        {{/each}}
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <style>
+            .modal-header {
+                background-color: #fafafa;
+                width: 100%;
+                height: 4rem;
+                z-index: 1;
+                padding-right: 24px;
+                padding-left: 24px;
+                position: absolute;
+                top: 0;
+            }
+        </style>
+    </div>
+</template>

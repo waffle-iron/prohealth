@@ -1,0 +1,82 @@
+# Meteor packages used by this project, one per line.
+# Check this file (and the other files in this directory) into your repository.
+#
+# 'meteor add' and 'meteor remove' will edit this file for you,
+# but you can also edit it by hand.
+
+meteor-base           # Packages every Meteor app needs to have
+mobile-experience     # Packages for a great mobile UX
+mongo                 # The database Meteor supports right now
+blaze-html-templates   # Compile .html files into Meteor Blaze views
+reactive-var          # Reactive variable for tracker
+jquery                # Helpful client-side library
+tracker               # Meteor's client-side reactive programming library
+reactive-dict
+standard-minifier-css   # CSS minifier run for production mode
+standard-minifier-js   # JS minifier run for production mode
+es5-shim                # ECMAScript 5 compatibility for older browsers.
+ecmascript            # Enable ECMAScript2015+ syntax in app code
+templating
+#autopublish            # Publish all data to the clients (for prototyping)
+insecure              # Allow all DB writes from clients (for prototyping)
+session
+check
+shell-server
+babel-compiler
+
+email
+accounts-password
+useraccounts:core
+
+iron:router
+nicolaslopezj:reactive-templates
+npm-bcrypt@0.9.2
+fourseven:scss@3.13.0
+materialize:materialize@=0.97.6
+manuel:viewmodel
+jcbernack:reactive-aggregate
+nicolaslopezj:roles
+richsilv:pikaday
+
+meteorhacks:aggregate
+froala:editor
+momentjs:moment
+iain:accounting
+simple:rest
+simple:json-routes
+maazalik:highcharts
+meteorhacks:ssr
+
+aldeed:simple-schema
+aldeed:collection2
+aldeed:autoform
+aldeed:tabular
+
+useraccounts:materialize
+rubaxa:sortable
+ostrio:files
+lepozepo:s3
+juliancwirko:s-alert
+juliancwirko:s-alert-scale
+
+tomi:upload-server
+tomi:upload-jquery
+
+
+gildaspk:autoform-materialize
+mizzao:autocomplete
+pascoual:pdfjs
+
+harrison:papa-parse
+aldeed:delete-button
+matb33:collection-hooks
+
+
+
+
+prohealth:core
+prohealth:hr
+prohealth:sales
+prohealth:payroll
+prohealth:billing
+percolate:synced-cron

@@ -1,0 +1,135 @@
+<template name="patientsSpreadsheet">
+  {{> header headerVariable=headerVariable}}
+  <div class='row page-title-form'>
+    <div class="col l5 offset-l7">
+      <div id="update-date">
+        <div class="col m4 offset-m5" style="padding-bottom:0">
+          <div class='input-field'>
+            <input value="{{date}}" type="text" name="date" id="date" class=""/>
+            <label for="date">Date</label>
+          </div>
+        </div>
+        <!-- <div class="col m3" style="padding-bottom:0;padding-right:0">
+          <div class="input-field">
+            <button title="Load patients from server" type="button" style="padding-right:1rem;padding-left:1rem;width: 100%" class="btn waves-effect waves-ripple white black-text refresh-data right">
+              <i class="left material-icons" style="margin-right:0">refresh</i>Reload
+            </button>
+          </div>
+        </div> -->
+      </div>
+    </div>
+  </div>
+
+  <div class="cont">
+    <div id="content" class= "card-panel">
+      {{#if subReady}}
+        <table class="table">
+          <thead>
+            <tr>
+              <th>First Group</th>
+              <th>Second Group</th>
+              <th colspan="2" style="margin-right: 4rem">Date</th>
+              <th colspan="2" style="margin-right: 4rem">Date Week</th>
+              <th colspan="4">Date Month</th>
+            </tr>
+            <tr style="height: 65px;">
+              <th>
+                <select id="change-field1" {{b "value: field1"}} class="browser-default">
+
+
+                  {{#each selector1}}
+                    <option value={{value}} selected={{selected}}>{{innerHTML}}</option>
+                  {{/each}}
+                </select>
+              </th>
+              <th>
+                <select id="change-field2" {{b "value: field2"}} class="browser-default">
+
+                  {{#each selector2}}
+                  <option value={{value}} selected={{selected}}>{{innerHTML}}</option>
+                  {{/each}}
+                </select>
+              </th>
+
+              <th class="rotate">Leads</th>
+              <th class="rotate">Referrals</th>
+              <th class="rotate">Leads</th>
+              <th class="rotate">Referrals</th>
+              <th class="rotate">Leads</th>
+              <th class="rotate">Referrals</th>
+              <th class="rotate">Non-Admit</th>
+              <th class="rotate">Admit</th>
+            </tr>
+          </thead>
+          <tbody>
+            {{#each patientsSpreadsheet}}
+              <tr>
+                <td>{{_id}}</td>
+                <td></td>
+                <td><a title="View sales" target="_blank" href="/patients?type={{type}}&start-date={{today}}&end-date={{today}}&{{field1s}}={{_id}}&chartStatus=Lead">{{dayLeads}}</a></td>
+                <td><a title="View sales" target="_blank" href="/patients?type={{type}}&start-date={{today}}&end-date={{today}}&{{field1s}}={{_id}}">{{dayReferrals}}</a></td>
+                <td><a title="View sales" target="_blank" href="/patients?type={{type}}&start-date={{weekStart}}&end-date={{weekEnd}}&{{field1s}}={{_id}}&chartStatus=Lead">{{weekLeads}}</a></td>
+                <td><a title="View sales" target="_blank" href="/patients?type={{type}}&start-date={{weekStart}}&end-date={{weekEnd}}&{{field1s}}={{_id}}">{{weekReferrals}}</a></td>
+                <td><a title="View sales" target="_blank" href="/patients?type={{type}}&start-date={{monthStart}}&end-date={{monthEnd}}&{{field1s}}={{_id}}&chartStatus=Lead">{{monthLeads}}</a></td>
+                <td><a title="View sales" target="_blank" href="/patients?type={{type}}&start-date={{monthStart}}&end-date={{monthEnd}}&{{field1s}}={{_id}}">{{monthReferrals}}</a></td>
+                <td><a title="View sales" target="_blank" href="/patients?type={{type}}&start-date={{monthStart}}&end-date={{monthEnd}}&{{field1s}}={{_id}}&chartStatus=Non-Admit">{{monthNonAdmit}}</a></td>
+                <td><a title="View sales" target="_blank" href="/patients?type={{type}}&start-date={{monthStart}}&end-date={{monthEnd}}&{{field1s}}={{_id}}&chartStatus=Admitted">{{monthAdmitted}}</a></td>
+              </tr>
+              {{#unless sameField}}
+              {{#each field2Aggregates}}
+                <tr>
+                  <td></td>
+                  <td>{{_id}}</td>
+                  <td><a title="View sales" target="_blank" href="/patients?type={{type}}&start-date={{today}}&end-date={{today}}&{{field1s}}={{../_id}}&{{field2s}}={{_id}}&chartStatus=Lead">{{dayLeads}}</a></td>
+                  <td><a title="View sales" target="_blank" href="/patients?type={{type}}&start-date={{today}}&end-date={{today}}&{{field1s}}={{../_id}}&{{field2s}}={{_id}}">{{dayReferrals}}</a></td>
+                  <td><a title="View sales" target="_blank" href="/patients?type={{type}}&start-date={{weekStart}}&end-date={{weekEnd}}&{{field1s}}={{../_id}}&{{field2s}}={{_id}}&chartStatus=Lead">{{weekLeads}}</a></td>
+                  <td><a title="View sales" target="_blank" href="/patients?type={{type}}&start-date={{weekStart}}&end-date={{weekEnd}}&{{field1s}}={{../_id}}&{{field2s}}={{_id}}">{{weekReferrals}}</a></td>
+                  <td><a title="View sales" target="_blank" href="/patients?type={{type}}&start-date={{monthStart}}&end-date={{monthEnd}}&{{field1s}}={{../_id}}&{{field2s}}={{_id}}&chartStatus=Lead">{{monthLeads}}</a></td>
+                  <td><a title="View sales" target="_blank" href="/patients?type={{type}}&start-date={{monthStart}}&end-date={{monthEnd}}&{{field1s}}={{../_id}}&{{field2s}}={{_id}}">{{monthReferrals}}</a></td>
+                  <td><a title="View sales" target="_blank" href="/patients?type={{type}}&start-date={{monthStart}}&end-date={{monthEnd}}&{{field1s}}={{../_id}}&{{field2s}}={{_id}}&chartStatus=Non-Admit">{{monthNonAdmit}}</a></td>
+                  <td><a title="View sales" target="_blank" href="/patients?type={{type}}&start-date={{monthStart}}&end-date={{monthEnd}}&{{field1s}}={{../_id}}&{{field2s}}={{_id}}&chartStatus=Admitted">{{monthAdmitted}}</a></td>
+                </tr>
+              {{/each}}
+              {{/unless}}
+            {{/each}}
+          </tbody>
+          <tfoot>
+            {{#if patientsSpreadsheet}}
+            <tr class="grey lighten-2">
+              <th>Total</th>
+              <th></th>
+              <th><a title="View sales" target="_blank" href="/patients?type={{type}}&start-date={{today}}&end-date={{today}}&chartStatus=Lead">{{TotalCount 'dayLeads'}}</a></th>
+              <th><a title="View sales" target="_blank" href="/patients?type={{type}}&start-date={{today}}&end-date={{today}}">{{TotalCount 'dayReferrals'}}</a></th>
+              <th><a title="View sales" target="_blank" href="/patients?type={{type}}&start-date={{weekStart}}&end-date={{weekEnd}}&chartStatus=Lead">{{TotalCount 'weekLeads'}}</a></th>
+              <th><a title="View sales" target="_blank" href="/patients?type={{type}}&start-date={{weekStart}}&end-date={{weekEnd}}">{{TotalCount 'weekReferrals'}}</a></th>
+              <th><a title="View sales" target="_blank" href="/patients?type={{type}}&start-date={{monthStart}}&end-date={{monthEnd}}&chartStatus=Lead">{{TotalCount 'monthLeads'}}</a></th>
+              <th><a title="View sales" target="_blank" href="/patients?type={{type}}&start-date={{monthStart}}&end-date={{monthEnd}}">{{TotalCount 'monthReferrals'}}</a></th>
+              <th><a title="View sales" target="_blank" href="/patients?type={{type}}&start-date={{monthStart}}&end-date={{monthEnd}}&chartStatus=Non-Admit">{{TotalCount 'monthNonAdmit'}}</a></th>
+              <th><a title="View sales" target="_blank" href="/patients?type={{type}}&start-date={{monthStart}}&end-date={{monthEnd}}&chartStatus=Admitted">{{TotalCount 'monthAdmitted'}}</a></th>
+            </tr>
+
+            {{/if}}
+          </tfoot>
+        </table>
+      {{else}}
+        {{> myloading}}
+      {{/if}}
+    </div>
+  </div>
+  <div class="fixed-action-btn horizontal"  style="right: 45px; bottom: 45px; position: fixed;">
+    <a title="Download report" class="btn-floating btn-large blue waves-effect waves-light download-payments"  href=""  {{b "click: downloadCSV"}}>
+      <i class="ion-archive"></i>
+    </a>
+    <ul>
+      <li><a title="Send by E-mail" id="sendmail" data-target="#modal1" class="send-email btn-floating waves-effect waves-light green download-bills" ><i class="material-icons">email</i></a></li>
+    </ul>
+  </div>
+  {{> emailModal subject=headerVariable.title repData=tableData}}
+</template>
+
+<!-- <template name="myloading">
+  <div style="height: 500px;" class="center">
+    <i class="fa fa-cog fa-spin fa-3x fa-fw"></i>
+    <span class="sr-only">Loading...</span>
+  </div>
+</template> -->

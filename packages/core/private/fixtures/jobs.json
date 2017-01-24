@@ -1,0 +1,401 @@
+[{
+    "id": 32,
+    "job_class": null,
+    "created_at": "2016-05-20T21:29:37.172Z",
+    "updated_at": "2016-05-20T21:29:37.172Z",
+    "title": "Billing Manager",
+    "payment_method_ids": ["1", "2", "3"],
+    "salary_amount": "0.0",
+    "hour_price": "0.0",
+    "on_call_price": null
+}, {
+    "id": 33,
+    "job_class": null,
+    "created_at": "2016-05-20T21:29:55.683Z",
+    "updated_at": "2016-05-20T21:29:55.683Z",
+    "title": "Billing Assistant",
+    "payment_method_ids": ["1", "2", "3"],
+    "salary_amount": "0.0",
+    "hour_price": "0.0",
+    "on_call_price": null
+}, {
+    "id": 34,
+    "job_class": null,
+    "created_at": "2016-05-20T21:30:12.816Z",
+    "updated_at": "2016-05-20T21:30:12.816Z",
+    "title": "Human Resources",
+    "payment_method_ids": ["1", "2", "3"],
+    "salary_amount": "0.0",
+    "hour_price": "0.0",
+    "on_call_price": null
+}, {
+    "id": 6,
+    "job_class": null,
+    "created_at": "2016-02-01T04:27:31.543Z",
+    "updated_at": "2016-04-20T20:20:46.640Z",
+    "title": "PT",
+    "payment_method_ids": ["1", "2"],
+    "salary_amount": "0.0",
+    "hour_price": "10.0",
+    "on_call_price": null
+}, {
+    "id": 35,
+    "job_class": null,
+    "created_at": "2016-05-20T21:30:27.522Z",
+    "updated_at": "2016-05-20T21:30:27.522Z",
+    "title": "Patient Care Coordinator",
+    "payment_method_ids": ["1", "2", "3"],
+    "salary_amount": "0.0",
+    "hour_price": "0.0",
+    "on_call_price": null
+}, {
+    "id": 13,
+    "job_class": null,
+    "created_at": "2016-02-01T04:27:39.038Z",
+    "updated_at": "2016-04-20T20:30:47.287Z",
+    "title": "Bereavement",
+    "payment_method_ids": ["1"],
+    "salary_amount": "0.0",
+    "hour_price": "10.0",
+    "on_call_price": null
+}, {
+    "id": 19,
+    "job_class": null,
+    "created_at": "2016-02-01T04:28:00.828Z",
+    "updated_at": "2016-04-20T20:31:16.108Z",
+    "title": "CA",
+    "payment_method_ids": [],
+    "salary_amount": "0.0",
+    "hour_price": "10.0",
+    "on_call_price": null
+}, {
+    "id": 27,
+    "job_class": null,
+    "created_at": "2016-04-12T19:03:21.452Z",
+    "updated_at": "2016-04-20T20:31:40.451Z",
+    "title": "CEO",
+    "payment_method_ids": ["3"],
+    "salary_amount": "0.0",
+    "hour_price": "0.0",
+    "on_call_price": null
+}, {
+    "id": 8,
+    "job_class": null,
+    "created_at": "2016-02-01T04:27:34.119Z",
+    "updated_at": "2016-04-20T20:32:12.937Z",
+    "title": "Chaplain",
+    "payment_method_ids": ["1", "2"],
+    "salary_amount": "0.0",
+    "hour_price": "10.0",
+    "on_call_price": null
+}, {
+    "id": 21,
+    "job_class": null,
+    "created_at": "2016-02-01T04:28:08.420Z",
+    "updated_at": "2016-04-20T20:33:00.141Z",
+    "title": "COTA",
+    "payment_method_ids": ["1", "2"],
+    "salary_amount": "0.0",
+    "hour_price": "10.0",
+    "on_call_price": null
+}, {
+    "id": 25,
+    "job_class": null,
+    "created_at": "2016-04-12T19:03:04.141Z",
+    "updated_at": "2016-04-20T20:33:24.864Z",
+    "title": "Director",
+    "payment_method_ids": ["3"],
+    "salary_amount": "0.0",
+    "hour_price": "0.0",
+    "on_call_price": null
+}, {
+    "id": 12,
+    "job_class": null,
+    "created_at": "2016-02-01T04:27:37.431Z",
+    "updated_at": "2016-04-20T20:33:46.405Z",
+    "title": "FR - Forms Review",
+    "payment_method_ids": [],
+    "salary_amount": "0.0",
+    "hour_price": "10.0",
+    "on_call_price": null
+}, {
+    "id": 20,
+    "job_class": null,
+    "created_at": "2016-02-01T04:28:04.389Z",
+    "updated_at": "2016-04-20T20:34:11.993Z",
+    "title": "Guest",
+    "payment_method_ids": [],
+    "salary_amount": "0.0",
+    "hour_price": "10.0",
+    "on_call_price": null
+}, {
+    "id": 3,
+    "job_class": "",
+    "created_at": "2016-02-01T04:27:31.052Z",
+    "updated_at": "2016-04-20T20:34:30.432Z",
+    "title": "HHA",
+    "payment_method_ids": ["1", "2"],
+    "salary_amount": "0.0",
+    "hour_price": "31.0",
+    "on_call_price": ""
+}, {
+    "id": 36,
+    "job_class": null,
+    "created_at": "2016-05-20T21:30:39.747Z",
+    "updated_at": "2016-05-20T21:30:39.747Z",
+    "title": "Quality Assurance Nurse",
+    "payment_method_ids": ["1", "2", "3"],
+    "salary_amount": "0.0",
+    "hour_price": "0.0",
+    "on_call_price": null
+}, {
+    "id": 28,
+    "job_class": null,
+    "created_at": "2016-04-12T19:13:51.416Z",
+    "updated_at": "2016-04-20T20:36:01.022Z",
+    "title": "HR",
+    "payment_method_ids": ["2", "3"],
+    "salary_amount": "0.0",
+    "hour_price": "0.0",
+    "on_call_price": null
+}, {
+    "id": 24,
+    "job_class": null,
+    "created_at": "2016-04-12T19:02:51.509Z",
+    "updated_at": "2016-04-20T20:36:25.330Z",
+    "title": "Intake",
+    "payment_method_ids": ["2", "3"],
+    "salary_amount": "0.0",
+    "hour_price": "0.0",
+    "on_call_price": null
+}, {
+    "id": 11,
+    "job_class": null,
+    "created_at": "2016-02-01T04:27:36.075Z",
+    "updated_at": "2016-04-20T20:37:05.519Z",
+    "title": "LVN",
+    "payment_method_ids": ["1", "2"],
+    "salary_amount": "0.0",
+    "hour_price": "10.0",
+    "on_call_price": null
+}, {
+    "id": 23,
+    "job_class": null,
+    "created_at": "2016-04-12T19:02:35.677Z",
+    "updated_at": "2016-04-20T20:37:28.754Z",
+    "title": "Marketer",
+    "payment_method_ids": ["2", "3"],
+    "salary_amount": "0.0",
+    "hour_price": "0.0",
+    "on_call_price": null
+}, {
+    "id": 14,
+    "job_class": null,
+    "created_at": "2016-02-01T04:27:39.534Z",
+    "updated_at": "2016-04-20T20:38:05.637Z",
+    "title": "MSW",
+    "payment_method_ids": ["1", "2"],
+    "salary_amount": "0.0",
+    "hour_price": "10.0",
+    "on_call_price": null
+}, {
+    "id": 29,
+    "job_class": null,
+    "created_at": "2016-04-12T19:15:12.899Z",
+    "updated_at": "2016-04-20T20:38:31.473Z",
+    "title": "Office",
+    "payment_method_ids": ["2", "3"],
+    "salary_amount": "0.0",
+    "hour_price": "0.0",
+    "on_call_price": null
+}, {
+    "id": 9,
+    "job_class": null,
+    "created_at": "2016-02-01T04:27:35.222Z",
+    "updated_at": "2016-04-20T20:39:14.678Z",
+    "title": "OT",
+    "payment_method_ids": ["1", "2"],
+    "salary_amount": "0.0",
+    "hour_price": "10.0",
+    "on_call_price": null
+}, {
+    "id": 2,
+    "job_class": null,
+    "created_at": "2016-02-01T04:27:30.753Z",
+    "updated_at": "2016-04-20T20:40:05.659Z",
+    "title": "Physician",
+    "payment_method_ids": ["3"],
+    "salary_amount": "0.0",
+    "hour_price": "10.0",
+    "on_call_price": null
+}, {
+    "id": 26,
+    "job_class": null,
+    "created_at": "2016-04-12T19:03:15.358Z",
+    "updated_at": "2016-04-20T20:40:27.091Z",
+    "title": "President",
+    "payment_method_ids": ["3"],
+    "salary_amount": "0.0",
+    "hour_price": "0.0",
+    "on_call_price": null
+}, {
+    "id": 16,
+    "job_class": null,
+    "created_at": "2016-02-01T04:27:48.838Z",
+    "updated_at": "2016-04-20T20:41:46.178Z",
+    "title": "PTA",
+    "payment_method_ids": ["1", "2"],
+    "salary_amount": "0.0",
+    "hour_price": "10.0",
+    "on_call_price": null
+}, {
+    "id": 17,
+    "job_class": null,
+    "created_at": "2016-02-01T04:27:52.611Z",
+    "updated_at": "2016-04-20T20:41:59.390Z",
+    "title": "RD",
+    "payment_method_ids": ["2"],
+    "salary_amount": "0.0",
+    "hour_price": "10.0",
+    "on_call_price": null
+}, {
+    "id": 15,
+    "job_class": null,
+    "created_at": "2016-02-01T04:27:40.035Z",
+    "updated_at": "2016-04-20T20:43:06.251Z",
+    "title": "ST",
+    "payment_method_ids": ["1", "2"],
+    "salary_amount": "0.0",
+    "hour_price": "10.0",
+    "on_call_price": null
+}, {
+    "id": 7,
+    "job_class": null,
+    "created_at": "2016-02-01T04:27:32.165Z",
+    "updated_at": "2016-04-20T20:43:28.742Z",
+    "title": "SuperAdmin",
+    "payment_method_ids": ["2", "3"],
+    "salary_amount": "0.0",
+    "hour_price": "10.0",
+    "on_call_price": null
+}, {
+    "id": 10,
+    "job_class": null,
+    "created_at": "2016-02-01T04:27:35.475Z",
+    "updated_at": "2016-04-20T20:43:54.317Z",
+    "title": "Surveyor",
+    "payment_method_ids": [],
+    "salary_amount": "0.0",
+    "hour_price": "10.0",
+    "on_call_price": null
+}, {
+    "id": 18,
+    "job_class": null,
+    "created_at": "2016-02-01T04:27:55.438Z",
+    "updated_at": "2016-04-20T20:44:19.618Z",
+    "title": "Volunteer",
+    "payment_method_ids": [],
+    "salary_amount": "0.0",
+    "hour_price": "10.0",
+    "on_call_price": null
+}, {
+    "id": 4,
+    "job_class": null,
+    "created_at": "2016-02-01T04:27:31.195Z",
+    "updated_at": "2016-04-26T22:29:27.675Z",
+    "title": "RN",
+    "payment_method_ids": ["1", "2", "3", "5"],
+    "salary_amount": "0.0",
+    "hour_price": "10.0",
+    "on_call_price": null
+}, {
+    "id": 5,
+    "job_class": null,
+    "created_at": "2016-02-01T04:27:31.323Z",
+    "updated_at": "2016-05-05T13:32:29.784Z",
+    "title": "Admin",
+    "payment_method_ids": ["1", "2", "3", "4", "5", "6"],
+    "salary_amount": "0.0",
+    "hour_price": "10.0",
+    "on_call_price": null
+}, {
+    "id": 30,
+    "job_class": null,
+    "created_at": "2016-05-20T21:29:00.917Z",
+    "updated_at": "2016-05-20T21:29:00.917Z",
+    "title": "Intake Coordinator",
+    "payment_method_ids": ["1", "2", "3"],
+    "salary_amount": "0.0",
+    "hour_price": "0.0",
+    "on_call_price": null
+}, {
+    "id": 31,
+    "job_class": null,
+    "created_at": "2016-05-20T21:29:17.305Z",
+    "updated_at": "2016-05-20T21:29:17.305Z",
+    "title": "Intake Supervisor",
+    "payment_method_ids": ["1", "2", "3"],
+    "salary_amount": "0.0",
+    "hour_price": "0.0",
+    "on_call_price": null
+}, {
+    "id": 37,
+    "job_class": null,
+    "created_at": "2016-05-20T21:30:51.368Z",
+    "updated_at": "2016-05-20T21:30:51.368Z",
+    "title": "Director of Nursing",
+    "payment_method_ids": ["1", "2", "3"],
+    "salary_amount": "0.0",
+    "hour_price": "0.0",
+    "on_call_price": null
+}, {
+    "id": 38,
+    "job_class": null,
+    "created_at": "2016-05-20T21:31:03.699Z",
+    "updated_at": "2016-05-20T21:31:03.699Z",
+    "title": "Director of Rehabilitation",
+    "payment_method_ids": ["1", "2", "3"],
+    "salary_amount": "0.0",
+    "hour_price": "0.0",
+    "on_call_price": null
+}, {
+    "id": 39,
+    "job_class": null,
+    "created_at": "2016-05-20T21:31:23.225Z",
+    "updated_at": "2016-05-20T21:31:23.225Z",
+    "title": "Office Manager",
+    "payment_method_ids": ["1", "2", "3"],
+    "salary_amount": "0.0",
+    "hour_price": "0.0",
+    "on_call_price": null
+}, {
+    "id": 40,
+    "job_class": null,
+    "created_at": "2016-05-20T21:31:36.444Z",
+    "updated_at": "2016-05-20T21:31:36.444Z",
+    "title": "Medical Records",
+    "payment_method_ids": ["1", "2", "3"],
+    "salary_amount": "0.0",
+    "hour_price": "0.0",
+    "on_call_price": null
+}, {
+    "id": 41,
+    "job_class": null,
+    "created_at": "2016-05-20T21:31:51.489Z",
+    "updated_at": "2016-05-20T21:31:51.489Z",
+    "title": "Orders Coordinator",
+    "payment_method_ids": ["1", "2", "3"],
+    "salary_amount": "0.0",
+    "hour_price": "0.0",
+    "on_call_price": null
+}, {
+    "id": 42,
+    "job_class": null,
+    "created_at": "2016-05-20T21:32:02.692Z",
+    "updated_at": "2016-05-20T21:32:02.692Z",
+    "title": "Marketer",
+    "payment_method_ids": ["1", "2", "3"],
+    "salary_amount": "0.0",
+    "hour_price": "0.0",
+    "on_call_price": null
+}]

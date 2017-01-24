@@ -1,0 +1,183 @@
+<template name="timesheet">
+  {{> header headerVariable=headerVariable}}
+  <div class='row page-title-form'>
+    <div class="col l6 offset-l6">
+            <div class="col s12 m6 l4 right">
+                <select id="change-field" class="browser-default">
+                    <option value="$formDate">Group By Date</option>
+                    <option value="$patient">Group By Patient</option>
+                    <option value="$form">Group By Visit Type</option>
+                </select>
+            </div>
+            {{#if billingStateIs "logged"}}
+              <div class="col s12 m6 l4 right">
+                <button title="Update timesheet visits cost" class="waves-effect waves-ripple btn white black-text update-cost right" style="padding:0; padding-right:1rem" {{updating}}>
+                  {{#if loadingStatus}}
+                    <i class="left">
+                        {{> loading}}
+                    </i>
+                    Updating Cost
+                  {{else}}
+                  <i class="left material-icons" style="padding-left: 1rem;margin-right: 0.5rem;">refresh</i>
+                    Update Cost
+                  {{/if}}
+                </button>
+              </div>
+            {{/if}}
+            <style>
+               i .spinner {
+                 height:20px;
+                 width: 20px;
+                 display: inline-block;
+                 margin:.65rem 0;
+               }
+               i .dot1, i .dot2{
+                 background-color: #9F9F9F !important
+               }
+             </style>
+           </div>
+        </div>
+    {{#if Template.subscriptionsReady}}
+    {{#if requestingStatus}}
+      <div class="cont">
+        <h5 class="center">Requesting visits, please wait...</h5>
+        {{> loading}}
+      </div>
+    {{else}}
+    <div class="cont">
+        {{#if summaries}}
+          <h5 style="margin-bottom:1rem">All visits <small>- click to expand</small>
+          {{#if billingStateIs "logged"}}
+            <a title="Request whole timesheet" class="waves-effect waves-light btn-flat btn-small right white blue-text btn-request-timesheet" style="margin-right:7px;margin-top:-0.5rem" >
+              <i class='ion-android-checkbox-outline right'></i>
+              Request all
+            </a>
+            <span class="right blue-text" style="padding-right: 1rem;font-size:1rem">{{totalVisits}} visits {{totalCost totalGroupCost}}</span>
+          {{/if}}
+          </h5>
+          <div class="collection" style="overflow:visible">
+            {{#each summaries}}
+              {{#if firstSummary this._id}}
+                <div class="collection z-depth-1" style="margin-top:0rem; margin-bottom:0.1rem; border:0; border-radius:0;overflow:visible">
+                  <div class="collection-item blue white-text">
+                      <div class="row" style="margin-top: 0; margin-bottom: 0;">
+                    <span>{{this._id}}</span>
+                    {{#if billingStateIs "logged"}}
+                      <a title="Request shown visits" class="waves-effect waves-light btn-flat btn-small right white blue-text btn-request-all "  data-this="{{getFormDate this}}" data-id="{{_id}}" style="margin-right:7px;" >
+                        <i class='ion-android-checkbox-outline right'></i>
+                        Request
+                      </a>
+                      <span class="right" style="padding-right: 1rem;padding-top: 0.2rem;">{{this.total}} visits {{totalCost this.cost}}</span>
+                    {{else}}
+                      <a class="btn-flat btn-small white-text right disabled" style="margin-right:7px;" >
+                        <!-- <i class='ion-android-checkbox-outline right'></i> -->
+                        {{this.total}} visits {{totalCost this.cost}}
+                      </a>
+                    {{/if}}
+                  </div>
+                  </div>
+                  {{#each visits}}
+                    {{> timesheetEntry}}
+                  {{/each}}
+                </div>
+              {{else}}
+                <a title="Click to expand" href="" id="{{this._id}}" class="collection-item blue-text showTimesheet">
+                  <span id="{{this._id}}" >{{this._id}}</span>
+                  <span  id="{{this._id}}" class="right">
+                    {{totalCost this.cost}}
+                  </span>
+                  <span  id="{{this._id}}" class="right" style="padding-right:1rem">{{this.total}} visits</span>
+                </a>
+              {{/if}}
+            {{/each}}
+          </div>
+          <div class="row" style="margin:0; margin-bottom:4rem;margin-right: 1rem;">
+            <span class="right">Cost: {{totalCost totalGroupCost}}</span>
+            <span class="right" style="padding-right:1rem"><span style="font-weight:600">Total: </span>Visits: {{totalVisits}}</span>
+          </div>
+        {{else}}
+          <div class="row">
+              <div class="col l8 offset-l2">
+                  <div class="card-panel card-panel alert alert-border-left white blue-text">
+                      <span>
+                          You don't have any {{billingState}} visits.</span>
+                  </div>
+              </div>
+          </div>
+        {{/if}}
+
+          <div class="fixed-action-btn" style="{{#if billingStateIs 'logged'}}bottom: 45px; right: 45px;{{else}}display:none;{{/if}}">
+
+              <a title="Create visit" href="#modal-new-visit" class="open-modal btn-floating btn-large blue action-submit">
+                  <i class="large ion-android-add"></i>
+              </a>
+          </div>
+        </div>
+    {{/if}}
+    {{else}}
+        {{> loading}}
+    {{/if }}
+    {{> modal}}
+
+
+    <!-- Modal Trigger -->
+
+ <!-- Modal Structure -->
+
+<div id="modal-new-visit" class="modal modal-fixed-footer" style="overflow-x: hidden; width:50% !important">
+
+  <div class="modal-header z-depth-1">
+      <div class="row" style="margin-left: 0 !important; margin-top: 1.2rem;">
+          <div class="col l10">
+              <h4>Timesheet: New Entry</h4>
+          </div>
+          <div class="col l2">
+              <a href="" class=" modal-action modal-close right grey-text">
+                  <i class="material-icons">close</i>
+              </a>
+          </div>
+      </div>
+  </div>
+
+
+  <div class="modal-content" style="background-color: #fff; position: absolute; margin-top: 4rem; max-height: 100%; width: 100%; overflow-y: auto; overflow-x: hidden;">
+
+    {{#autoForm collection="Visits" id="createVisitForm" type="insert" }}
+      {{> afFieldInput name='formStatus' type="hidden" value="Completed"}}
+      {{> afFieldInput name='user' type="hidden" value=userName}}
+      <div class="row" style="margin-top:0">
+        <div class="col l12 form-input">
+          {{> afQuickField name='form'}}
+        </div>
+      </div>
+      <div class="row">
+        <div class="col l12 form-input">
+          {{> afQuickField id="formDate" name='formDate' value=today type="text"}}
+        </div>
+      </div>
+      <div class="row">
+        <div class="col l12 form-input timeIn">
+          {{> afQuickField type="time" name='timeIn' class="timeInOut"}}
+        </div>
+      </div>
+      <div class="row" style="margin-bottom:3rem !important">
+        <div class="col l12 form-input timeOut">
+          {{> afQuickField type="time" name='timeOut' class="timeInOut"}}
+        </div>
+      </div>
+      <style>
+        .form-input .row{
+          margin-top: 0
+        }
+      </style>
+      {{/autoForm}}
+
+   </div>
+   <div class="modal-footer">
+     <a href="#!" class=" modal-action waves-effect waves-green btn-flat" id="create-visit" type="submit" name="commit">Add</a>
+     <button href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat" >Close</button>
+   </div>
+
+ </div>
+
+</template>

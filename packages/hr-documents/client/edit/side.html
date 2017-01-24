@@ -1,0 +1,64 @@
+<template name="typebar">
+  <aside class="yaybar typebar">
+      <div class="nano">
+          <div class="nano-content">
+              <ul>
+                <li>
+                  <div class="input-field col s6">
+                    <input {{b "value: typeName, change: filterChange"}} placeholder="Search for a type" id="findType" type="text">
+                    <label for="findType">Quick find</label>
+                  </div>
+                </li>
+                <li class="label">document types</li>
+                <li id="nodoctype" class="">
+                  <a href="{{pathFor route='documentEditSortable' agent_id=agent_id type_id='nodoctype'}}" class="toggle-type waves-effect waves-blue" id={{containerName "nodoctype"}} style="padding:15px;display:inline-table;width:100%;border-bottom: solid 1px #2d2f40;height:100%">
+                      <ul id="nodoctypeSide" class=" doc-side white-text" data-name=Uncategorized style="min-height:1rem; margin: 0;">
+                         Uncategorized
+                      </ul>
+                      <span class="badge new" data-badge-caption="" style="position: absolute;bottom: 1.3rem;background-color:#242634">{{documentsPerType "nodoctype"}}</span>
+                  </a>
+              </li>
+                {{#each docTypes}}
+                <li id={{_id}}>
+                  <a href="{{pathFor route='documentEditSortable' agent_id=agent_id type_id=_id}}" class="toggle-type waves-effect waves-blue" id={{containerNameEmpty _id}} style="padding:15px;display:inline-table;width:100%;border-bottom: solid 1px #2d2f40;height:100%">
+                      <ul id={{sideId _id}} class=" doc-side white-text" data-name={{name}} style="min-height:1rem; margin: 0;">
+                          {{name}}
+                      </ul>
+                      {{#if isExpired _id}}
+                      <span id={{_id}} class="red-text text-darken-1" data-badge-caption="" style="position: absolute;bottom: 1.1rem;right:3rem;"><i class="material-icons" style="margin-right:0;font-size:1.7rem">error_outline</i></span>
+                      {{/if}}
+                      <span class="new badge" data-badge-caption="" style="position: absolute;bottom: 1.3rem;background-color:#242634">{{documentsPerType _id}}</span>
+                  </a>
+              </li>
+              {{/each}}
+              </ul>
+              <!-- {{#if Template.subscriptionsReady}} -->
+                  {{initializeSortables}}
+              <!-- {{/if}} -->
+          </div>
+      </div>
+  </aside>
+  <!-- Modal Structure -->
+  <div id="expiry-modal" class="modal" style="overflow-y: hidden;">
+    <div class="modal-content">
+      <h4>Set expiration date for {{newDocType}}</h4>
+      <form id="formDoc">
+        <div class="row" style="margin:0;padding:0">
+          <div class="col l7" style="margin-top:1rem;">
+              <label>Expires</label>
+              <input id="expiresModal" placeholder="Expiry Date" class="expiresFields" name="expires" type="text" style="margin-top:0;margin-bottom:0">
+              <span id="expiryError" class="red-text" style="display:none">Please set a valid expiry date !</span>
+          </div>
+          <div class="col l5">
+              <button class="btn btn-small blue lighten-1" type="submit" id="submitExpDate" style="margin-bottom:1rem;position:relative; top:2rem; width:100%">
+                  <i class="material-icons">save</i>
+              </button>
+              <button class="btn-small btn red white-text lighten-1" id="cancel" style="margin-bottom:0rem;position:relative; top:2rem; width:100%">
+                  Cancel
+              </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</template>

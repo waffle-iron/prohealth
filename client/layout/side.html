@@ -1,0 +1,327 @@
+<template name="side">
+  <!-- Yay Sidebar
+    Options [you can use all of theme classnames]:
+      .yay-hide-to-small         - no hide menu, just set it small with big icons
+      .yay-static                - stop using fixed sidebar (will scroll with content)
+      .yay-gestures              - to show and hide menu using gesture swipes
+      .yay-light                 - light color scheme
+      .yay-hide-on-content-click - hide menu on content click
+
+    Effects [you can use one of these classnames]:
+      .yay-overlay  - overlay content
+      .yay-push     - push content to right
+      .yay-shrink   - shrink content width
+  -->
+  {{#if notDocumentsRoute}}
+    <aside class="yaybar yay-shrink yay-hide-to-small yay-gestures">
+      <div class="nano">
+        <div class="nano-content">
+          <ul>
+            <li class="brand-logo">
+              <a href="/">
+                 <img src="/logo-white.svg" style="height: 100%; width: 100%;">
+              </a>
+            </li>
+
+            {{#if hasRole "billing, billing-admin"}}
+              <li class="label">Billing</li>
+              <li class="sidebar-item" id="bills">
+                <a id="bills" href="{{pathFor 'bills'}}" class="waves-effect waves-blue">
+                  <i class="material-icons">description</i>
+                  Bills
+                </a>
+              </li>
+              <!-- <li id="billsStats" class="sidebar-item" >
+                <a id="billsStats" href="{{pathFor 'billsStats'}}" class="waves-effect waves-blue">
+                  <i class="material-icons">timeline</i>
+                  Bills Stats
+                </a>
+              </li> -->
+              <li id="payments" class="sidebar-item" >
+                <a id="payments" href="{{pathFor 'payments'}}" class="waves-effect waves-blue">
+                  <i class="material-icons">receipt</i>
+                  Payments
+                </a>
+              </li>
+
+              <li class="label">Summaries</li>
+              <li id="reportsBillsSummary" class="sidebar-item">
+                <a id="reportsBillsSummary" class='waves-effect waves-blue' href="{{pathFor 'reportsBillsSummary'}}">
+                  <i class="material-icons">description</i>
+                  Bills Summary
+                </a>
+              </li>
+              <li id="reportsPaymentsSummary" class="sidebar-item">
+                <a id="reportsPaymentsSummary" class='waves-effect waves-blue' href="{{pathFor 'reportsPaymentsSummary'}}">
+                  <i class="material-icons">receipt</i>
+                  Payments Summary
+                </a>
+              </li>
+              <li id="recievablesSpreadsheet" class="sidebar-item">
+                <a id="recievablesSpreadsheet" class='waves-effect waves-blue' href="{{pathFor 'recievablesSpreadsheet'}}">
+                  <i class="material-icons">attach_money</i>
+                  Recievables Summary
+                </a>
+              </li>
+
+              <!-- <li class="label">Follow Ups</li>
+              <li id="followups" class="sidebar-item">
+                <a id="followups" class='waves-effect waves-blue' href="{{pathFor 'followups'}}">
+                  <i class="material-icons">bookmark</i>
+                  Follow Up Summary
+                </a>
+              </li>
+
+              <li class="label">Logs</li>
+              <li id="billLogs" class="sidebar-item">
+                <a id="billLogs" class='waves-effect waves-blue' href="{{pathFor 'billLogs'}}">
+                  <i class="material-icons">alarm</i>
+                  Deleted Bills Log
+                </a>
+              </li> -->
+            {{/if}}
+
+            {{#if hasRole 'sales, sales-admin'}}
+              <li class="label">Directory</li>
+              <li id="patients" class="sidebar-item">
+                <a id="patients" class="waves-effect waves-blue" href="{{pathFor 'patients'}}">
+                  <i class="material-icons">supervisor_account</i>
+                  Patients
+                </a>
+              </li>
+
+              <li class="label">Reports</li>
+              <li id="patientsSpreadsheetHomecare" class="sidebar-item">
+                <a id="patientsSpreadsheetHomecare" class="waves-effect waves-blue" href="{{pathFor 'patientsSpreadsheet' query='type=Homecare'}}">
+                  <i class="material-icons">equalizer</i>
+                  Homecare Sales
+                </a>
+              </li>
+              <li id="patientsSpreadsheetHospice" class="sidebar-item">
+                <a id="patientsSpreadsheetHospice" class="waves-effect waves-blue" href="{{pathFor 'patientsSpreadsheet' query='type=Hospice'}}">
+                  <i class="material-icons">equalizer</i>
+                  Hospice Sales
+                </a>
+              </li>
+
+              <!-- <li id="patientsSpreadsheetHomecareInsurances" class="sidebar-item">
+                <a id="patientsSpreadsheetHomecareInsurances" class="waves-effect waves-blue" href="{{pathFor 'patientsSpreadsheet' query='type=Homecare&field1=primaryInsurance'}}">
+                  <i class="material-icons">equalizer</i>
+                  Insurances - Homecare
+                </a>
+              </li>
+              <li id="patientsSpreadsheetHospiceInsurances" class="sidebar-item">
+                <a id="patientsSpreadsheetHospiceInsurances" class="waves-effect waves-blue" href="{{pathFor 'patientsSpreadsheet' query='type=Hospice&field1=primaryInsurance'}}">
+                  <i class="material-icons">equalizer</i>
+                  Insurances - Hospice
+                </a>
+              </li>
+
+
+              <li id="patientsSpreadsheetHomecareMarketers" class="sidebar-item">
+                <a id="patientsSpreadsheetHomecareMarketers" class="waves-effect waves-blue" href="{{pathFor 'patientsSpreadsheet' query='type=Homecare&field1=marketer'}}">
+                  <i class="material-icons">equalizer</i>
+                  Marketers - Homecare
+                </a>
+              </li>
+              <li id="patientsSpreadsheetHomecareMarketers" class="sidebar-item">
+                <a id="patientsSpreadsheetHomecareMarketers" class="waves-effect waves-blue" href="{{pathFor 'patientsSpreadsheet' query='type=Hospice&field1=marketer'}}">
+                  <i class="material-icons">equalizer</i>
+                  Marketers - Hospice
+                </a>
+              </li>
+
+
+              <li id="patientsSpreadsheetGroupedHomecare" class="sidebar-item">
+                <a id="patientsSpreadsheetGroupedHomecare" class="waves-effect waves-blue" href="{{pathFor 'patientsSpreadsheetGrouped' query='type=Homecare'}}">
+                  <i class="material-icons">equalizer</i>
+                  Homecare Insurance Sales
+                </a>
+              </li>
+              <li id="patientsSpreadsheetGroupedHospice" class="sidebar-item">
+                <a id="patientsSpreadsheetGroupedHospice" class="waves-effect waves-blue" href="{{pathFor 'patientsSpreadsheetGrouped' query='type=Hospice'}}">
+                  <i class="material-icons">equalizer</i>
+                  Hospice Insurance Sales
+                </a>
+              </li> -->
+              <li id="marketerSales" class="sidebar-item">
+                <a id="marketerSales" class="waves-effect waves-blue" href="{{pathFor 'marketerSales' template='marketerSalesSheet'}}">
+                  <i class="material-icons">chrome_reader_mode</i>
+                  Marketers Sales
+                </a>
+              </li>
+
+              <li class="label">Statistics</li>
+              <li id="patientsStats" class="sidebar-item">
+                <a id="patientsStats" class="waves-effect waves-blue" href="{{pathFor 'patientsStats'}}">
+                  <i class="material-icons">trending_up</i>
+                  Sales
+                </a>
+              </li>
+            {{/if}}
+
+            {{#if hasRole 'hr, hr-admin'}}
+              <li class="label">HR</li>
+              <li id="agents" class="sidebar-item">
+                <a id="agents" href="{{pathFor 'agents'}}" class="waves-effect waves-blue">
+                  <i class="material-icons">people</i>
+                  People
+                </a>
+              </li>
+            {{/if}}
+
+            {{#if hasRole 'hr-admin'}}
+              <li id="emergencyList" class="sidebar-item">
+                <a id="emergencyList" href="{{pathFor 'emergencyList'}}" class="waves-effect waves-blue">
+                  <i class="material-icons">new_releases</i>
+                  Emergency List
+                </a>
+              </li>
+              <li id="missingDocuments" class="sidebar-item">
+                <a id="missingDocuments" href="{{pathFor 'missingDocuments'}}" class="waves-effect waves-blue">
+                  <i class="material-icons">texture</i>
+                  Missing Documents
+                </a>
+              </li>
+              <li id="expiringDocuments" class="sidebar-item">
+                <a id="expiringDocuments" href="{{pathFor 'expiringDocuments'}}" class="waves-effect waves-blue">
+                  <i class="material-icons">sync</i>
+                  Expiring Documents
+                </a>
+              </li>
+              <li id="jobs" class="sidebar-item">
+                <a id="jobs" href="{{pathFor 'jobs'}}" class="waves-effect waves-blue">
+                  <i class="material-icons">work</i>
+                  Jobs
+                </a>
+              </li>
+            {{/if}}
+            {{#if hasRole 'payroll'}}
+              <li class="label">Payroll</li>
+              <li id="timesheetlogged" class="sidebar-item">
+                <a id="timesheetlogged" href="{{pathFor route='timesheet' query='billingState=logged'}}"
+                   class="waves-effect waves-blue">
+                   <i class="material-icons">view_agenda</i>
+                   Timesheet
+                </a>
+              </li>
+              <li id="timesheetpending" class="sidebar-item">
+                <a id="timesheetpending" href="{{pathFor route='timesheet' query='billingState=pending'}}"
+                   class="waves-effect waves-blue">
+                   <i class="material-icons">watch_later</i>
+                   Timesheet: Pending
+                </a>
+              </li>
+              <li id="timesheetapproved" class="sidebar-item">
+                <a id="timesheetapproved" href="{{pathFor route='timesheet' query='billingState=approved'}}"
+                   class="waves-effect waves-blue">
+                   <i class="material-icons">done</i>
+                   Timesheet: Approved
+                </a>
+              </li>
+              <li id="timesheetrejected" class="sidebar-item">
+                <a id="timesheetrejected" href="{{pathFor route='timesheet' query='billingState=rejected'}}"
+                   class="waves-effect waves-blue">
+                   <i class="material-icons">close</i>
+                   Timesheet: Rejected
+                </a>
+              </li>
+            {{/if}}
+
+            {{#if hasRole 'payroll-admin'}}
+              <li class="label">Payroll Administration</li>
+              <!-- <li id="editRates" class="sidebar-item">
+                <a id="editRates" href="{{pathFor route='editRates'}}"
+                   class="waves-effect waves-blue">
+                  <i class="material-icons">attach_money</i>
+                   Edit Reimbursement Rates
+                </a>
+              </li> -->
+              <li id="pendingTimesheet" class="sidebar-item">
+                <a id="pendingTimesheet" href="{{pathFor route='pendingTimesheet' query='billingState=pending'}}"
+                   class="waves-effect waves-blue">
+                   <i class="material-icons">watch_later</i>
+                   Timesheets: Pending
+                </a>
+              </li>
+              <!-- <li id="agentVisitsSheet" class="sidebar-item">
+                <a id="agentVisitsSheet" href="{{pathFor route='agentVisitsSheet'}}"
+                   class="waves-effect waves-blue">
+                   <i class="material-icons">list</i>
+                   Visits/agent sheet
+                </a>
+              </li> -->
+
+              <li class="label">Visits</li>
+              <li id="visits" class="sidebar-item">
+                <a id="visits" class="waves-effect waves-blue" href="{{pathFor 'visits'}}">
+                  <i class="material-icons">slow_motion_video</i>
+                  Visits
+                </a>
+              </li>
+              <!-- <li id="visitsStats" class="sidebar-item">
+                <a id="visitsStats" class="waves-effect waves-blue" href="{{pathFor 'visitsStats'}}">
+                  <i class="material-icons">timeline</i>
+                  Visits Stats
+                </a>
+              </li> -->
+              <li id="visitsSpreadsheet" class="sidebar-item">
+                <a id="visitsSpreadsheet" class="waves-effect waves-blue" href="{{pathFor 'visitsSpreadsheet'}}">
+                  <i class="material-icons">view_list</i>
+                  Visits Summary
+                </a>
+              </li>
+              <li id="visitsScrapper" class="sidebar-item">
+                <a id="visitsScrapper" class="waves-effect waves-blue" href="{{pathFor 'visitsScrapper'}}">
+                  <i class="mdi-social-people"></i>
+                  Visits Validator
+                </a>
+              </li>
+              <li>
+                <br>
+              </li>
+            {{/if}}
+            <li class="yay-user-info profile-item">
+              <a href="{{pathFor 'profile' _id=agentId}}">
+                <img src="{{agentPictureURL}}" alt="{{agentName}}" class="circle">
+                <div class="yay-user-info-name" style="text-transform: capitalize">
+                  {{agentName}}
+                </div>
+
+<!--
+                  {{#if isAgent}}
+                    {{agentJob}}
+                  {{else}}
+                    User
+                  {{/if}} -->
+
+                  {{#if currentUser}}
+                    <a href=""
+                       class="logout white-text"
+                       style="padding-left: 0 !important;">
+                       Logout
+                    </a>
+                  {{/if}}
+              </a>
+            </li>
+
+            <style>
+              .profile-item {
+                  position: fixed;
+                  bottom: 0;
+                  height: 80px;
+                  width: 100%;
+              }
+              .nano-content ul {
+                  position: relative;
+              }
+              .brand-logo{
+                background-color: #2d2f40;
+              }
+            </style>
+          </ul>
+        </div>
+      </div>
+    </aside>
+  {{/if}}
+</template>

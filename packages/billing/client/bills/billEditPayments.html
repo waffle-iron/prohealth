@@ -1,0 +1,130 @@
+<template name="addPayment">
+	<button class="waves-effect waves-light btn red darken-2" id="write-off" {{checkDue}}>Add Write Off</button>
+	{{#autoForm collection="Payments" id="insertPaymentsForm" type="insert"}}
+	<div class="edit-bill">
+		<div class="row">
+			<div class="col l6">
+				{{> afQuickField name='amount' class="insertamount"}}
+			</div>
+			<div class="col l6">
+				{{> afQuickField name='due' disabled="true" value=due}}
+
+			</div>
+			<div class="col l6">
+				{{> afQuickField name='date' type="text" id="newPaymentDate" value=today}}
+			</div>
+			<div class="col l6">
+				{{> afQuickField name='payment_type_id'}}
+			</div>
+		</div>
+		<div class="row" style="margin-top: -1rem">
+			<div class="col l12" id="paymentNoteField">
+				{{> afQuickField name='note'}}
+			</div>
+		</div>
+		<span class="red-text" id="formError" style = "display:none;margin-left:1rem;position:relative; bottom:1.5rem"> Error ! Payments total exceeds bill amount</span>
+		<span class="red-text" id="formDateError" style = "display:none;margin-left:1rem;position:relative; bottom:1.5rem"> Error ! Can't add future payment</span>
+		{{> afQuickField name='bill_id' value=bill._id type="hidden"}}
+		{{> afQuickField name='payor_id' value=bill.payor_id type="hidden"}}
+		<button title="Add payment" type="submit" class="btn-floating btn right" style="position: absolute;right: 2rem;top: 2rem; z-index:0">
+			<i class="icon ion-android-add" ></i>
+		</button>
+	</div>
+{{/autoForm}}
+<style>
+	/*.edit-bill {
+		border-bottom: 1px #eee solid;
+	}*/
+	.edit-bill .row .col {
+		padding-bottom: 0;
+		padding-right: 1rem;
+	}
+	.edit-bill .row {
+		margin: -1rem -1rem -1rem 0;
+	}
+	.edit-bill .row .row:first-child {
+		margin: 1rem -1rem 1rem 1rem;
+		padding: 0;
+	}
+	#paymentNoteField .row {
+		margin-top: -1rem;
+	}
+
+</style>
+</template>
+
+<template name="editPayment">
+{{#autoForm collection="Payments" doc=payment id="updatePaymentsForm" type="update"}}
+	<div class="modal-header z-depth-1">
+		<div class="row" style="margin-left: 0 !important;margin-right: 0 !important; margin-top: 1.2rem;">
+			<div class="col l10">
+				<h4>Edit Payment</h4>
+			</div>
+			<div class="col l2" style="padding-right: 0">
+				<a href="" class=" modal-action modal-close right grey-text">
+					<i class="material-icons">close</i>
+				</a>
+			</div>
+		</div>
+	</div>
+	<div class="modal-content">
+		<div class="edit-bill" id="editP">
+			<div class="row" style="margin-top: 2rem !important;">
+				<div class="col l12 modal-field">
+					{{> afQuickField name='amount' class="updateamount"}}
+				</div>
+			</div>
+			<span class="red-text" id="updateFormError" style = "display:none;margin-left:1rem;position:relative; bottom:1.5rem"> Error ! Payments total exceeds bill amount</span>
+
+			<div class="row" style="margin-top: 0rem !important;">
+				<div class="col l6 modal-field"  style="margin-top: 1rem">
+					<!-- {{> afQuickField name='payment_type_id'}} -->
+					<div class="input-field col s12">
+					{{> afFieldInput firstOption="Select payment type..." type="select" options=paymentTypes name='payment_type_id' value=payment.payment_type_id}}
+						<label for="#payment_type_id">Payment Type</label>
+					</div>
+				</div>
+				<div class="col l6 modal-field">
+					{{> afQuickField name='date' type="text" value=paymentDate id="paymentDateField"}}
+				</div>
+			</div>
+			<span class="red-text right" id="updateFormDateError" style = "display:none;margin-left:1rem;position:relative; bottom:1.5rem"> Error ! Can't add future payment</span>
+
+			<div class="row" style="margin-top: 0 !important;">
+				<div class="col l12 modal-field">
+					{{> afQuickField name='note'}}
+				</div>
+			</div>
+			{{> afQuickField name='payor_id' value=bill.payor_id type="hidden"}}
+			{{> afQuickField name='bill_id' value=bill._id type="hidden"}}
+		</div>
+	</div>
+	<div class="modal-footer">
+		<button title="Save payment" type="submit" class="btn modal-action waves-effect waves-green btn-flat">Save</button>
+	</div>
+{{/autoForm}}
+<style>
+	.modal-header {
+		background-color: #fafafa;
+		width: 100%;
+		height: 4rem;
+		z-index: 1;
+		padding-right: 24px;
+		padding-left: 24px;
+		position: absolute;
+		top: 0;
+	}
+
+	.edit-bill .row .col {
+		padding-bottom: 0;
+	}
+	.edit-bill .row {
+		margin: -1rem -1rem 1rem 0;
+	}
+	.edit-bill .row .row:first-child {
+		margin: 1rem -1rem 1rem 1rem;
+		padding: 0;
+	}
+
+</style>
+</template>

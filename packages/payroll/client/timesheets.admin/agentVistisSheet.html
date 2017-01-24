@@ -1,0 +1,99 @@
+<template name="agentVisitsSheet">
+  {{> header headerVariable=headerVariable}}
+  <div class='row page-title-form'>
+    <div class="col l7 offset-l5">
+      <div class="col s3">
+        <input placeholder="From" id="start-date" type="text"
+               {{b "value: startDate, change:query"}}>
+      </div>
+      <div class="col s3">
+        <input placeholder="To" id="end-date" type="text"
+               {{b "value: endDate, change:query"}}>
+      </div>
+        <div class="input-field col s3 ">
+            <select {{b "value: formType, change:query"}} class="">
+                <option value="">Select</option>
+                <option value="all">All</option>
+                {{#each compensationTypes}}
+                  {{#if complexOrMileage name}}
+                  {{else}}
+                    <option value="{{name}}">{{name}}</option>
+                  {{/if}}
+                {{/each}}
+            </select>
+            <label>Visit Type</label>
+        </div>
+        <div class="input-field col s3 ">
+            <select {{b "value: formState, change:query"}} class="">
+                <option value="">Select</option>
+                <option value="all">All</option>
+                <option value="logged">Logged</option>
+                <option value="approved">Approved</option>
+                <option value="rejected">Rejected</option>
+            </select>
+            <label>Visit State</label>
+        </div>
+    </div>
+    </div>
+    <div class="row date-error" style="display: none;margin-top:0;margin-bottom:0;padding-top:0;padding-bottom:0">
+      <div class="col l6 offset-l6" style="margin-top:0;margin-bottom:0;padding-top:0;padding-bottom:0">
+        <div class="col s6 offset-s5" style="margin-top:0;margin-bottom:0;padding-top:0;padding-bottom:0">
+        <span class="" style="position: relative;top: 5rem;">
+          <i class="material-icons red-text">error</i><span style="position: relative;top: -0.5rem;left: 1rem;" class="red-text">To date must be after from date !</span>
+        </span>
+        </div>
+      </div>
+    </div>
+  <div class="cont">
+    <div class= "card-panel">
+      <table class="table striped centered">
+        <thead>
+          <tr>
+            <th>Agent</th>
+            <th>Total Visits</th>
+            <th class="blue lighten-5">Total cost</th>
+            <th>Visits</th>
+            <th class="blue lighten-5">Visits cost</th>
+            <th>Reimbursed Visits</th>
+            <th class="blue lighten-5">Reimbursed Visits cost</th>
+          </tr>
+        </thead>
+          <tbody>
+            {{#each allSupervisedAgents}}
+            <tr>
+              <td>{{_id}}</td>
+              <td><a title="Open visits" target="_blank" href="{{getLink _id 'all'}}">{{total}}</a></td>
+              <td class="blue lighten-5">{{formatCurrency cost}}</td>
+              <td><a title="Open visits" target="_blank"  href="{{getLink _id 'regular'}}">{{regular}}</a></td>
+              <td class="blue lighten-5">{{formatCurrency regularCost}}</td>
+              <td><a title="Open visits" target="_blank"  href="{{getLink _id 'nonRegular'}}">{{nonRegular}}</a></td>
+              <td class="blue lighten-5">{{formatCurrency nonRegularCost}}</td>
+            </tr>
+            {{/each}}
+            <!-- {{#each agentsWithNoVisits}}
+              <tr>
+                <td>{{this}}</td>
+                <td>0</td>
+                <td class="blue lighten-5">{{formatCurrency 0}}</td>
+                <td>0</td>
+                <td class="blue lighten-5">{{formatCurrency 0}}</td>
+                <td>0</td>
+                <td class="blue lighten-5">{{formatCurrency 0}}</td>
+              </tr>
+            {{/each}} -->
+          <tr>
+            <td><strong>{{totalAgents}}</strong></td>
+            {{#with getSums}}
+              <td><a title="Open visits" target="_blank"  href="{{getSumLink 'all'}}"><strong>{{totalVisits}}</strong></a></td>
+              <td class="blue lighten-5"><strong>{{formatCurrency totalCost}}</strong></td>
+              <td><a title="Open visits" target="_blank"  href="{{getSumLink 'regular'}}"><strong>{{totalRegular}}</strong></a></td>
+              <td class="blue lighten-5"><strong>{{formatCurrency totalRegularCost}}</strong></td>
+              <td><a title="Open visits" target="_blank"  href="{{getSumLink 'nonRegular'}}"><strong>{{totalReimbursed}}</strong></a></td>
+              <td class="blue lighten-5"><strong>{{formatCurrency totalReimbursedCost}}</strong></td>
+            {{/with}}
+          </tr>
+      </tbody>
+      </table>
+    </div>
+  </div>
+</template>

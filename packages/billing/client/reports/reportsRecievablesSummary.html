@@ -1,0 +1,91 @@
+<template name="reportsRecievablesSummary">
+
+
+  <div class='page-title z-depth-1'>
+    <div class='row page-title-form'>
+      <div class="col s4">
+        <h1>
+        Recievables Summary
+        </h1>
+        <ul>
+        <li>
+        List of all recievables filtered by date
+        </li>
+        </ul>
+      </div>
+      <div class='input-field col s2'>
+      <input {{b "value: fromDate"}} type="date" name="from" id="from" value="" class="filter"/>
+      <label class="active" for="from">From</label>
+      </div>
+      <div class='input-field col s2'>
+        <input {{b "value: toDate"}} type="date" name="to" id="to" value="" class="filter"/>
+        <label class="active" for="to">To</label>
+      </div>
+        <div class='input-field col s2'>
+        <select {{b "value: paymentState"}} name="payment_state" id="payment_state" class="filter">
+          <option  value="no_payment" selected>No Payment</option>
+          <option value="partially_paid">Partially Paid</option>
+        </select>
+        <label for="payment_state">Payment state</label>
+      </div>
+      <div class='input-field col s2'>
+        <select {{b "value: filterType"}} name="filter_type" id="filter_type" class="filter">
+          <option  value="claim" selected>Claim, Payor</option>
+          <option value="payor">Payor, Claim</option>
+        </select>
+        <label for="filter_type">Filter type</label>
+      </div>
+      </div>
+
+    </div>
+
+
+
+
+    {{#if stillLoading}}
+        {{>loading}}
+    {{else}}
+{{> tablesControl parentTemplate="reportsRecievablesSummary" start="fromDate" end="toDate"}}
+    <div class="row">
+      <div class="col l12">
+
+  <div class='card' style="">
+    <table class='table table-hover table-striped table-bordered'>
+      <thead>
+        <th {{b "text: firstType"}}></th>
+        <th {{b "text: secondType"}}></th>
+        <th class='right-align'>Total</th>
+        <th class='right-align'>0-10 days</th>
+        <th class='right-align'>11-20 days</th>
+        <th class='right-align'>21-30 days</th>
+        <th class='right-align'>31-60 days</th>
+        <th class='right-align'>61+ days</th>
+      </thead>
+      <tbody>
+        {{#each tableData}}
+           {{> tableRow}}
+        {{/each}}
+      </tbody>
+    </table>
+  </div>
+  <a class="btn-floating btn-large blue" style="right: 45px; bottom: 45px; position: fixed;" {{b "click: downloadCSV"}}>
+    <i class="ion-archive"> </i>
+  </a>
+</div>
+</div>
+{{/if}}
+
+</template>
+
+<template name = "tableRow">
+  <tr>
+    <td><span {{b "text: first"}}></span></td>
+    <td {{b "text: second"}}></td>
+    <td><a href='{{pathFor "bills"}}?{{urlParams}}' {{b "text: count"}} ></a> <span class = "right" {{b "text: total"}}></span></td>
+    <td><a href='{{pathFor "bills"}}?{{params_0_10}}' {{b "text: 0_10_count"}} ></a> <span class = "right" {{b "text: 0_10_total"}}></span></td>
+    <td><a href='{{pathFor "bills"}}?{{params_11_20}}' {{b "text: 11_20_count"}} ></a> <span class = "right" {{b "text: 11_20_total"}}></span></td>
+    <td><a href='{{pathFor "bills"}}?{{params_21_30}}' {{b "text: 21_30_count"}} ></a> <span class = "right" {{b "text: 21_30_total"}}></span></td>
+    <td><a href='{{pathFor "bills"}}?{{params_31_60}}' {{b "text: 31_60_count"}} ></a> <span class = "right" {{b "text: 31_60_total"}}></span></td>
+    <td><a href='{{pathFor "bills"}}?{{params_60_0}}' {{b "text: 60_0_count"}} ></a> <span class = "right" {{b "text: 60_0_total"}}></span></td>
+  </tr>
+</template>

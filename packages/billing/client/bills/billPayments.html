@@ -1,0 +1,67 @@
+<template name="billPayments">
+  <div class="card" style="min-height:350px;">
+    <div class="title">
+        <h5>Add Payment</h5>
+    </div>
+    <div class="content" style="padding-bottom: 0;border-bottom: 1px #eee solid; overflow: visible;">
+        {{> addPayment}}
+      </div>
+      <div class="title">
+          <h5>Payments</h5>
+      </div>
+
+        <div class="content">
+            <!-- {{> addPayment}} -->
+
+            <div class="row" style="margin:0">
+                <div class="col l12">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th class="right-align"></th>
+                                <th>Type</th>
+                                <th>Date</th>
+                                <th>Note</th>
+                                <th class="right-align">Amount</th>
+                                <th class="right-align"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {{#each payments}}
+                                <tr>
+                                    <td>
+                                        {{#quickRemoveButton title="Delete payment" collection="Payments" _id=this._id class="waves-effect btn-flat btn-small" beforeRemove=beforeRemoveHelper style="z-index:0"}}
+                                            <i class="icon ion-android-delete"></i>
+                                        {{/quickRemoveButton}}
+                                    </td>
+                                    <td>{{this.type}}</td>
+                                    <td>{{paymentDate this}}</td>
+                                    <td>{{this.note}}</td>
+                                    <td class="right-align">{{this.amount}}</td>
+                                    <td>
+                                        <a title="Edit payment" href="#{{this._id}}" class="" id="btnEditPayment" data-payment="{{this._id}}">
+                                            <i class="icon ion-edit"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                            {{/each}}
+                            <tr>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th>Total</th>
+                                <th class="right-align">{{bill.paymentsAmount}}</th>
+                                <th></th>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal Structure -->
+    <div id="editPaymetModal" class="modal modal-fixed-footer">
+          {{> editPayment}}
+    </div>
+</template>

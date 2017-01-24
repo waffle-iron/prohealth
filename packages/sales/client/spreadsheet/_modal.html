@@ -1,0 +1,40 @@
+<template name="emailModal">
+  <!-- Modal Structure -->
+  <div id="modal1" class="modal" style="overflow-y: hidden;">
+    <div class="modal-content">
+      <h4>Send report via E-mail</h4>
+      <form id="formDoc">
+        <div class="row" style="margin:0;padding:0">
+          <div class="col l7" style="margin-top:1rem;">
+              <label>To</label>
+              <input id="recepient" placeholder="Recepient E-mail/s" class="" name="" type="email" style="margin-top:0;margin-bottom:0">
+              <span id="emailError" class="red-text" style="display:none">Invalid E-mail/s, Please enter check E-mail format !</span>
+          </div>
+          <div class="col l5">
+              <button id="sendemail" class="btn btn-small blue lighten-1" type="submit" style="margin-bottom:1rem;position:relative; top:2rem; width:100%">
+                 Send
+              </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+<!-- 
+  <div id="modal1" class="modal">
+    <div class="modal-content">
+      <h4>Email</h4>
+      <form class="col s12">
+        <div class="row">
+          <div class="input-field col s6">
+            <input id="recepient" type="email" class="validate">
+            <label for="recepient">To</label>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <a href="#!" id="sendemail" class="waves-effect waves-blue btn-flat">SEND</a>
+    </div>
+  </div> -->
+</template>

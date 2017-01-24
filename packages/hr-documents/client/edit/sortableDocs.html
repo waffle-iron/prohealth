@@ -1,0 +1,20 @@
+<template name="sortableDocs">
+    <div class="row">
+        <div class="col l12">
+          {{#if showUncategorized}}
+              {{> nodoctype}}
+          {{else}}
+              {{> types}}
+          {{/if}}
+        </div>
+    </div>
+    <style>
+        form.doc-type-form .col,
+        form.doc-type-form .row,
+        form.doc-type-form .row .input-field {
+            margin: 0 !important;
+            padding: 0 !important;
+        }
+
+    </style>
+</template>

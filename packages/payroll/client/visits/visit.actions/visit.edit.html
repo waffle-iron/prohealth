@@ -1,0 +1,29 @@
+<template name="visitEdit">
+    <div class="page-title">
+        <div class="row">
+            <div class="col s12 m9 l10">
+                <h1>Visit Edit</h1>
+                <ul>
+                    <li>
+                        Editing visit details
+                    </li>
+                </ul>
+            </div>
+            <div class="col s12 m3 l2 right-align">
+                <a href="" class="btn grey lighten-3 grey-text z-depth-0 chat-toggle" id="back">
+                    <i class="left ion-chevron-left"></i>
+                    Back
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col l8">
+            <div class="card">
+                <div class="content">
+                    {{> quickForm collection="Visits" doc=visit id="visit-edit" type="update" omitFields="new"}}
+                </div>
+            </div>
+        </div>
+    </div>
+</template>

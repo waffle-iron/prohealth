@@ -1,0 +1,71 @@
+<template name="pendingTimesheet">
+  {{> header headerVariable=headerVariable}}
+
+  <div class='row page-title-form'>
+    <div class="col l6 offset-l6">
+            <div class="col s12 m6 l4 right">
+                    <select id="change-field" class="browser-default">
+                        <option value="$user">Group By User</option>
+                        <option value="$formDate">Group By Date</option>
+                        <option value="$patient">Group By Patient</option>
+                        <option value="$form">Group By Visit Type</option>
+                    </select>
+                </div>
+              </div>
+        </div>
+    {{#if Template.subscriptionsReady}}
+    <div class="cont">
+      {{#if summaries}}
+      <h5>All visits <small>- click to expand</small></h5>
+      <div class="collection" style="overflow:visible">
+        {{#each summaries}}
+        <!-- //===================================================== -->
+              {{#if firstSummary this._id}}
+                <div class="collection z-depth-1" style="margin-top:0rem; margin-bottom:0.1rem; border:0; border-radius:0;overflow:visible">
+                  <div class="collection-item blue white-text">
+                      <div class="row" style="margin-top: 0; margin-bottom: 0;">
+                        <span>{{this._id}}</span>
+                        {{#if billingStateIs "pending"}}
+                          <a title="Approve shown visits" class="waves-effect waves-light btn-flat btn-small right white blue-text btn-approve-all " data-id="{{_id}}" >
+                            <i class="ion-android-done-all"></i>
+                            Approve {{this.total}} visits {{totalCost this.cost}}
+                          </a>
+                        {{/if}}
+                      </div>
+                  </div>
+                  {{#each visits}}
+                    {{> timesheetEntry}}
+                  {{/each}}
+                </div>
+              {{else}}
+                <a title="Click to expand" href="" id="{{this._id}}" class="collection-item blue-text showTimesheet">
+                  <span id="{{this._id}}" >{{this._id}}</span>
+                  <span  id="{{this._id}}" class="right">
+                    {{totalCost this.cost}}
+                  </span>
+                  <span  id="{{this._id}}" class="right" style="padding-right:1rem">{{this.total}} visits</span>
+                </a>
+              {{/if}}
+            {{/each}}
+          </div>
+          <div class="row" style="margin:0; margin-bottom:4rem;margin-right: 1rem;">
+            <span class="right">Cost: {{totalCost totalGroupCost}}</span>
+            <span class="right" style="padding-right:1rem"><span style="font-weight:600">Total: </span>Visits: {{totalVisits}}</span>
+          </div>
+        {{else}}
+          <div class="row">
+              <div class="col l8 offset-l2">
+                  <div class="card-panel card-panel alert alert-border-left white blue-text">
+                      <span>
+                          You don't have any {{billingState}} visits.</span>
+                  </div>
+              </div>
+          </div>
+        {{/if}}
+</div>
+        <!-- //=================================================== -->
+    {{else}}
+        {{> loading}}
+    {{/if }}
+    {{> modal}}
+</template>

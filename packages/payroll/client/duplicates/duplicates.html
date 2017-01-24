@@ -1,0 +1,38 @@
+<template name="visitsDuplicates">
+  <div class="page-title">
+    <div class="row" style="margin-right: -1rem">
+      <div class="col s12 m3 l2">
+        <h1>Visits Duplicates</h1>
+        <ul>
+          <li>
+            <a href="#"><i class="fa fa-home"></i> List of all suspected duplicate visits</a>
+          </li>
+        </ul>
+      </div>
+      <div class="col s12 m9 l10 right-align">
+        <div id="update-date" class="text-center">
+          <div class="input-field col s4">
+            <input id="start-date" value={{startDate}}>
+            <label>Start Date</label>
+          </div>
+          <div class="input-field col s4">
+            <input id="end-date" value={{endDate}}>
+            <label>End Date</label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  {{#if Template.subscriptionsReady}}
+  <div class="row">
+    <div class="col s12 m12 l12">
+      <div class='card' style="margin-top:2rem">
+        <!-- {{> downloadButton class="btn btn-floating" selector=selector collection='Patients' fields = "name,status"}} -->
+        <div class="content">
+          {{> tabular table=visits selector=query class="table" id="visits-table" }}
+        </div>
+      </div>
+    </div>
+  </div>
+  {{else}} {{> loading}} {{/if }}
+</template>
